@@ -5,5 +5,6 @@
   #### Try out __MVVM architectural design__
   #### Better design __Network Management Layer__, avoiding big fat Singleton
   #### Try out __Alamofire, Argo or SwiftyJSON__ for network management layer
+  #### Try out IOS unit test 
   
   ## Let's go
