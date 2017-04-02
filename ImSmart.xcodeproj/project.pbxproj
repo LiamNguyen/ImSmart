@@ -17,6 +17,9 @@
 		ED75D33B1E8C478B006D6082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3391E8C478B006D6082 /* LaunchScreen.storyboard */; };
 		ED75D3461E8C478B006D6082 /* ImSmartTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75D3451E8C478B006D6082 /* ImSmartTests.swift */; };
 		ED75D3511E8C478B006D6082 /* ImSmartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75D3501E8C478B006D6082 /* ImSmartUITests.swift */; };
+		ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9792D21E9010A5004827D4 /* UIFunctionality.swift */; };
+		ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; };
+		ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED9C588C1E8E49C400F57B8F /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9C588A1E8E49C400F57B8F /* RxCocoa.framework */; };
 		ED9C588D1E8E49C400F57B8F /* RxCocoa.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED9C588A1E8E49C400F57B8F /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9C588B1E8E49C400F57B8F /* RxSwift.framework */; };
@@ -49,6 +52,7 @@
 			files = (
 				ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */,
 				ED9C588D1E8E49C400F57B8F /* RxCocoa.framework in Embed Frameworks */,
+				ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -72,6 +76,8 @@
 		ED75D34C1E8C478B006D6082 /* ImSmartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImSmartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED75D3501E8C478B006D6082 /* ImSmartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImSmartUITests.swift; sourceTree = "<group>"; };
 		ED75D3521E8C478B006D6082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED9792D21E9010A5004827D4 /* UIFunctionality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFunctionality.swift; sourceTree = "<group>"; };
+		ED9792D41E907C34004827D4 /* IBAnimatable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IBAnimatable.framework; path = Carthage/Build/iOS/IBAnimatable.framework; sourceTree = "<group>"; };
 		ED9C588A1E8E49C400F57B8F /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		ED9C588B1E8E49C400F57B8F /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -83,6 +89,7 @@
 			files = (
 				ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */,
 				ED9C588C1E8E49C400F57B8F /* RxCocoa.framework in Frameworks */,
+				ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				ED171EC41E8F8CC3006791C6 /* Constants.swift */,
+				ED9792D21E9010A5004827D4 /* UIFunctionality.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -145,6 +153,7 @@
 		ED75D3241E8C4782006D6082 = {
 			isa = PBXGroup;
 			children = (
+				ED9792D41E907C34004827D4 /* IBAnimatable.framework */,
 				ED9C588A1E8E49C400F57B8F /* RxCocoa.framework */,
 				ED9C588B1E8E49C400F57B8F /* RxSwift.framework */,
 				ED75D32F1E8C478A006D6082 /* ImSmart */,
@@ -342,6 +351,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/IBAnimatable.framework",
 			);
 			outputPaths = (
 			);
@@ -361,6 +371,7 @@
 				ED171EC51E8F8CC3006791C6 /* Constants.swift in Sources */,
 				ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
+				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
