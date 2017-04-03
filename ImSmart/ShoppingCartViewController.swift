@@ -16,6 +16,12 @@ class ShoppingCartViewController: UIViewController {
         print("In Shopping VC")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationItem.title = Constants.ShoppingCart.View.title
+    }
+    
     deinit {
         print("Out Shopping VC")
     }

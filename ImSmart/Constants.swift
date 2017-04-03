@@ -35,4 +35,28 @@ struct Constants {
             static let toFridgeVC           = "segue_HomeToFridgeVC"
         }
     }
+    
+    struct Lights {
+        struct View {
+            static let title                = "Lights"
+        }
+    }
+    
+    struct AirConditioner {
+        struct View {
+            static let title                = "Air Conditioners"
+        }
+    }
+    
+    struct ShoppingCart {
+        struct View {
+            static let title                = "Shopping Cart"
+        }
+    }
+    
+    struct Fridges {
+        struct View {
+            static let title                = "Fridges"
+        }
+    }
 }

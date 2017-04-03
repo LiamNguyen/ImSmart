@@ -16,6 +16,12 @@ class AirConditionerViewController: UIViewController {
         print("In Air Con VC")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationItem.title = Constants.AirConditioner.View.title
+    }
+    
     deinit {
         print("Out Air Con VC")
     }

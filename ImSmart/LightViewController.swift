@@ -16,6 +16,12 @@ class LightViewController: UIViewController {
         print("In Light VC")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationItem.title = Constants.Lights.View.title
+    }
+    
     deinit {
         print("Out Light VC")
     }

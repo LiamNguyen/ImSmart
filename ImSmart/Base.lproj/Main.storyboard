@@ -12,7 +12,7 @@
         <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController title="Home" id="BYZ-38-t0r" customClass="HomeViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" id="LNL-yf-Pz3"/>
+                    <navigationItem key="navigationItem" title="Home" id="LNL-yf-Pz3"/>
                     <connections>
                         <segue destination="vnQ-DK-CcP" kind="show" identifier="segue_HomeToLightVC" id="LaL-r2-q9d"/>
                         <segue destination="FbY-Y5-U51" kind="show" identifier="segue_HomeToShoppingCartVC" id="u8e-TR-Lt9"/>
@@ -34,7 +34,7 @@
             </objects>
             <point key="canvasLocation" x="975.20000000000005" y="37.331334332833585"/>
         </scene>
-        <!--Light View Controller-->
+        <!--Lights-->
         <scene sceneID="rLZ-ym-l3z">
             <objects>
                 <viewController id="vnQ-DK-CcP" customClass="LightViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
@@ -47,12 +47,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Lights" id="8Bn-Bd-T04"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJG-7Q-FTd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2089" y="-286"/>
         </scene>
-        <!--Air Conditioner View Controller-->
+        <!--Air Conditioners-->
         <scene sceneID="7iQ-3B-OFY">
             <objects>
                 <viewController id="VAP-mZ-JfI" customClass="AirConditionerViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
@@ -65,12 +66,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Air Conditioners" id="B6g-7b-pSK"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6j-LA-i66" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3012" y="-287"/>
         </scene>
-        <!--Shopping Cart View Controller-->
+        <!--Shopping Cart-->
         <scene sceneID="ONC-Bl-yGM">
             <objects>
                 <viewController id="FbY-Y5-U51" customClass="ShoppingCartViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
@@ -83,12 +85,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Shopping Cart" id="v1w-uW-NxS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IJ0-5q-pje" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2089" y="384"/>
         </scene>
-        <!--Fridge View Controller-->
+        <!--Fridges-->
         <scene sceneID="brN-NE-NHF">
             <objects>
                 <viewController id="YPv-KN-f6H" customClass="FridgeViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
@@ -101,6 +104,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Fridges" id="Owg-bM-lzw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KK5-Y3-Cag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -114,6 +118,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="AfJ-do-zOz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="0.056107677719999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                            <color key="textColor" red="1" green="0.056107677719999999" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
