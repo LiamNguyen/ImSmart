@@ -17,11 +17,22 @@ struct Constants {
     
     struct Home {
         struct View {
-            static let homeBackground   = "homeBackground.png"
-            static let logo             = "logo.png"
-            static let welcomeText      = "welcomeText.png"
-            static let mainButton       = "optimus.png"
-            static let cancelButton     = "cancelButton.png"
+            static let homeBackground       = "homeBackground.png"
+            static let logo                 = "logo.png"
+            static let welcomeText          = "welcomeText.png"
+            static let mainButton           = "optimus.png"
+            static let cancelButton         = "cancelButton.png"
+            static let lightsButton         = "lightIcon.png"
+            static let airConditionerButton = "airConditionerIcon.png"
+            static let shoppingCartButton   = "shoppingCartIcon.png"
+            static let fridgeButton         = "fridgeIcon.png"
+        }
+        
+        struct SegueIdentifier {
+            static let toLightVC            = "segue_HomeToLightVC"
+            static let toAirConditionerVC   = "segue_HomeToAirConditionerVC"
+            static let toShoppingCartVC     = "segue_HomeToShoppingCartVC"
+            static let toFridgeVC           = "segue_HomeToFridgeVC"
         }
     }
 }

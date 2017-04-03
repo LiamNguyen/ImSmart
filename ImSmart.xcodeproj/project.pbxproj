@@ -11,6 +11,18 @@
 		ED171EC51E8F8CC3006791C6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC41E8F8CC3006791C6 /* Constants.swift */; };
 		ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC61E8F8CEF006791C6 /* LocalStore.swift */; };
 		ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */; };
+		ED505DD91E92DC2700D5BB69 /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DD81E92DC2700D5BB69 /* LightViewController.swift */; };
+		ED505DDA1E92DC2700D5BB69 /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DD81E92DC2700D5BB69 /* LightViewController.swift */; };
+		ED505DDB1E92DC2700D5BB69 /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DD81E92DC2700D5BB69 /* LightViewController.swift */; };
+		ED505DDD1E92DC9E00D5BB69 /* AirConditionerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DDC1E92DC9E00D5BB69 /* AirConditionerViewController.swift */; };
+		ED505DDE1E92DC9E00D5BB69 /* AirConditionerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DDC1E92DC9E00D5BB69 /* AirConditionerViewController.swift */; };
+		ED505DDF1E92DC9E00D5BB69 /* AirConditionerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DDC1E92DC9E00D5BB69 /* AirConditionerViewController.swift */; };
+		ED505DE11E92DD2700D5BB69 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DE01E92DD2700D5BB69 /* ShoppingCartViewController.swift */; };
+		ED505DE21E92DD2700D5BB69 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DE01E92DD2700D5BB69 /* ShoppingCartViewController.swift */; };
+		ED505DE31E92DD2700D5BB69 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DE01E92DD2700D5BB69 /* ShoppingCartViewController.swift */; };
+		ED505DE51E92DD4000D5BB69 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DE41E92DD4000D5BB69 /* FridgeViewController.swift */; };
+		ED505DE61E92DD4000D5BB69 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DE41E92DD4000D5BB69 /* FridgeViewController.swift */; };
+		ED505DE71E92DD4000D5BB69 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED505DE41E92DD4000D5BB69 /* FridgeViewController.swift */; };
 		ED75D3311E8C478A006D6082 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75D3301E8C478A006D6082 /* AppDelegate.swift */; };
 		ED75D3361E8C478B006D6082 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3341E8C478B006D6082 /* Main.storyboard */; };
 		ED75D3381E8C478B006D6082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3371E8C478B006D6082 /* Assets.xcassets */; };
@@ -64,6 +76,10 @@
 		ED171EC41E8F8CC3006791C6 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ED171EC61E8F8CEF006791C6 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		ED505DD81E92DC2700D5BB69 /* LightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewController.swift; sourceTree = "<group>"; };
+		ED505DDC1E92DC9E00D5BB69 /* AirConditionerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerViewController.swift; sourceTree = "<group>"; };
+		ED505DE01E92DD2700D5BB69 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
+		ED505DE41E92DD4000D5BB69 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		ED75D32D1E8C478A006D6082 /* ImSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED75D3301E8C478A006D6082 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED75D3351E8C478B006D6082 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -129,6 +145,10 @@
 			isa = PBXGroup;
 			children = (
 				ED171EC01E8F89EB006791C6 /* HomeViewController.swift */,
+				ED505DD81E92DC2700D5BB69 /* LightViewController.swift */,
+				ED505DDC1E92DC9E00D5BB69 /* AirConditionerViewController.swift */,
+				ED505DE01E92DD2700D5BB69 /* ShoppingCartViewController.swift */,
+				ED505DE41E92DD4000D5BB69 /* FridgeViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -368,10 +388,14 @@
 			files = (
 				ED75D3311E8C478A006D6082 /* AppDelegate.swift in Sources */,
 				ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */,
+				ED505DE11E92DD2700D5BB69 /* ShoppingCartViewController.swift in Sources */,
 				ED171EC51E8F8CC3006791C6 /* Constants.swift in Sources */,
 				ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
+				ED505DE51E92DD4000D5BB69 /* FridgeViewController.swift in Sources */,
+				ED505DDD1E92DC9E00D5BB69 /* AirConditionerViewController.swift in Sources */,
+				ED505DD91E92DC2700D5BB69 /* LightViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -379,7 +403,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED505DE21E92DD2700D5BB69 /* ShoppingCartViewController.swift in Sources */,
+				ED505DDE1E92DC9E00D5BB69 /* AirConditionerViewController.swift in Sources */,
+				ED505DE61E92DD4000D5BB69 /* FridgeViewController.swift in Sources */,
 				ED75D3461E8C478B006D6082 /* ImSmartTests.swift in Sources */,
+				ED505DDA1E92DC2700D5BB69 /* LightViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +415,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED505DE31E92DD2700D5BB69 /* ShoppingCartViewController.swift in Sources */,
+				ED505DDF1E92DC9E00D5BB69 /* AirConditionerViewController.swift in Sources */,
+				ED505DE71E92DD4000D5BB69 /* FridgeViewController.swift in Sources */,
 				ED75D3511E8C478B006D6082 /* ImSmartUITests.swift in Sources */,
+				ED505DDB1E92DC2700D5BB69 /* LightViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

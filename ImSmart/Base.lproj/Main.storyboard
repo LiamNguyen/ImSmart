@@ -9,10 +9,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Home-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Home" id="BYZ-38-t0r" customClass="HomeViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -23,17 +23,95 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="LNL-yf-Pz3"/>
+                    <connections>
+                        <segue destination="vnQ-DK-CcP" kind="show" identifier="segue_HomeToLightVC" id="LaL-r2-q9d"/>
+                        <segue destination="FbY-Y5-U51" kind="show" identifier="segue_HomeToShoppingCartVC" id="u8e-TR-Lt9"/>
+                        <segue destination="VAP-mZ-JfI" kind="show" identifier="segue_HomeToAirConditionerVC" id="itV-ld-ouR"/>
+                        <segue destination="YPv-KN-f6H" kind="show" identifier="segue_HomeToFridgeVC" id="qRd-eb-OgI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="975.20000000000005" y="37.331334332833585"/>
         </scene>
+        <!--Light View Controller-->
+        <scene sceneID="rLZ-ym-l3z">
+            <objects>
+                <viewController id="vnQ-DK-CcP" customClass="LightViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mA5-YO-bma"/>
+                        <viewControllerLayoutGuide type="bottom" id="gye-ra-Pws"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eaB-Hl-2nS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AJG-7Q-FTd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2089" y="-286"/>
+        </scene>
+        <!--Air Conditioner View Controller-->
+        <scene sceneID="7iQ-3B-OFY">
+            <objects>
+                <viewController id="VAP-mZ-JfI" customClass="AirConditionerViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wxd-Yb-Li6"/>
+                        <viewControllerLayoutGuide type="bottom" id="RPr-cd-p8O"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Xhd-aL-sMO">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Z6j-LA-i66" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3012" y="-287"/>
+        </scene>
+        <!--Shopping Cart View Controller-->
+        <scene sceneID="ONC-Bl-yGM">
+            <objects>
+                <viewController id="FbY-Y5-U51" customClass="ShoppingCartViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="w5V-N2-Pvt"/>
+                        <viewControllerLayoutGuide type="bottom" id="4IO-M8-9X0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="b5D-m1-6bU">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IJ0-5q-pje" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2089" y="384"/>
+        </scene>
+        <!--Fridge View Controller-->
+        <scene sceneID="brN-NE-NHF">
+            <objects>
+                <viewController id="YPv-KN-f6H" customClass="FridgeViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YE9-mW-t1z"/>
+                        <viewControllerLayoutGuide type="bottom" id="gsm-lL-qir"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e6H-LX-ItQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KK5-Y3-Cag" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3012" y="384"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="QqW-pr-wUe">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Byy-FK-4uE" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Byy-FK-4uE" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AfJ-do-zOz">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" barStyle="black" id="AfJ-do-zOz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
