@@ -34,13 +34,12 @@ class LightViewModel {
             }).addDisposableTo(disposalBag)
         
         brightness.asObservable()
-            .filter({ brightness -> Bool in
+            .filter({ _ in
                 return self.isOn.value ? true : false
             })
             .subscribe(onNext: { brightness in
                 self.light.brightness = brightness
-            })
-            .addDisposableTo(disposalBag)
+            }).addDisposableTo(disposalBag)
         
         area.asObservable()
             .subscribe(onNext: { area in

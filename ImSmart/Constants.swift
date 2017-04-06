@@ -39,6 +39,8 @@ struct Constants {
     struct Lights {
         struct View {
             static let title                = "Lights"
+            static let lightOn              = "lightOn.png"
+            static let lightOff             = "lightOff.png"
         }
     }
     

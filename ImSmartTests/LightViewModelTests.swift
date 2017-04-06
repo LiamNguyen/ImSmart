@@ -17,7 +17,7 @@ class LightViewModelTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        kitchenLight = Light(brightness: 50, area: "Kitchen")
+        kitchenLight = Light(brightness: 0, area: "Kitchen")
         kitchenLightViewModel = LightViewModel(light: kitchenLight)
     }
     
@@ -40,11 +40,16 @@ class LightViewModelTests: XCTestCase {
     
     func testLightModelUpdate() {
         kitchenLightViewModel.isOn.value = true
-        kitchenLightViewModel.brightness.value = 100
+        kitchenLightViewModel.brightness.value = 50
         kitchenLightViewModel.area.value = "Living room"
         
         XCTAssertEqual(kitchenLight.isOn, true)
-        XCTAssertEqual(kitchenLight.brightness, 100)
+        XCTAssertEqual(kitchenLight.brightness, 50)
         XCTAssertEqual(kitchenLight.area, "Living room")
+        
+        kitchenLightViewModel.isOn.value = false
+        kitchenLightViewModel.brightness.value = 100
+        
+        XCTAssertEqual(kitchenLight.brightness, 50)
     }
 }
