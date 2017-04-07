@@ -33,6 +33,12 @@ class LightViewController: UIViewController {
         self.navigationItem.title = Constants.Lights.View.title
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        UIFunctionality.applySmoothAnimation(elementToBeSmooth: lightsTableView)
+    }
+    
     private func bindRxCellForRowAtIndexPath() {
 //        The same as cellForRowAtIndexPath
         mockupLights.asObservable()

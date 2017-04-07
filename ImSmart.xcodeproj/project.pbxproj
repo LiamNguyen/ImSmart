@@ -10,6 +10,8 @@
 		ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC01E8F89EB006791C6 /* HomeViewController.swift */; };
 		ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC61E8F8CEF006791C6 /* LocalStore.swift */; };
 		ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */; };
+		ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; };
+		ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED67474E1E95663700C925D0 /* FridgeViewController.swift */; };
 		ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6747501E9567CC00C925D0 /* ShoppingCartViewController.swift */; };
 		ED75D3311E8C478A006D6082 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75D3301E8C478A006D6082 /* AppDelegate.swift */; };
@@ -63,6 +65,7 @@
 			files = (
 				EDAB2C431E952EB4006DF616 /* RxCocoa.framework in Embed Frameworks */,
 				ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */,
+				ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */,
 				ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -74,6 +77,7 @@
 		ED171EC01E8F89EB006791C6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED171EC61E8F8CEF006791C6 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		ED5954B31E981B3600C3E047 /* Spruce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spruce.framework; path = Carthage/Build/iOS/Spruce.framework; sourceTree = "<group>"; };
 		ED67474E1E95663700C925D0 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		ED6747501E9567CC00C925D0 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		ED75D32D1E8C478A006D6082 /* ImSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +114,7 @@
 			files = (
 				EDAB2C421E952EB4006DF616 /* RxCocoa.framework in Frameworks */,
 				ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */,
+				ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */,
 				ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +187,7 @@
 		ED75D3241E8C4782006D6082 = {
 			isa = PBXGroup;
 			children = (
+				ED5954B31E981B3600C3E047 /* Spruce.framework */,
 				EDAB2C411E952EB4006DF616 /* RxCocoa.framework */,
 				ED9792D41E907C34004827D4 /* IBAnimatable.framework */,
 				ED9C588B1E8E49C400F57B8F /* RxSwift.framework */,
@@ -450,6 +456,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/IBAnimatable.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Spruce.framework",
 			);
 			outputPaths = (
 			);
