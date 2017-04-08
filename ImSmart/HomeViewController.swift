@@ -12,7 +12,7 @@ import RxSwift
 
 class HomeViewController: UIViewController {
     
-    private var homeViewModel       : HomeViewModel!
+    var homeViewModel               : HomeViewModel!
     
     private var mainButton          : UIButton!
     private var cancelButton        : UIButton!
@@ -29,9 +29,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.homeViewModel = HomeViewModel()
-     
         customizeAppearance()
+        
+        guard let _ = self.homeViewModel else {
+            print("Home view model not set")
+            return
+        }
         
         bindRxObserver()
         bindRxActions()
@@ -317,4 +320,15 @@ class HomeViewController: UIViewController {
         self.view.addSubview(self.fridgeButton)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case Constants.Home.SegueIdentifier.toLightVC?:
+            if let lightViewController = segue.destination as? LightViewController {
+                let lightViewModel                  = LightViewModel()
+                lightViewController.lightViewModel  = lightViewModel
+            }
+        default:
+            return
+        }
+    }
 }

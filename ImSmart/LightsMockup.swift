@@ -10,42 +10,51 @@ import Foundation
 import RxSwift
 
 struct LightsMockup {
-    static func lights() -> [LightViewModel] {
+    static func lights(lightViewModel: LightViewModel) -> [LightCellViewModel] {
         
-        let kitchenLightViewModel           = LightViewModel(
-            light: Light(brightness: 0, area: "Kitchen")
+        let kitchenLightViewModel           = LightCellViewModel(
+            light: Light(brightness: 0, area: "Kitchen"),
+            parentViewModel: lightViewModel
         )
         
-        let livingroomLightViewModel        = LightViewModel(
-            light: Light(brightness: 0, area: "Livingroom")
+        let livingroomLightViewModel        = LightCellViewModel(
+            light: Light(brightness: 0, area: "Livingroom"),
+            parentViewModel: lightViewModel
         )
                 
-        let frontYardLightViewModel         = LightViewModel(
-            light: Light(brightness: 70, area: "Front yard")
+        let frontYardLightViewModel         = LightCellViewModel(
+            light: Light(brightness: 70, area: "Front yard"),
+            parentViewModel: lightViewModel
         )
         
-        let backYardLightViewModel          = LightViewModel(
-            light: Light(brightness: 50, area: "Back yard")
+        let backYardLightViewModel          = LightCellViewModel(
+            light: Light(brightness: 50, area: "Back yard"),
+            parentViewModel: lightViewModel
         )
         
-        let myBedroomLightViewModel         = LightViewModel(
-            light: Light(brightness: 0, area: "My bedroom")
+        let myBedroomLightViewModel         = LightCellViewModel(
+            light: Light(brightness: 0, area: "My bedroom"),
+            parentViewModel: lightViewModel
         )
         
-        let hersheyBedroomLightViewModel    = LightViewModel(
-            light: Light(brightness: 0, area: "Hershey bedroom")
+        let hersheyBedroomLightViewModel    = LightCellViewModel(
+            light: Light(brightness: 0, area: "Hershey bedroom"),
+            parentViewModel: lightViewModel
         )
         
-        let tobleronBedroomLightViewModel   = LightViewModel(
-            light: Light(brightness: 0, area: "Tobleron bedroom")
+        let tobleronBedroomLightViewModel   = LightCellViewModel(
+            light: Light(brightness: 0, area: "Tobleron bedroom"),
+            parentViewModel: lightViewModel
         )
         
-        let firstFloorToiletLightViewModel  = LightViewModel(
-            light: Light(brightness: 0, area: "1st floor toilet")
+        let firstFloorToiletLightViewModel  = LightCellViewModel(
+            light: Light(brightness: 0, area: "1st floor toilet"),
+            parentViewModel: lightViewModel
         )
         
-        let secondFloorToiletLightViewModel  = LightViewModel(
-            light: Light(brightness: 0, area: "2nd floor toilet")
+        let secondFloorToiletLightViewModel  = LightCellViewModel(
+            light: Light(brightness: 0, area: "2nd floor toilet"),
+            parentViewModel: lightViewModel
         )
         
         return [

@@ -13,21 +13,36 @@ class LightsTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var lightImageView: UIImageView!
     @IBOutlet private weak var areaLabel: UILabel!
+    @IBOutlet private weak var brightnessLabel: UILabel!
     @IBOutlet private weak var cellBackground: UIView!
     
     private let disposalBag = DisposeBag()
     
-    var viewModel: LightViewModel? {
+    var viewModel: LightCellViewModel? {
         didSet {
-            guard let lightViewModel = viewModel else {
+            guard let lightCellViewModel = viewModel else {
                 return
             }
             
-            lightViewModel.area.asObservable()
+            lightCellViewModel.area.asObservable()
                 .bindTo(areaLabel.rx.text)
                 .addDisposableTo(disposalBag)
             
-            lightImageView.image = lightViewModel.isOn.value ? UIImage(named: Constants.Lights.View.lightOn) : UIImage(named: Constants.Lights.View.lightOff)
+            lightCellViewModel.brightness.asObservable()
+                .map({ String($0) })
+                .bindTo(brightnessLabel.rx.text)
+                .addDisposableTo(disposalBag)
+            
+            lightCellViewModel.cellMustShake.asObservable()
+                .subscribe(onNext: { cellMustShake in
+                    if cellMustShake {
+                        UIFunctionality.applyShakyAnimation(elementToBeShake: self.cellBackground, duration: 0.15)
+                    } else {
+                        self.cellBackground.layer.removeAllAnimations()
+                    }
+                }).addDisposableTo(disposalBag)
+            
+            lightImageView.image = lightCellViewModel.isOn.value ? UIImage(named: Constants.Lights.View.lightOn) : UIImage(named: Constants.Lights.View.lightOff)
         }
     }
     

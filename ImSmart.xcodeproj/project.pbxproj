@@ -10,8 +10,13 @@
 		ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC01E8F89EB006791C6 /* HomeViewController.swift */; };
 		ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC61E8F8CEF006791C6 /* LocalStore.swift */; };
 		ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */; };
+		ED1BACC71E98EA64005F7F75 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */; };
+		ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACC81E98EAB2005F7F75 /* Theme.swift */; };
+		ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; };
+		ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; };
 		ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5954B61E9898FB00C3E047 /* LightViewModel.swift */; };
 		ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED67474E1E95663700C925D0 /* FridgeViewController.swift */; };
 		ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6747501E9567CC00C925D0 /* ShoppingCartViewController.swift */; };
 		ED75D3311E8C478A006D6082 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75D3301E8C478A006D6082 /* AppDelegate.swift */; };
@@ -32,7 +37,7 @@
 		EDAB2C441E9533FC006DF616 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAB2C411E952EB4006DF616 /* RxCocoa.framework */; };
 		EDAB2C451E953407006DF616 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9C588B1E8E49C400F57B8F /* RxSwift.framework */; };
 		EDAB2C541E9537D5006DF616 /* LightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB2C531E9537D5006DF616 /* LightTests.swift */; };
-		EDD938081E941DE000FB1797 /* LightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938071E941DE000FB1797 /* LightViewModel.swift */; };
+		EDD938081E941DE000FB1797 /* LightCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938071E941DE000FB1797 /* LightCellViewModel.swift */; };
 		EDD9380A1E941E5300FB1797 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938091E941E5300FB1797 /* Light.swift */; };
 		EDD9380C1E942BC400FB1797 /* LightViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9380B1E942BC400FB1797 /* LightViewModelTests.swift */; };
 		EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF791E61E9554A00078E98B /* AirConditionerViewController.swift */; };
@@ -67,6 +72,7 @@
 				ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */,
 				ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */,
 				ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */,
+				ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,7 +83,11 @@
 		ED171EC01E8F89EB006791C6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED171EC61E8F8CEF006791C6 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		ED1BACC81E98EAB2005F7F75 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		ED5954B31E981B3600C3E047 /* Spruce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spruce.framework; path = Carthage/Build/iOS/Spruce.framework; sourceTree = "<group>"; };
+		ED5954B61E9898FB00C3E047 /* LightViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewModel.swift; sourceTree = "<group>"; };
 		ED67474E1E95663700C925D0 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		ED6747501E9567CC00C925D0 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		ED75D32D1E8C478A006D6082 /* ImSmart.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImSmart.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -100,7 +110,7 @@
 		EDAB2C411E952EB4006DF616 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		EDAB2C471E953411006DF616 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		EDAB2C531E9537D5006DF616 /* LightTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTests.swift; sourceTree = "<group>"; };
-		EDD938071E941DE000FB1797 /* LightViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewModel.swift; sourceTree = "<group>"; };
+		EDD938071E941DE000FB1797 /* LightCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightCellViewModel.swift; sourceTree = "<group>"; };
 		EDD938091E941E5300FB1797 /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		EDD9380B1E942BC400FB1797 /* LightViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewModelTests.swift; sourceTree = "<group>"; };
 		EDF791E61E9554A00078E98B /* AirConditionerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerViewController.swift; sourceTree = "<group>"; };
@@ -116,6 +126,7 @@
 				ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */,
 				ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */,
 				ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */,
+				ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,8 +160,9 @@
 		ED171EBE1E8F87EA006791C6 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				ED5954B81E98990200C3E047 /* CellViewModel */,
 				ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */,
-				EDD938071E941DE000FB1797 /* LightViewModel.swift */,
+				ED5954B61E9898FB00C3E047 /* LightViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -172,6 +184,8 @@
 			children = (
 				ED9792D21E9010A5004827D4 /* UIFunctionality.swift */,
 				EDAB2C3F1E95287F006DF616 /* Constants.swift */,
+				ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */,
+				ED1BACC81E98EAB2005F7F75 /* Theme.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -184,9 +198,18 @@
 			name = Store;
 			sourceTree = "<group>";
 		};
+		ED5954B81E98990200C3E047 /* CellViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				EDD938071E941DE000FB1797 /* LightCellViewModel.swift */,
+			);
+			name = CellViewModel;
+			sourceTree = "<group>";
+		};
 		ED75D3241E8C4782006D6082 = {
 			isa = PBXGroup;
 			children = (
+				ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */,
 				ED5954B31E981B3600C3E047 /* Spruce.framework */,
 				EDAB2C411E952EB4006DF616 /* RxCocoa.framework */,
 				ED9792D41E907C34004827D4 /* IBAnimatable.framework */,
@@ -212,6 +235,7 @@
 		ED75D32F1E8C478A006D6082 /* ImSmart */ = {
 			isa = PBXGroup;
 			children = (
+				ED75D3301E8C478A006D6082 /* AppDelegate.swift */,
 				ED171EC31E8F8CB4006791C6 /* Store */,
 				ED171EC21E8F8CAB006791C6 /* Helper */,
 				ED171EBF1E8F87F5006791C6 /* Controller */,
@@ -219,7 +243,6 @@
 				EDA77A7B1E9571A8002C801B /* View */,
 				ED171EBE1E8F87EA006791C6 /* ViewModel */,
 				EDA77A811E957CEF002C801B /* MockupData */,
-				ED75D3301E8C478A006D6082 /* AppDelegate.swift */,
 				ED75D3341E8C478B006D6082 /* Main.storyboard */,
 				ED75D3371E8C478B006D6082 /* Assets.xcassets */,
 				ED75D3391E8C478B006D6082 /* LaunchScreen.storyboard */,
@@ -457,6 +480,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/IBAnimatable.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Spruce.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 			);
 			outputPaths = (
 			);
@@ -491,15 +515,18 @@
 				ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
+				ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */,
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
 				EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */,
-				EDD938081E941DE000FB1797 /* LightViewModel.swift in Sources */,
+				ED1BACC71E98EA64005F7F75 /* ColorExtension.swift in Sources */,
+				EDD938081E941DE000FB1797 /* LightCellViewModel.swift in Sources */,
 				EDA77A7F1E957CE0002C801B /* LightsMockup.swift in Sources */,
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
+				ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

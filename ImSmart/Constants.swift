@@ -42,6 +42,11 @@ struct Constants {
             static let lightOn              = "lightOn.png"
             static let lightOff             = "lightOff.png"
         }
+        
+        struct Buttons {
+            static let barButtonBrightness  = "Brightness"
+            static let barButtonEdit        = "Edit"
+        }
     }
     
     struct AirConditioner {

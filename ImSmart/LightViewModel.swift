@@ -2,48 +2,50 @@
 //  LightViewModel.swift
 //  ImSmart
 //
-//  Created by Cao Do Nguyen on /04/04/2017.
+//  Created by Cao Do Nguyen on /08/04/2017.
 //  Copyright © 2017 LetsDev. All rights reserved.
 //
 
 import Foundation
 import RxSwift
+import UIKit
 
 class LightViewModel {
-    fileprivate let light: Light!
+    var requireCellShake                    = Variable<Bool>(false)
+    var viewColorObserver                   : Observable<UIColor>!
+    var tableViewColorObserver              : Observable<UIColor>!
+    var cellContentViewColorObserver        : Observable<UIColor>!
+    var cancelSelectionViewOriginYObserver  : Observable<Float>!
+    var barButtonTitleObserver              : Observable<String>!
     
-    var isOn        = Variable<Bool>(false)
-    var brightness  : Variable<Int>!
-    var area        : Variable<String>!
-    
-    private let disposalBag = DisposeBag()
-    
-    init(light: Light) {
-        self.light      = light
-        
-        self.brightness = Variable<Int>(self.light.brightness)
-        self.area       = Variable<String>(self.light.area)
-        
+    init() {
         bindRx()
     }
     
-    private func bindRx() {
-        isOn.asObservable()
-            .subscribe(onNext: { isOn in
-                self.light.isOn = isOn
-            }).addDisposableTo(disposalBag)
-        
-        brightness.asObservable()
-            .filter({ _ in
-                return self.isOn.value ? true : false
+    func bindRx() {
+        viewColorObserver = requireCellShake.asObservable()
+            .map({ requireCellShake in
+                return requireCellShake ? Theme.contentHighlighted : Theme.background
             })
-            .subscribe(onNext: { brightness in
-                self.light.brightness = brightness
-            }).addDisposableTo(disposalBag)
         
-        area.asObservable()
-            .subscribe(onNext: { area in
-                self.light.area = area
-            }).addDisposableTo(disposalBag)
+        tableViewColorObserver = requireCellShake.asObservable()
+            .map({ requireCellShake in
+                return requireCellShake ? Theme.contentHighlighted : Theme.background
+            })
+        
+        cellContentViewColorObserver = requireCellShake.asObservable()
+            .map({ requireCellShake in
+                return requireCellShake ? Theme.contentHighlighted : Theme.background
+            })
+        
+        cancelSelectionViewOriginYObserver = requireCellShake.asObservable()
+            .map({ requireCellShake in
+                return requireCellShake ? Constants.Window.screenHeight - 30 : Constants.Window.screenHeight + 30
+            })
+        
+        barButtonTitleObserver = requireCellShake.asObservable()
+            .map({ requireCellShake in
+                return requireCellShake ? Constants.Lights.Buttons.barButtonEdit : Constants.Lights.Buttons.barButtonBrightness
+            })
     }
 }

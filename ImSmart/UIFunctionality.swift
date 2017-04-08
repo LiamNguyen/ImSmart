@@ -19,14 +19,14 @@ struct UIFunctionality {
     }
     
     static func applyShakyAnimation(elementToBeShake: AnyObject, duration: Float, repeatCount: Float = .infinity) {
+        let animation = CABasicAnimation(keyPath: "position")
+        animation.duration = CFTimeInterval(duration)
+        animation.repeatCount = repeatCount
+        animation.autoreverses = true
+        
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: elementToBeShake.center.x - 2, y: elementToBeShake.center.y - 0.5))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: elementToBeShake.center.x + 2, y: elementToBeShake.center.y + 0.5))
         DispatchQueue.main.async {
-            let animation = CABasicAnimation(keyPath: "position")
-            animation.duration = CFTimeInterval(duration)
-            animation.repeatCount = repeatCount
-            animation.autoreverses = true
-            
-            animation.fromValue = NSValue(cgPoint: CGPoint(x: elementToBeShake.center.x - 5, y: elementToBeShake.center.y))
-            animation.toValue = NSValue(cgPoint: CGPoint(x: elementToBeShake.center.x + 5, y: elementToBeShake.center.y))
             elementToBeShake.layer.add(animation, forKey: "position")
         }
     }
