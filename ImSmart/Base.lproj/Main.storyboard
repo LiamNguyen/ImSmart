@@ -47,7 +47,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="102" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k6K-05-hQO">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsMultipleSelection="YES" rowHeight="102" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="k6K-05-hQO">
                                 <rect key="frame" x="16" y="0.0" width="343" height="659"/>
                                 <color key="backgroundColor" red="0.92941176469999998" green="0.92941176469999998" blue="0.92941176469999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <prototypes>
@@ -139,6 +139,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Brightness" id="1L1-ya-DMA"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="bottomConstraintTableViewToSuperview" destination="Tc9-Fe-UdO" id="kV9-lf-von"/>
                         <outlet property="lightsSelectionButton" destination="1L1-ya-DMA" id="xQJ-Qa-bpe"/>
                         <outlet property="lightsTableView" destination="k6K-05-hQO" id="I13-Oc-xuQ"/>
                     </connections>

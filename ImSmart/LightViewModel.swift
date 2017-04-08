@@ -12,8 +12,11 @@ import UIKit
 
 class LightViewModel {
     var requireCellShake                    = Variable<Bool>(false)
+    var selectedLights                      = Variable<[String: LightCellViewModel]>([String: LightCellViewModel]())
+    
     var viewColorObserver                   : Observable<UIColor>!
     var tableViewColorObserver              : Observable<UIColor>!
+    var tableViewBottomConstraintObserver   : Observable<Float>!
     var cellContentViewColorObserver        : Observable<UIColor>!
     var cancelSelectionViewOriginYObserver  : Observable<Float>!
     var barButtonTitleObserver              : Observable<String>!
@@ -31,6 +34,11 @@ class LightViewModel {
         tableViewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
                 return requireCellShake ? Theme.contentHighlighted : Theme.background
+            })
+        
+        tableViewBottomConstraintObserver = requireCellShake.asObservable()
+            .map({ requireCellShake in
+                return requireCellShake ? 60 : 8
             })
         
         cellContentViewColorObserver = requireCellShake.asObservable()

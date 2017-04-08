@@ -15,8 +15,9 @@ class LightViewController: UIViewController {
     
     var lightViewModel: LightViewModel!
     
-    @IBOutlet fileprivate weak var lightsTableView      : UITableView!
-    @IBOutlet fileprivate weak var lightsSelectionButton: UIBarButtonItem!
+    @IBOutlet fileprivate weak var lightsTableView                      : UITableView!
+    @IBOutlet fileprivate weak var lightsSelectionButton                : UIBarButtonItem!
+    @IBOutlet fileprivate weak var bottomConstraintTableViewToSuperview : NSLayoutConstraint!
     
     private var cancelSelectionView: UIView!
     private var cancelButton: UIButton!
@@ -39,10 +40,10 @@ class LightViewController: UIViewController {
         
         bindRxCellForRowAtIndexPath()
         bindRxDidSelectRowAtIndexPath()
+        bindRxDidDeselectRowAtIndexPath()
         bindRxAction()
         bindRxObserver()
         
-        lightsTableView.separatorColor = UIColor.clear
         lightsTableView
             .rx
             .setDelegate(self)
@@ -82,12 +83,25 @@ class LightViewController: UIViewController {
             .rx
             .modelSelected(LightCellViewModel.self)
             .debounce(0.2, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { selectedLightViewModel in
-                selectedLightViewModel.isOn.value = !selectedLightViewModel.isOn.value
-                if let selectedRowIndexPath = self.lightsTableView.indexPathForSelectedRow {
-                    self.lightsTableView.deselectRow(at: selectedRowIndexPath, animated: true)
-                    self.lightsTableView.reloadRows(at: [selectedRowIndexPath], with: UITableViewRowAnimation.fade)
+            .subscribe(onNext: { selectedLightCellViewModel in
+                guard let _ = self.lightsTableView.indexPathForSelectedRow else {
+                    return
                 }
+                
+                self.handleCellSelection(
+                    selectedLightCellViewModel: selectedLightCellViewModel,
+                    selectedRowIndexPath: self.lightsTableView.indexPathForSelectedRow!
+                )
+            }).addDisposableTo(disposalBag)
+    }
+    
+    private func bindRxDidDeselectRowAtIndexPath() {
+        lightsTableView
+            .rx
+            .modelDeselected(LightCellViewModel.self)
+            .debounce(0.2, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { deselctedLightCellViewModel in
+                self.lightViewModel.selectedLights.value.removeValue(forKey: deselctedLightCellViewModel.area.value)
             }).addDisposableTo(disposalBag)
     }
     
@@ -111,6 +125,13 @@ class LightViewController: UIViewController {
                 })
             }).addDisposableTo(disposalBag)
         
+        lightViewModel.tableViewBottomConstraintObserver
+            .subscribe(onNext: { constant in
+                UIView.animate(withDuration: 0.4, animations: { 
+                    self.bottomConstraintTableViewToSuperview.constant = CGFloat(constant)
+                })
+            }).addDisposableTo(disposalBag)
+        
         lightViewModel.cancelSelectionViewOriginYObserver
             .subscribe(onNext: { originY in
                 UIView.animate(withDuration: 0.4, animations: { 
@@ -129,7 +150,7 @@ class LightViewController: UIViewController {
             .rx
             .tap
             .subscribe(onNext: { [weak self] in
-                handleBarButtonAction()
+                self?.handleBarButtonAction()
             }).addDisposableTo(disposalBag)
         
         cancelButton
@@ -145,6 +166,17 @@ class LightViewController: UIViewController {
     private func handleBarButtonAction() {
         if !lightViewModel.requireCellShake.value {
             self.lightViewModel.requireCellShake.value = true
+        }
+    }
+    
+    private func handleCellSelection(selectedLightCellViewModel: LightCellViewModel, selectedRowIndexPath: IndexPath) {
+        if !lightViewModel.requireCellShake.value {
+            self.lightsTableView.deselectRow(at: selectedRowIndexPath, animated: true)
+            selectedLightCellViewModel.isOn.value = !selectedLightCellViewModel.isOn.value
+            self.lightsTableView.reloadRows(at: [selectedRowIndexPath], with: .fade)
+        } else {
+            lightViewModel.selectedLights.value[selectedLightCellViewModel.area.value] = selectedLightCellViewModel
+            self.lightsTableView.selectRow(at: selectedRowIndexPath, animated: true, scrollPosition: .none)
         }
     }
     
@@ -189,6 +221,9 @@ extension LightViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         lightViewModel.cellContentViewColorObserver.asObservable()
             .subscribe(onNext: { cellContentViewBackgroundColor in
+                if cell.isSelected {
+                    return
+                }
                 cell.contentView.backgroundColor = cellContentViewBackgroundColor
             }).addDisposableTo(disposalBag)
     }
