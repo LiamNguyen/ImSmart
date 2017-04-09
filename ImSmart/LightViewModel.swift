@@ -21,6 +21,7 @@ class LightViewModel {
     var cellContentViewColorObserver        : Observable<UIColor>!
     var cancelSelectionViewOriginYObserver  : Observable<Float>!
     var barButtonTitleObserver              : Observable<String>!
+    var barButtonEnableObserver             : Observable<Bool>!
     
     var brightnessValue                     = Variable<Float>(0.0)
     var sampleLightBrightness               : Observable<UIColor>!
@@ -71,5 +72,11 @@ class LightViewModel {
                     alpha: 1
                 )
             })
+        
+        barButtonEnableObserver = Observable.combineLatest(
+            requireCellShake.asObservable(),
+            selectedLights.asObservable()) { (requireCellShake, selectedLights) in
+                return requireCellShake ? !selectedLights.values.isEmpty : true
+        }
     }
 }

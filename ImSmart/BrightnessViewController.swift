@@ -19,6 +19,7 @@ class BrightnessViewController: UIViewController {
     private var brightnessValueLabel    : UILabel!
     private var adjustBrightnessSlider  : UISlider!
     
+    private var sliderValueDidChange    = false
     private let disposalBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -65,8 +66,15 @@ class BrightnessViewController: UIViewController {
                 return Int(brightness)
             })
             .subscribe(onNext: { brightness in
+                if !self.sliderValueDidChange {
+                    return
+                }
+                
                 for lightCellViewModel in self.lightViewModel.selectedLights.value.values {
                     lightCellViewModel.brightness.value = brightness
+                    if brightness == 0 {
+                        lightCellViewModel.isOn.value   = false
+                    }
                 }
             }).addDisposableTo(disposalBag)
     }
@@ -83,6 +91,9 @@ class BrightnessViewController: UIViewController {
         
 //        Set default brightness value
         lightViewModel.brightnessValue.value = 0.0
+        
+//        Set default requireCellShake variable
+        lightViewModel.requireCellShake.value = false
     }
 
     private func customizeAppearance() {
@@ -131,6 +142,7 @@ class BrightnessViewController: UIViewController {
     }
     
     @objc func sliderValueChange(sender: UISlider) {
+        self.sliderValueDidChange               = !self.sliderValueDidChange
         let sliderValueStep: Float              = 5
         let roundedValue                        = round(sender.value / sliderValueStep) * sliderValueStep
         self.adjustBrightnessSlider.value       = roundedValue

@@ -49,7 +49,7 @@ class LightViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        self.navigationItem.title = Constants.Lights.View.title
+        self.lightsTableView.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -103,7 +103,7 @@ class LightViewController: UIViewController {
     
     private func bindRxObserver() {
         lightViewModel.requireCellShake.asObservable()
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { reqireCellShake in
                 self.lightsTableView.reloadData()
             }).addDisposableTo(disposalBag)
         
@@ -138,6 +138,11 @@ class LightViewController: UIViewController {
         lightViewModel.barButtonTitleObserver
             .subscribe(onNext: { title in
                 self.lightsSelectionButton.title = title
+            }).addDisposableTo(disposalBag)
+        
+        lightViewModel.barButtonEnableObserver
+            .subscribe(onNext: { shouldEnable in
+                self.lightsSelectionButton.isEnabled = shouldEnable
             }).addDisposableTo(disposalBag)
     }
     
@@ -179,6 +184,7 @@ class LightViewController: UIViewController {
     }
     
     private func customizeAppearance() {
+        self.navigationItem.title = Constants.Lights.View.title
         drawCancelSelectionView()
         drawCancelButton()
     }
