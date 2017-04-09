@@ -244,7 +244,7 @@ class HomeViewController: UIViewController {
     private func drawMainButton() {
         self.mainButton                             = UIButton(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
         self.mainButton.frame                       = self.mainButton.bounds
-        self.mainButton.center                      = CGPoint(x: UIScreen.main.bounds.width / 2, y: 420)
+        self.mainButton.center                      = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
         UIFunctionality.applyShadow(toView: self.mainButton, withColor: UIColor.red)
         
         let buttonImage                             = UIImage(named: Constants.Home.View.mainButton)
@@ -266,7 +266,7 @@ class HomeViewController: UIViewController {
         let cancelButtonImage               = UIImage(named: Constants.Home.View.cancelButton)?.cgImage
         
         self.cancelButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        self.cancelButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: 420)
+        self.cancelButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
         self.cancelButton.layer.contents    = cancelButtonImage
 
         self.view.addSubview(self.cancelButton)
@@ -278,7 +278,7 @@ class HomeViewController: UIViewController {
         let lightsButtonImage               = UIImage(named: Constants.Home.View.lightsButton)?.cgImage
         
         self.lightsButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        self.lightsButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: 420)
+        self.lightsButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
         self.lightsButton.layer.contents    = lightsButtonImage
         
         self.view.addSubview(self.lightsButton)
@@ -290,7 +290,7 @@ class HomeViewController: UIViewController {
         let airConditionerButtonImage               = UIImage(named: Constants.Home.View.airConditionerButton)?.cgImage
         
         self.airConditionerButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        self.airConditionerButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: 420)
+        self.airConditionerButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
         self.airConditionerButton.layer.contents    = airConditionerButtonImage
         
         self.view.addSubview(self.airConditionerButton)
@@ -302,7 +302,7 @@ class HomeViewController: UIViewController {
         let shoppingCartButtonImage               = UIImage(named: Constants.Home.View.shoppingCartButton)?.cgImage
         
         self.shoppingCartButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        self.shoppingCartButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: 420)
+        self.shoppingCartButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
         self.shoppingCartButton.layer.contents    = shoppingCartButtonImage
         
         self.view.addSubview(self.shoppingCartButton)
@@ -314,7 +314,7 @@ class HomeViewController: UIViewController {
         let fridgeButtonImage               = UIImage(named: Constants.Home.View.fridgeButton)?.cgImage
         
         self.fridgeButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        self.fridgeButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: 420)
+        self.fridgeButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
         self.fridgeButton.layer.contents    = fridgeButtonImage
         
         self.view.addSubview(self.fridgeButton)
