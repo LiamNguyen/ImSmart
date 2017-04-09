@@ -11,7 +11,7 @@ import RxSwift
 
 class LightCellViewModel {
     fileprivate let light: Light!
-    fileprivate let lightViewModel: LightViewModel!
+    fileprivate let requireCellShake: Variable<Bool>!
     
     var isOn          = Variable<Bool>(false)
     var brightness    : Variable<Int>!
@@ -21,12 +21,12 @@ class LightCellViewModel {
     
     private let disposalBag = DisposeBag()
     
-    init(light: Light, parentViewModel: LightViewModel) {
-        self.light          = light
-        self.lightViewModel = parentViewModel
+    init(light: Light, requireCellShake: Variable<Bool>) {
+        self.light              = light
+        self.requireCellShake   = requireCellShake
         
-        self.brightness     = Variable<Int>(self.light.brightness)
-        self.area           = Variable<String>(self.light.area)
+        self.brightness         = Variable<Int>(self.light.brightness)
+        self.area               = Variable<String>(self.light.area)
         
         bindRx()
     }
@@ -50,7 +50,7 @@ class LightCellViewModel {
                 self.light.area = area
             }).addDisposableTo(disposalBag)
         
-        cellMustShake = lightViewModel.requireCellShake.asObservable()
+        cellMustShake = requireCellShake.asObservable()
             .map({ return $0 })
     }
 }

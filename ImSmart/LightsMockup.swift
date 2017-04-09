@@ -10,63 +10,63 @@ import Foundation
 import RxSwift
 
 struct LightsMockup {
-    static func lights(lightViewModel: LightViewModel) -> [LightCellViewModel] {
+    static func lights(requireCellShake: Variable<Bool>) -> [LightCellViewModel] {
         
-        let kitchenLightViewModel           = LightCellViewModel(
+        let kitchenrequireCellShake           = LightCellViewModel(
             light: Light(brightness: 0, area: "Kitchen"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
         
-        let livingroomLightViewModel        = LightCellViewModel(
+        let livingroomrequireCellShake        = LightCellViewModel(
             light: Light(brightness: 0, area: "Livingroom"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
                 
-        let frontYardLightViewModel         = LightCellViewModel(
+        let frontYardrequireCellShake         = LightCellViewModel(
             light: Light(brightness: 70, area: "Front yard"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
         
-        let backYardLightViewModel          = LightCellViewModel(
+        let backYardrequireCellShake          = LightCellViewModel(
             light: Light(brightness: 50, area: "Back yard"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
         
-        let myBedroomLightViewModel         = LightCellViewModel(
+        let myBedroomrequireCellShake         = LightCellViewModel(
             light: Light(brightness: 0, area: "My bedroom"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
         
-        let hersheyBedroomLightViewModel    = LightCellViewModel(
+        let hersheyBedroomrequireCellShake    = LightCellViewModel(
             light: Light(brightness: 0, area: "Hershey bedroom"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
         
-        let tobleronBedroomLightViewModel   = LightCellViewModel(
+        let tobleronBedroomrequireCellShake   = LightCellViewModel(
             light: Light(brightness: 0, area: "Tobleron bedroom"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
         
-        let firstFloorToiletLightViewModel  = LightCellViewModel(
+        let firstFloorToiletrequireCellShake  = LightCellViewModel(
             light: Light(brightness: 0, area: "1st floor toilet"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
         
-        let secondFloorToiletLightViewModel  = LightCellViewModel(
+        let secondFloorToiletrequireCellShake  = LightCellViewModel(
             light: Light(brightness: 0, area: "2nd floor toilet"),
-            parentViewModel: lightViewModel
+            requireCellShake: requireCellShake
         )
         
         return [
-            kitchenLightViewModel,
-            livingroomLightViewModel,
-            frontYardLightViewModel,
-            backYardLightViewModel,
-            myBedroomLightViewModel,
-            hersheyBedroomLightViewModel,
-            tobleronBedroomLightViewModel,
-            firstFloorToiletLightViewModel,
-            secondFloorToiletLightViewModel
+            kitchenrequireCellShake,
+            livingroomrequireCellShake,
+            frontYardrequireCellShake,
+            backYardrequireCellShake,
+            myBedroomrequireCellShake,
+            hersheyBedroomrequireCellShake,
+            tobleronBedroomrequireCellShake,
+            firstFloorToiletrequireCellShake,
+            secondFloorToiletrequireCellShake
         ]
     }
 }

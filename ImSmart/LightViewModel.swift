@@ -12,6 +12,7 @@ import UIKit
 
 class LightViewModel {
     var requireCellShake                    = Variable<Bool>(false)
+    var mockupLights                        : Variable<[LightCellViewModel]>!
     var selectedLights                      = Variable<[String: LightCellViewModel]>([String: LightCellViewModel]())
     
     var viewColorObserver                   : Observable<UIColor>!
@@ -29,6 +30,8 @@ class LightViewModel {
     }
     
     func bindRx() {
+        mockupLights = Variable(LightsMockup.lights(requireCellShake: requireCellShake))
+        
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
                 return requireCellShake ? Theme.contentHighlighted : Theme.background

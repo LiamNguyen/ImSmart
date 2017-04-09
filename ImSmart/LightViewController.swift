@@ -22,8 +22,6 @@ class LightViewController: UIViewController {
     private var cancelSelectionView: UIView!
     private var cancelButton: UIButton!
     
-    fileprivate var mockupLights: Variable<[LightCellViewModel]>!
-
     fileprivate let disposalBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -33,8 +31,6 @@ class LightViewController: UIViewController {
             print("Light view model not set")
             return
         }
-        
-        mockupLights = Variable(LightsMockup.lights(lightViewModel: lightViewModel))
         
         customizeAppearance()
         
@@ -64,7 +60,7 @@ class LightViewController: UIViewController {
     
     private func bindRxCellForRowAtIndexPath() {
 //        The same as cellForRowAtIndexPath
-        mockupLights.asObservable()
+        lightViewModel.mockupLights.asObservable()
             .bindTo(
                 lightsTableView
                     .rx
