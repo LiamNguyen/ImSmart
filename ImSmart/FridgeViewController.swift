@@ -12,11 +12,11 @@ class FridgeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("In Fridge VC")
     }
-    
-    deinit {
-        print("Out fridge VC")
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationItem.title = Constants.Fridges.View.title
     }
 }
