@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ED1117951E9AD337006EC259 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1117941E9AD337006EC259 /* Helper.swift */; };
 		ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC01E8F89EB006791C6 /* HomeViewController.swift */; };
 		ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC61E8F8CEF006791C6 /* LocalStore.swift */; };
 		ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */; };
@@ -15,6 +16,7 @@
 		ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; };
 		ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */; };
+		ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */; };
 		ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; };
 		ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5954B61E9898FB00C3E047 /* LightViewModel.swift */; };
@@ -80,6 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		ED1117941E9AD337006EC259 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ED171EC01E8F89EB006791C6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED171EC61E8F8CEF006791C6 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
 		ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 		ED1BACC81E98EAB2005F7F75 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessViewController.swift; sourceTree = "<group>"; };
+		ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
 		ED5954B31E981B3600C3E047 /* Spruce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spruce.framework; path = Carthage/Build/iOS/Spruce.framework; sourceTree = "<group>"; };
 		ED5954B61E9898FB00C3E047 /* LightViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewModel.swift; sourceTree = "<group>"; };
 		ED67474E1E95663700C925D0 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 				EDAB2C3F1E95287F006DF616 /* Constants.swift */,
 				ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */,
 				ED1BACC81E98EAB2005F7F75 /* Theme.swift */,
+				ED1117941E9AD337006EC259 /* Helper.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -323,6 +328,7 @@
 		EDAB2C4F1E9536AB006DF616 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -519,6 +525,7 @@
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
 				ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */,
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
+				ED1117951E9AD337006EC259 /* Helper.swift in Sources */,
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
@@ -537,6 +544,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDAB2C541E9537D5006DF616 /* LightTests.swift in Sources */,
+				ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */,
 				EDD9380C1E942BC400FB1797 /* LightCellViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -623,7 +631,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -668,7 +676,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

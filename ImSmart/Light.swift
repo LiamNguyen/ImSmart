@@ -13,8 +13,8 @@ class Light: NSCoder {
     var brightness  : Int!
     var area        : String!
     
-    init(brightness: Int, area: String) {
-        self.isOn       = false
+    init(brightness: Int, area: String, isOn: Bool = false) {
+        self.isOn       = isOn
         self.brightness = brightness
         self.area       = area
     }

@@ -26,7 +26,7 @@ class LightCellViewModelTests: XCTestCase {
         
         lightViewModel = LightViewModel()
         kitchenLight = Light(brightness: 0, area: "Kitchen")
-        kitchenLightCellViewModel = LightCellViewModel(light: kitchenLight, parentViewModel: lightViewModel)
+        kitchenLightCellViewModel = LightCellViewModel(light: kitchenLight, requireCellShake: lightViewModel.requireCellShake)
         
         bindRxObserver()
     }
