@@ -21,6 +21,9 @@ class LightViewModel {
     var cancelSelectionViewOriginYObserver  : Observable<Float>!
     var barButtonTitleObserver              : Observable<String>!
     
+    var brightnessValue                     = Variable<Float>(0.0)
+    var sampleLightBrightness               : Observable<UIColor>!
+    
     init() {
         bindRx()
     }
@@ -54,6 +57,16 @@ class LightViewModel {
         barButtonTitleObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
                 return requireCellShake ? Constants.Lights.Buttons.barButtonEdit : Constants.Lights.Buttons.barButtonBrightness
+            })
+        
+        sampleLightBrightness = brightnessValue.asObservable()
+            .map({ brightnessValue in
+                return UIColor(
+                    red: 255 / 255,
+                    green: 255 / 255,
+                    blue: CGFloat((100 - brightnessValue) * 2.55) / 255,
+                    alpha: 1
+                )
             })
     }
 }

@@ -166,6 +166,8 @@ class LightViewController: UIViewController {
     private func handleBarButtonAction() {
         if !lightViewModel.requireCellShake.value {
             self.lightViewModel.requireCellShake.value = true
+        } else {
+            self.performSegue(withIdentifier: Constants.Lights.SegueIdentifier.toBrightnessVC, sender: self)
         }
     }
     
@@ -214,6 +216,19 @@ class LightViewController: UIViewController {
         self.cancelSelectionView.alpha           = 0.9
         
         self.view.addSubview(self.cancelSelectionView)
+    }
+    
+//** Mark: SEGUE PREPARATIONS
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case Constants.Lights.SegueIdentifier.toBrightnessVC?:
+            if let brightnessVC = segue.destination as? BrightnessViewController {
+                brightnessVC.lightViewModel = self.lightViewModel
+            }
+        default:
+            return
+        }
     }
 }
 

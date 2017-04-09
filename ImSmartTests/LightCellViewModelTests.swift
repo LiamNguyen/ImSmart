@@ -8,6 +8,8 @@
 
 import XCTest
 @testable import ImSmart
+import RxSwift
+import RxCocoa
 
 class LightCellViewModelTests: XCTestCase {
     
@@ -15,12 +17,18 @@ class LightCellViewModelTests: XCTestCase {
     var kitchenLight: Light!
     var kitchenLightCellViewModel: LightCellViewModel!
     
+    var brightnessValue: UIColor!
+    
+    private let disposalBag = DisposeBag()
+    
     override func setUp() {
         super.setUp()
         
         lightViewModel = LightViewModel()
         kitchenLight = Light(brightness: 0, area: "Kitchen")
         kitchenLightCellViewModel = LightCellViewModel(light: kitchenLight, parentViewModel: lightViewModel)
+        
+        bindRxObserver()
     }
     
     override func tearDown() {
@@ -40,6 +48,13 @@ class LightCellViewModelTests: XCTestCase {
         }
     }
     
+    func bindRxObserver() {
+        lightViewModel.sampleLightBrightness
+            .subscribe(onNext: { brightness in
+                self.brightnessValue = brightness
+            }).addDisposableTo(disposalBag)
+    }
+    
     func testLightModelUpdate() {
         kitchenLightCellViewModel.isOn.value = true
         kitchenLightCellViewModel.brightness.value = 50
@@ -53,5 +68,15 @@ class LightCellViewModelTests: XCTestCase {
         kitchenLightCellViewModel.brightness.value = 100
         
         XCTAssertEqual(kitchenLight.brightness, 50)
+    }
+    
+    func testSampleLightBrightness() {
+        lightViewModel.brightnessValue.value = 65
+        
+        XCTAssertEqual(brightnessValue, UIColor(red: 1, green: 1, blue: 0.35, alpha: 1))
+        
+        lightViewModel.brightnessValue.value = 100
+        
+        XCTAssertEqual(brightnessValue, UIColor(red: 1, green: 1, blue: 0, alpha: 1))
     }
 }

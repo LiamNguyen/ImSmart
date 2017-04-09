@@ -320,6 +320,8 @@ class HomeViewController: UIViewController {
         self.view.addSubview(self.fridgeButton)
     }
     
+//** Mark: SEGUE PREPARATIONS
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Constants.Home.SegueIdentifier.toLightVC?:

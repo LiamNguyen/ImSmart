@@ -47,6 +47,17 @@ struct Constants {
             static let barButtonBrightness  = "Brightness"
             static let barButtonEdit        = "Edit"
         }
+        
+        struct SegueIdentifier {
+            static let toBrightnessVC       = "segue_LightToBrightnessVC"
+        }
+    }
+    
+    struct Brightness {
+        struct View {
+            static let title                = "Adjust brightness"
+            static let brightnessExample    = "brightnessAdjust.png"
+        }
     }
     
     struct AirConditioner {

@@ -14,6 +14,7 @@
 		ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACC81E98EAB2005F7F75 /* Theme.swift */; };
 		ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; };
 		ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */; };
 		ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; };
 		ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5954B61E9898FB00C3E047 /* LightViewModel.swift */; };
@@ -85,6 +86,7 @@
 		ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 		ED1BACC81E98EAB2005F7F75 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessViewController.swift; sourceTree = "<group>"; };
 		ED5954B31E981B3600C3E047 /* Spruce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spruce.framework; path = Carthage/Build/iOS/Spruce.framework; sourceTree = "<group>"; };
 		ED5954B61E9898FB00C3E047 /* LightViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewModel.swift; sourceTree = "<group>"; };
 		ED67474E1E95663700C925D0 /* FridgeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
@@ -168,8 +170,9 @@
 		ED171EBF1E8F87F5006791C6 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				EDF791E81E9557120078E98B /* LightViewController.swift */,
 				ED171EC01E8F89EB006791C6 /* HomeViewController.swift */,
+				EDF791E81E9557120078E98B /* LightViewController.swift */,
+				ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */,
 				EDF791E61E9554A00078E98B /* AirConditionerViewController.swift */,
 				ED67474E1E95663700C925D0 /* FridgeViewController.swift */,
 				ED6747501E9567CC00C925D0 /* ShoppingCartViewController.swift */,
@@ -511,6 +514,7 @@
 				ED75D3311E8C478A006D6082 /* AppDelegate.swift in Sources */,
 				ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */,
 				ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */,
+				ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
 				ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */,

@@ -35,6 +35,24 @@
             </objects>
             <point key="canvasLocation" x="975.20000000000005" y="37.331334332833585"/>
         </scene>
+        <!--Brightness View Controller-->
+        <scene sceneID="BVH-FK-wcc">
+            <objects>
+                <viewController id="GLY-al-3EY" customClass="BrightnessViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Zy-qn-Xwm"/>
+                        <viewControllerLayoutGuide type="bottom" id="WsF-vY-NlX"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LGu-xD-S7q">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QHO-zK-gwh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3012" y="-991"/>
+        </scene>
         <!--Lights-->
         <scene sceneID="rLZ-ym-l3z">
             <objects>
@@ -142,11 +160,12 @@
                         <outlet property="bottomConstraintTableViewToSuperview" destination="Tc9-Fe-UdO" id="kV9-lf-von"/>
                         <outlet property="lightsSelectionButton" destination="1L1-ya-DMA" id="xQJ-Qa-bpe"/>
                         <outlet property="lightsTableView" destination="k6K-05-hQO" id="I13-Oc-xuQ"/>
+                        <segue destination="GLY-al-3EY" kind="show" identifier="segue_LightToBrightnessVC" id="YPh-Lb-yTc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AJG-7Q-FTd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2088.8000000000002" y="-286.50674662668666"/>
+            <point key="canvasLocation" x="2089" y="-992"/>
         </scene>
         <!--Air Conditioners-->
         <scene sceneID="7iQ-3B-OFY">
@@ -165,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6j-LA-i66" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3012" y="-287.40629685157421"/>
+            <point key="canvasLocation" x="2089" y="-305"/>
         </scene>
         <!--Shopping Cart-->
         <scene sceneID="ONC-Bl-yGM">
@@ -203,7 +222,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KK5-Y3-Cag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3012" y="384"/>
+            <point key="canvasLocation" x="3012" y="37"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="QqW-pr-wUe">
