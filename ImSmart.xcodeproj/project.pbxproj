@@ -23,7 +23,6 @@
 		ED75D3361E8C478B006D6082 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3341E8C478B006D6082 /* Main.storyboard */; };
 		ED75D3381E8C478B006D6082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3371E8C478B006D6082 /* Assets.xcassets */; };
 		ED75D33B1E8C478B006D6082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3391E8C478B006D6082 /* LaunchScreen.storyboard */; };
-		ED75D3511E8C478B006D6082 /* ImSmartUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED75D3501E8C478B006D6082 /* ImSmartUITests.swift */; };
 		ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9792D21E9010A5004827D4 /* UIFunctionality.swift */; };
 		ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; };
 		ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -39,7 +38,7 @@
 		EDAB2C541E9537D5006DF616 /* LightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB2C531E9537D5006DF616 /* LightTests.swift */; };
 		EDD938081E941DE000FB1797 /* LightCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938071E941DE000FB1797 /* LightCellViewModel.swift */; };
 		EDD9380A1E941E5300FB1797 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938091E941E5300FB1797 /* Light.swift */; };
-		EDD9380C1E942BC400FB1797 /* LightViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9380B1E942BC400FB1797 /* LightViewModelTests.swift */; };
+		EDD9380C1E942BC400FB1797 /* LightCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9380B1E942BC400FB1797 /* LightCellViewModelTests.swift */; };
 		EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF791E61E9554A00078E98B /* AirConditionerViewController.swift */; };
 		EDF791E91E9557120078E98B /* LightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF791E81E9557120078E98B /* LightViewController.swift */; };
 /* End PBXBuildFile section */
@@ -99,7 +98,6 @@
 		ED75D3411E8C478B006D6082 /* ImSmartTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImSmartTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED75D3471E8C478B006D6082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED75D34C1E8C478B006D6082 /* ImSmartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImSmartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED75D3501E8C478B006D6082 /* ImSmartUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImSmartUITests.swift; sourceTree = "<group>"; };
 		ED75D3521E8C478B006D6082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED9792D21E9010A5004827D4 /* UIFunctionality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFunctionality.swift; sourceTree = "<group>"; };
 		ED9792D41E907C34004827D4 /* IBAnimatable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IBAnimatable.framework; path = Carthage/Build/iOS/IBAnimatable.framework; sourceTree = "<group>"; };
@@ -112,7 +110,7 @@
 		EDAB2C531E9537D5006DF616 /* LightTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTests.swift; sourceTree = "<group>"; };
 		EDD938071E941DE000FB1797 /* LightCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightCellViewModel.swift; sourceTree = "<group>"; };
 		EDD938091E941E5300FB1797 /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
-		EDD9380B1E942BC400FB1797 /* LightViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewModelTests.swift; sourceTree = "<group>"; };
+		EDD9380B1E942BC400FB1797 /* LightCellViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightCellViewModelTests.swift; sourceTree = "<group>"; };
 		EDF791E61E9554A00078E98B /* AirConditionerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerViewController.swift; sourceTree = "<group>"; };
 		EDF791E81E9557120078E98B /* LightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -267,7 +265,6 @@
 		ED75D34F1E8C478B006D6082 /* ImSmartUITests */ = {
 			isa = PBXGroup;
 			children = (
-				ED75D3501E8C478B006D6082 /* ImSmartUITests.swift */,
 				ED75D3521E8C478B006D6082 /* Info.plist */,
 			);
 			path = ImSmartUITests;
@@ -308,7 +305,7 @@
 		EDAB2C4D1E953693006DF616 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				EDD9380B1E942BC400FB1797 /* LightViewModelTests.swift */,
+				EDD9380B1E942BC400FB1797 /* LightCellViewModelTests.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -417,6 +414,7 @@
 					ED75D34B1E8C478B006D6082 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 86M37DGEMQ;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = ED75D32C1E8C4782006D6082;
 					};
@@ -535,7 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDAB2C541E9537D5006DF616 /* LightTests.swift in Sources */,
-				EDD9380C1E942BC400FB1797 /* LightViewModelTests.swift in Sources */,
+				EDD9380C1E942BC400FB1797 /* LightCellViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,7 +541,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED75D3511E8C478B006D6082 /* ImSmartUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
