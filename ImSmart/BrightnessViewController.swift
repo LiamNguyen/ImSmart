@@ -41,6 +41,12 @@ class BrightnessViewController: UIViewController {
         self.navigationItem.title = Constants.Brightness.View.title
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        clearRequireState()
+    }
+    
     private func bindRxObserver() {
         lightViewModel.brightnessValue.asObservable()
             .map { value in
@@ -53,10 +59,30 @@ class BrightnessViewController: UIViewController {
         .subscribe(onNext: { brightness in
             self.sampleLightBrightness.layer.backgroundColor = brightness.cgColor
         }).addDisposableTo(disposalBag)
+        
+        lightViewModel.brightnessValue.asObservable()
+            .map({ brightness in
+                return Int(brightness)
+            })
+            .subscribe(onNext: { brightness in
+                for lightCellViewModel in self.lightViewModel.selectedLights.value.values {
+                    lightCellViewModel.brightness.value = brightness
+                }
+            }).addDisposableTo(disposalBag)
     }
     
     private func bindRxAction() {
         
+    }
+    
+//** Mark: SUPPORT FUNCTIONS
+    
+    private func clearRequireState() {
+//        Clear selected lights
+        lightViewModel.selectedLights.value.removeAll()
+        
+//        Set default brightness value
+        lightViewModel.brightnessValue.value = 0.0
     }
 
     private func customizeAppearance() {
@@ -91,13 +117,13 @@ class BrightnessViewController: UIViewController {
     }
     
     private func drawBrightnessSlider() {
-        self.adjustBrightnessSlider = UISlider(frame: CGRect(x: 0, y: 0, width: 220, height: 40))
+        self.adjustBrightnessSlider                 = UISlider(frame: CGRect(x: 0, y: 0, width: 220, height: 40))
         
-        self.adjustBrightnessSlider.minimumValue = 0
-        self.adjustBrightnessSlider.maximumValue = 100
-        self.adjustBrightnessSlider.isContinuous = true
-        self.adjustBrightnessSlider.tintColor = UIColor.red
-        self.adjustBrightnessSlider.value = 0
+        self.adjustBrightnessSlider.minimumValue    = 0
+        self.adjustBrightnessSlider.maximumValue    = 100
+        self.adjustBrightnessSlider.isContinuous    = true
+        self.adjustBrightnessSlider.tintColor       = UIColor.red
+        self.adjustBrightnessSlider.value           = 0
         self.adjustBrightnessSlider.addTarget(self, action: #selector(self.sliderValueChange), for: .valueChanged)
         
         self.view.addSubview(self.adjustBrightnessSlider)
@@ -105,11 +131,11 @@ class BrightnessViewController: UIViewController {
     }
     
     @objc func sliderValueChange(sender: UISlider) {
-        let sliderValueStep: Float = 5
-        let roundedValue = round(sender.value / sliderValueStep) * sliderValueStep
-        self.adjustBrightnessSlider.value = roundedValue
+        let sliderValueStep: Float              = 5
+        let roundedValue                        = round(sender.value / sliderValueStep) * sliderValueStep
+        self.adjustBrightnessSlider.value       = roundedValue
 
-        lightViewModel.brightnessValue.value = roundedValue
+        lightViewModel.brightnessValue.value    = roundedValue
     }
     
 //** Mark: MAKE CONSTRAINTS
