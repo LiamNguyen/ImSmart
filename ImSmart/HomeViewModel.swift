@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import RxCocoa
 import RxSwift
 
 class HomeViewModel {
@@ -74,7 +73,7 @@ class HomeViewModel {
         let screenWidth = Constants.Window.screenWidth
         let originCoordinate = (
             x: Float(screenWidth / 2),
-            y: Float(420)
+            y: Float(Constants.Window.screenHeight - 300)
         )
         
         if position == .Origin {

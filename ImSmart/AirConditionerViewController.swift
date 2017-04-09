@@ -7,16 +7,18 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class AirConditionerViewController: UIViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("In Air Con VC")
     }
     
-    deinit {
-        print("Out Air Con VC")
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        self.navigationItem.title = Constants.AirConditioner.View.title
     }
 }
