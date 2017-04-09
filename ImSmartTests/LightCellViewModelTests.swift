@@ -1,5 +1,5 @@
 //
-//  LightTests.swift
+//  LightCellViewModelTests.swift
 //  ImSmart
 //
 //  Created by Cao Do Nguyen on /04/04/2017.
@@ -9,16 +9,18 @@
 import XCTest
 @testable import ImSmart
 
-class LightViewModelTests: XCTestCase {
+class LightCellViewModelTests: XCTestCase {
     
+    var lightViewModel: LightViewModel!
     var kitchenLight: Light!
-    var kitchenLightViewModel: LightViewModel!
+    var kitchenLightCellViewModel: LightCellViewModel!
     
     override func setUp() {
         super.setUp()
         
+        lightViewModel = LightViewModel()
         kitchenLight = Light(brightness: 0, area: "Kitchen")
-        kitchenLightViewModel = LightViewModel(light: kitchenLight)
+        kitchenLightCellViewModel = LightCellViewModel(light: kitchenLight, parentViewModel: lightViewModel)
     }
     
     override func tearDown() {
@@ -39,16 +41,16 @@ class LightViewModelTests: XCTestCase {
     }
     
     func testLightModelUpdate() {
-        kitchenLightViewModel.isOn.value = true
-        kitchenLightViewModel.brightness.value = 50
-        kitchenLightViewModel.area.value = "Living room"
+        kitchenLightCellViewModel.isOn.value = true
+        kitchenLightCellViewModel.brightness.value = 50
+        kitchenLightCellViewModel.area.value = "Living room"
         
         XCTAssertEqual(kitchenLight.isOn, true)
         XCTAssertEqual(kitchenLight.brightness, 50)
         XCTAssertEqual(kitchenLight.area, "Living room")
         
-        kitchenLightViewModel.isOn.value = false
-        kitchenLightViewModel.brightness.value = 100
+        kitchenLightCellViewModel.isOn.value = false
+        kitchenLightCellViewModel.brightness.value = 100
         
         XCTAssertEqual(kitchenLight.brightness, 50)
     }
