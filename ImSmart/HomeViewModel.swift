@@ -9,7 +9,10 @@
 import Foundation
 import RxSwift
 
-class HomeViewModel {
+class HomeViewModel{
+    
+    var localStore                          : LocalStore!
+    var dataSynchronizeManager              = DataSynchronizationManager()
     
     var isMainButtonShown                   : Variable<Bool> = Variable(true)
     var brandLogoOriginXObserver            : Observable<Float>!
@@ -21,9 +24,10 @@ class HomeViewModel {
     var shoppingCartButtonPositionObserver  : Observable<(x: Float, y: Float)>!
     var fridgeButtonPositionObserver        : Observable<(x: Float, y: Float)>!
     
-    private var disposalBag = DisposeBag()
+    private var disposalBag                 = DisposeBag()
     
     init() {
+        dataSynchronizeManager.delegate = self
         bindRx()
     }
     
@@ -73,7 +77,7 @@ class HomeViewModel {
         let screenWidth = Constants.Window.screenWidth
         let originCoordinate = (
             x: Float(screenWidth / 2),
-            y: Float(Constants.Window.screenHeight - 300)
+            y: Float(Constants.Home.View.mainButtonPosition)
         )
         
         if position == .Origin {
@@ -116,5 +120,14 @@ class HomeViewModel {
         case Origin
         case Destination
     }
+}
+
+extension HomeViewModel: DataSynchronizationManagerDelegate {
+    func connectedDevicesChanged(manager: DataSynchronizationManager, connectedDevices: [String]) {
+        NSLog("%@", "Connections: \(connectedDevices)")
+    }
     
+    func onDataReceived(manager: DataSynchronizationManager, data: Any) {
+        
+    }
 }

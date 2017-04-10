@@ -326,7 +326,7 @@ class HomeViewController: UIViewController {
         switch segue.identifier {
         case Constants.Home.SegueIdentifier.toLightVC?:
             if let lightViewController = segue.destination as? LightViewController {
-                let lightViewModel                  = LightViewModel()
+                let lightViewModel                  = LightViewModel(dataSynchronizeManager: homeViewModel.dataSynchronizeManager)
                 lightViewController.lightViewModel  = lightViewModel
             }
         default:

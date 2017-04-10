@@ -7,20 +7,40 @@
 //
 
 import UIKit
+import CoreBluetooth
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
 
-    var window: UIWindow?
-    let homeViewModel = HomeViewModel()
-
+    var window          : UIWindow?
+    let homeViewModel   = HomeViewModel()
+    let localStore      = LocalStore()
+    var centralManager  : CBCentralManager!
+    
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        switch (central.state) {
+        case .poweredOff:
+            print("CoreBluetooth BLE hardware is powered off")
+        case .poweredOn:
+            print("CoreBluetooth BLE hardware is powered on and ready")
+            
+        default: break
+        }
+    }
+    
+    private func startUpCentralManager() {
+        print("Initializing central manager")
+        centralManager = CBCentralManager(delegate: self, queue: nil)
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        startUpCentralManager()
         
         if let navigationController = window?.rootViewController as? UINavigationController,
             let homeViewController = navigationController.viewControllers.first as? HomeViewController {
-                homeViewController.homeViewModel = homeViewModel
+                homeViewModel.localStore            = localStore
+                homeViewController.homeViewModel    = homeViewModel
         }
         
         return true

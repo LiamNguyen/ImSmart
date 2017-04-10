@@ -102,10 +102,15 @@ class LightViewController: UIViewController {
     }
     
     private func bindRxObserver() {
-        lightViewModel.requireCellShake.asObservable()
-            .subscribe(onNext: { reqireCellShake in
+        
+        Observable.combineLatest(
+            lightViewModel.requireCellShake.asObservable(),
+            lightViewModel.mockupLights.asObservable()
+        ).subscribe(onNext: { _ in
+            DispatchQueue.main.async {
                 self.lightsTableView.reloadData()
-            }).addDisposableTo(disposalBag)
+            }
+        }).addDisposableTo(disposalBag)
         
         lightViewModel.viewColorObserver
             .subscribe(onNext: { viewBackgroundColor in
