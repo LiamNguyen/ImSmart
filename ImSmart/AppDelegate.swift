@@ -33,8 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate,
         centralManager = CBCentralManager(delegate: self, queue: nil)
     }
 
+    private func customizeAppearance() {
+        if UIScreen.main.bounds.height > 736 { //Device is not iPhone
+            Constants.Home.View.mainButtonPosition  = CGFloat(UIScreen.main.bounds.height - 420)
+            Constants.Home.View.homeButtonSize      = (width: 60, height: 50)
+        }
+    }
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        customizeAppearance()
         startUpCentralManager()
         
         if let navigationController = window?.rootViewController as? UINavigationController,
