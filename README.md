@@ -6,5 +6,6 @@
   #### Better design __Network Management Layer__, avoiding big fat Singleton
   #### Try out __Alamofire, Argo or SwiftyJSON__ for network management layer
   #### Try out IOS unit test 
+  #### Data synchronization between devices with MultiPeer Connectivity
   
   ## Let's go
