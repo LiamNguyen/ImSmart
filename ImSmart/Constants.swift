@@ -32,6 +32,15 @@ struct Constants {
             static var mainButtonPosition   = CGFloat(Constants.Window.screenHeight - 250)
         }
         
+        struct Menu {
+            static let title                = "Menu"
+            static let connectionsLabel     = "Connected devices"
+            static let waitingConnections   = "Waiting for devices..."
+            static let tcButton             = "Terms and Conditions"
+            static let privacyStatement     = "Privacy Statement"
+            static let version              = "Version \(Bundle.main.infoDictionary!["CFBundleShortVersionString"]!)"
+        }
+        
         struct SegueIdentifier {
             static let toLightVC            = "segue_HomeToLightVC"
             static let toAirConditionerVC   = "segue_HomeToAirConditionerVC"

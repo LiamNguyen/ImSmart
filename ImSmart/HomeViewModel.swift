@@ -14,7 +14,9 @@ class HomeViewModel{
     var localStore                          : LocalStore!
     var dataSynchronizeManager              = DataSynchronizationManager()
     
-    var isMainButtonShown                   : Variable<Bool> = Variable(true)
+    var isMainButtonShown                   : Variable<Bool>        = Variable(true)
+    var connectedDevices                    : Variable<[String]>    = Variable([String]())
+    var menuViewShouldShow                  : Variable<Bool>        = Variable(false)
     var brandLogoOriginXObserver            : Observable<Float>!
     var welcomeTextOriginXObserver          : Observable<Float>!
     var mainButtonSizeObserver              : Observable<(Int, Int)>!
@@ -23,6 +25,9 @@ class HomeViewModel{
     var airConditionerPositionObserver      : Observable<(x: Float, y: Float)>!
     var shoppingCartButtonPositionObserver  : Observable<(x: Float, y: Float)>!
     var fridgeButtonPositionObserver        : Observable<(x: Float, y: Float)>!
+    var connectionsLabelObserver            : Observable<String>!
+    var menuViewOriginXObserver             : Observable<Float>!
+    var activityIndicatorShouldSpin         : Observable<Bool>!
     
     private var disposalBag                 = DisposeBag()
     
@@ -71,6 +76,22 @@ class HomeViewModel{
             .map({ isMainButtonShown in
                 return isMainButtonShown ? self.buttonsCoordinate(position: .Origin) : self.buttonsCoordinate(buttonType: .Fridge)
             })
+        
+        connectionsLabelObserver = connectedDevices.asObservable()
+            .map({ connectedDevices in
+                return connectedDevices.isEmpty ? Constants.Home.Menu.waitingConnections : Constants.Home.Menu.connectionsLabel
+            })
+        
+        menuViewOriginXObserver = menuViewShouldShow.asObservable()
+            .map({ menuViewShouldShow in
+                return menuViewShouldShow ? Constants.Window.screenWidth - 135 : Constants.Window.screenWidth + 135
+            })
+        
+        activityIndicatorShouldSpin = Observable.combineLatest(
+            connectedDevices.asObservable(),
+            menuViewShouldShow.asObservable(), resultSelector: { (connectedDevices, menuViewShouldShow) -> Bool in
+                return connectedDevices.isEmpty && menuViewShouldShow
+        })
     }
     
     private func buttonsCoordinate(buttonType: ButtonType = .Default, position: ButtonPosition = .Destination) -> (Float, Float) {
@@ -124,7 +145,7 @@ class HomeViewModel{
 
 extension HomeViewModel: DataSynchronizationManagerDelegate {
     func connectedDevicesChanged(manager: DataSynchronizationManager, connectedDevices: [String]) {
-        NSLog("%@", "Connections: \(connectedDevices)")
+        self.connectedDevices.value = connectedDevices
     }
     
     func onDataReceived(manager: DataSynchronizationManager, data: Any) {
