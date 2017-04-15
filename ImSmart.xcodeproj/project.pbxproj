@@ -26,6 +26,7 @@
 		ED75D3361E8C478B006D6082 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3341E8C478B006D6082 /* Main.storyboard */; };
 		ED75D3381E8C478B006D6082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3371E8C478B006D6082 /* Assets.xcassets */; };
 		ED75D33B1E8C478B006D6082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3391E8C478B006D6082 /* LaunchScreen.storyboard */; };
+		ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED810EC21E9BB4A9005F701E /* DataSynchronizationManager.swift */; };
 		ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9792D21E9010A5004827D4 /* UIFunctionality.swift */; };
 		ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; };
 		ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -105,6 +106,7 @@
 		ED75D3471E8C478B006D6082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED75D34C1E8C478B006D6082 /* ImSmartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImSmartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED75D3521E8C478B006D6082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ED810EC21E9BB4A9005F701E /* DataSynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSynchronizationManager.swift; sourceTree = "<group>"; };
 		ED9792D21E9010A5004827D4 /* UIFunctionality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFunctionality.swift; sourceTree = "<group>"; };
 		ED9792D41E907C34004827D4 /* IBAnimatable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IBAnimatable.framework; path = Carthage/Build/iOS/IBAnimatable.framework; sourceTree = "<group>"; };
 		ED9C588B1E8E49C400F57B8F /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -215,11 +217,7 @@
 		ED75D3241E8C4782006D6082 = {
 			isa = PBXGroup;
 			children = (
-				ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */,
-				ED5954B31E981B3600C3E047 /* Spruce.framework */,
-				EDAB2C411E952EB4006DF616 /* RxCocoa.framework */,
-				ED9792D41E907C34004827D4 /* IBAnimatable.framework */,
-				ED9C588B1E8E49C400F57B8F /* RxSwift.framework */,
+				ED810EC11E9BB440005F701E /* ExternalLibraries */,
 				ED75D32F1E8C478A006D6082 /* ImSmart */,
 				ED75D3441E8C478B006D6082 /* ImSmartTests */,
 				ED75D34F1E8C478B006D6082 /* ImSmartUITests */,
@@ -249,10 +247,9 @@
 				EDA77A7B1E9571A8002C801B /* View */,
 				ED171EBE1E8F87EA006791C6 /* ViewModel */,
 				EDA77A811E957CEF002C801B /* MockupData */,
-				ED75D3341E8C478B006D6082 /* Main.storyboard */,
-				ED75D3371E8C478B006D6082 /* Assets.xcassets */,
-				ED75D3391E8C478B006D6082 /* LaunchScreen.storyboard */,
-				ED75D33C1E8C478B006D6082 /* Info.plist */,
+				ED810EBE1E9BB399005F701E /* MultipeerConnectivity */,
+				ED810EBF1E9BB3ED005F701E /* Storyboards */,
+				ED810EC01E9BB41C005F701E /* SupportingFiles */,
 			);
 			path = ImSmart;
 			sourceTree = "<group>";
@@ -276,6 +273,44 @@
 				ED75D3521E8C478B006D6082 /* Info.plist */,
 			);
 			path = ImSmartUITests;
+			sourceTree = "<group>";
+		};
+		ED810EBE1E9BB399005F701E /* MultipeerConnectivity */ = {
+			isa = PBXGroup;
+			children = (
+				ED810EC21E9BB4A9005F701E /* DataSynchronizationManager.swift */,
+			);
+			name = MultipeerConnectivity;
+			sourceTree = "<group>";
+		};
+		ED810EBF1E9BB3ED005F701E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				ED75D3341E8C478B006D6082 /* Main.storyboard */,
+				ED75D3391E8C478B006D6082 /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		ED810EC01E9BB41C005F701E /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				ED75D3371E8C478B006D6082 /* Assets.xcassets */,
+				ED75D33C1E8C478B006D6082 /* Info.plist */,
+			);
+			name = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		ED810EC11E9BB440005F701E /* ExternalLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */,
+				ED5954B31E981B3600C3E047 /* Spruce.framework */,
+				EDAB2C411E952EB4006DF616 /* RxCocoa.framework */,
+				ED9792D41E907C34004827D4 /* IBAnimatable.framework */,
+				ED9C588B1E8E49C400F57B8F /* RxSwift.framework */,
+			);
+			name = ExternalLibraries;
 			sourceTree = "<group>";
 		};
 		EDA77A7B1E9571A8002C801B /* View */ = {
@@ -536,6 +571,7 @@
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
 				ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */,
+				ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,10 @@ import RxSwift
 import UIKit
 
 class LightViewModel {
+    var dataSynchronizeManager              : DataSynchronizationManager!
+    
     var requireCellShake                    = Variable<Bool>(false)
+    var requireSynchronization              = Variable<Bool>(false)
     var mockupLights                        : Variable<[LightCellViewModel]>!
     var selectedLights                      = Variable<[String: LightCellViewModel]>([String: LightCellViewModel]())
     
@@ -26,12 +29,20 @@ class LightViewModel {
     var brightnessValue                     = Variable<Float>(0.0)
     var sampleLightBrightness               : Observable<UIColor>!
     
+    private let disposalBag                 = DisposeBag()
+    
     init() {
         bindRx()
     }
     
+    convenience init(dataSynchronizeManager: DataSynchronizationManager) {
+        self.init()
+        self.dataSynchronizeManager             = dataSynchronizeManager
+        self.dataSynchronizeManager.delegate    = self
+    }
+    
     func bindRx() {
-        mockupLights = Variable(LightsMockup.lights(requireCellShake: requireCellShake))
+        mockupLights = Variable(LightsMockup.lights(requireCellShake: requireCellShake, requireSynchronization: requireSynchronization))
         
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
@@ -78,5 +89,28 @@ class LightViewModel {
             selectedLights.asObservable()) { (requireCellShake, selectedLights) in
                 return requireCellShake ? !selectedLights.values.isEmpty : true
         }
+        
+        requireSynchronization.asObservable()
+            .subscribe(onNext: { _ in
+                guard let _ = self.dataSynchronizeManager else {
+                    return
+                }
+                let jsonObject = Helper.buildJSONObject(fromLightCellViewModel: (self.mockupLights.value))
+                let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
+                
+                self.dataSynchronizeManager?.senđData(dataToBeSent: jsonString)
+            }).addDisposableTo(disposalBag)
+    }
+    
+    
+}
+
+extension LightViewModel: DataSynchronizationManagerDelegate {
+    func connectedDevicesChanged(manager: DataSynchronizationManager, connectedDevices: [String]) {
+        NSLog("%@", "Connections: \(connectedDevices)")
+    }
+    
+    func onDataReceived(manager: DataSynchronizationManager, data: Any) {
+        mockupLights.value = data as! [LightCellViewModel]
     }
 }

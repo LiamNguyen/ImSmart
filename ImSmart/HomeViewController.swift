@@ -9,6 +9,7 @@
 import UIKit
 import RxCocoa
 import RxSwift
+import SnapKit
 
 class HomeViewController: UIViewController {
     
@@ -20,9 +21,11 @@ class HomeViewController: UIViewController {
     private var airConditionerButton: UIButton!
     private var fridgeButton        : UIButton!
     private var shoppingCartButton  : UIButton!
+    private var homeButton          : UIButton!
     private var mainButtonImageView : UIImageView!
     private var brandLogoImageView  : UIImageView!
     private var welcomeTextImageView: UIImageView!
+    private var navigationView      : UIView!
     
     private let disposalBag         = DisposeBag()
     
@@ -198,6 +201,15 @@ class HomeViewController: UIViewController {
             .subscribe(onNext: { [weak self] in
                 self?.performSegue(withIdentifier: Constants.Home.SegueIdentifier.toFridgeVC, sender: self)
             }).addDisposableTo(disposalBag)
+        
+//** Mark: HOME BUTTON
+        
+        self.homeButton
+            .rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+
+            }).addDisposableTo(disposalBag)
     }
     
     private func customizeAppearance() {
@@ -211,6 +223,7 @@ class HomeViewController: UIViewController {
         drawShoppingCartButton()
         drawFridgeButton()
         drawMainButton()
+        drawHomeButton()
     }
     
 //** Mark: DRAWING BRAND LOGO
@@ -244,7 +257,7 @@ class HomeViewController: UIViewController {
     private func drawMainButton() {
         self.mainButton                             = UIButton(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
         self.mainButton.frame                       = self.mainButton.bounds
-        self.mainButton.center                      = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
+        self.mainButton.center                      = CGPoint(x: UIScreen.main.bounds.width / 2, y: Constants.Home.View.mainButtonPosition)
         UIFunctionality.applyShadow(toView: self.mainButton, withColor: UIColor.red)
         
         let buttonImage                             = UIImage(named: Constants.Home.View.mainButton)
@@ -266,7 +279,7 @@ class HomeViewController: UIViewController {
         let cancelButtonImage               = UIImage(named: Constants.Home.View.cancelButton)?.cgImage
         
         self.cancelButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        self.cancelButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
+        self.cancelButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: Constants.Home.View.mainButtonPosition)
         self.cancelButton.layer.contents    = cancelButtonImage
 
         self.view.addSubview(self.cancelButton)
@@ -278,7 +291,7 @@ class HomeViewController: UIViewController {
         let lightsButtonImage               = UIImage(named: Constants.Home.View.lightsButton)?.cgImage
         
         self.lightsButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        self.lightsButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
+        self.lightsButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: Constants.Home.View.mainButtonPosition)
         self.lightsButton.layer.contents    = lightsButtonImage
         
         self.view.addSubview(self.lightsButton)
@@ -290,7 +303,7 @@ class HomeViewController: UIViewController {
         let airConditionerButtonImage               = UIImage(named: Constants.Home.View.airConditionerButton)?.cgImage
         
         self.airConditionerButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        self.airConditionerButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
+        self.airConditionerButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: Constants.Home.View.mainButtonPosition)
         self.airConditionerButton.layer.contents    = airConditionerButtonImage
         
         self.view.addSubview(self.airConditionerButton)
@@ -302,7 +315,7 @@ class HomeViewController: UIViewController {
         let shoppingCartButtonImage               = UIImage(named: Constants.Home.View.shoppingCartButton)?.cgImage
         
         self.shoppingCartButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        self.shoppingCartButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
+        self.shoppingCartButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: Constants.Home.View.mainButtonPosition)
         self.shoppingCartButton.layer.contents    = shoppingCartButtonImage
         
         self.view.addSubview(self.shoppingCartButton)
@@ -314,19 +327,38 @@ class HomeViewController: UIViewController {
         let fridgeButtonImage               = UIImage(named: Constants.Home.View.fridgeButton)?.cgImage
         
         self.fridgeButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
-        self.fridgeButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height - 300)
+        self.fridgeButton.center            = CGPoint(x: UIScreen.main.bounds.width / 2, y: Constants.Home.View.mainButtonPosition)
         self.fridgeButton.layer.contents    = fridgeButtonImage
         
         self.view.addSubview(self.fridgeButton)
     }
     
+//** Mark: DRAWING HOME BUTTON
+
+    private func drawHomeButton() {
+        let size                          = Constants.Home.View.homeButtonSize
+        
+        let homeButtonImage               = UIImage(named: Constants.Home.View.homeButton)?.cgImage
+        
+        self.homeButton                   = UIButton()
+        self.homeButton.layer.contents    = homeButtonImage
+        
+        self.view.addSubview(self.homeButton)
+        
+        self.homeButton.snp.makeConstraints { maker in
+            maker.width.equalTo(size.width)
+            maker.height.equalTo(size.height)
+            maker.top.equalTo(self.view.snp.top).offset(40)
+            maker.right.equalTo(self.view.snp.right).offset(-20)
+        }
+    }
 //** Mark: SEGUE PREPARATIONS
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case Constants.Home.SegueIdentifier.toLightVC?:
             if let lightViewController = segue.destination as? LightViewController {
-                let lightViewModel                  = LightViewModel()
+                let lightViewModel                  = LightViewModel(dataSynchronizeManager: homeViewModel.dataSynchronizeManager)
                 lightViewController.lightViewModel  = lightViewModel
             }
         default:

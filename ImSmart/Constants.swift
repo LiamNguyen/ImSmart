@@ -17,6 +17,7 @@ struct Constants {
     
     struct Home {
         struct View {
+            static let title                = "Home"
             static let homeBackground       = "homeBackground.png"
             static let logo                 = "logo.png"
             static let welcomeText          = "welcomeText.png"
@@ -26,6 +27,9 @@ struct Constants {
             static let airConditionerButton = "airConditionerIcon.png"
             static let shoppingCartButton   = "shoppingCartIcon.png"
             static let fridgeButton         = "fridgeIcon.png"
+            static let homeButton           = "homeIcon.png"
+            static var homeButtonSize       = (width: 40, height: 40)
+            static var mainButtonPosition   = CGFloat(Constants.Window.screenHeight - 250)
         }
         
         struct SegueIdentifier {
