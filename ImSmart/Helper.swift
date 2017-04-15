@@ -54,9 +54,8 @@ class Helper {
                         area        : dictionary?["area"] as! String,
                         isOn        : dictionary?["isOn"] as! Bool
                     )
-                    return LightCellViewModel(light: light, requireCellShake: lightViewModel.requireCellShake)
+                    return LightCellViewModel(light: light, requireCellShake: lightViewModel.requireCellShake, requireSynchronization: lightViewModel.requireSynchronization)
                 })
-                
                 return receivedMockupLights
             } else {
                 NSLog("%@", "NSArray conversion failed")
@@ -66,5 +65,16 @@ class Helper {
         }
         
         return [LightCellViewModel]()
+    }
+    
+    static func printMockupLights(mockupLights: [LightCellViewModel]) {
+        let _ = mockupLights
+            .map({ lightCellViewModel in
+                print("__________Start item")
+                print("Area: \(lightCellViewModel.area.value)")
+                print("Brigtness: \(lightCellViewModel.brightness.value)")
+                print("Light is on \(lightCellViewModel.isOn.value)")
+                print("__________End item")
+            })
     }
 }

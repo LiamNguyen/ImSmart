@@ -10,10 +10,11 @@ import Foundation
 import RxSwift
 
 class LightCellViewModel {
-    fileprivate let light: Light!
-    fileprivate let requireCellShake: Variable<Bool>!
+    fileprivate let light                   : Light!
+    fileprivate let requireCellShake        : Variable<Bool>!
+    fileprivate let requireSynchronization  : Variable<Bool>!
     
-    var isOn          = Variable<Bool>(false)
+    var isOn          : Variable<Bool>!
     var brightness    : Variable<Int>!
     var area          : Variable<String>!
     
@@ -21,12 +22,13 @@ class LightCellViewModel {
     
     private let disposalBag = DisposeBag()
     
-    init(light: Light, requireCellShake: Variable<Bool>) {
-        self.light              = light
-        self.requireCellShake   = requireCellShake
-        
-        self.brightness         = Variable<Int>(self.light.brightness)
-        self.area               = Variable<String>(self.light.area)
+    init(light: Light, requireCellShake: Variable<Bool>, requireSynchronization: Variable<Bool>) {
+        self.light                  = light
+        self.requireCellShake       = requireCellShake
+        self.requireSynchronization = requireSynchronization
+        self.isOn                   = Variable<Bool>(self.light.isOn)
+        self.brightness             = Variable<Int>(self.light.brightness)
+        self.area                   = Variable<String>(self.light.area)
         
         bindRx()
     }
@@ -52,5 +54,14 @@ class LightCellViewModel {
         
         cellMustShake = requireCellShake.asObservable()
             .map({ return $0 })
+        
+        let  _ = Observable.combineLatest(
+            isOn.asObservable(),
+            brightness.asObservable(),
+            area.asObservable())
+            .throttle(1.7, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { _ in
+                self.requireSynchronization.value = true
+            })
     }
 }
