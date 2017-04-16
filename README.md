@@ -7,5 +7,6 @@
   #### Try out __Alamofire, Argo or SwiftyJSON__ for network management layer
   #### Try out IOS unit test 
   #### Data synchronization between devices with MultiPeer Connectivity
+  #### Using CoreData
   
   ## Let's go
