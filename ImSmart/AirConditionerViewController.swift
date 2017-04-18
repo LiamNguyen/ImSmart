@@ -21,4 +21,8 @@ class AirConditionerViewController: UIViewController {
         
         self.navigationItem.title = Constants.AirConditioner.View.title
     }
+    
+    deinit {
+        print("Air Con VC -> Dead")
+    }
 }
