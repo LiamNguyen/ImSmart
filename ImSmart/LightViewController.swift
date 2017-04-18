@@ -58,6 +58,10 @@ class LightViewController: UIViewController {
         UIFunctionality.applySmoothAnimation(elementToBeSmooth: lightsTableView)
     }
     
+    deinit {
+        print("Light VC -> Dead")
+    }
+    
     private func bindRxCellForRowAtIndexPath() {
 //        The same as cellForRowAtIndexPath
         lightViewModel.mockupLights.asObservable()
@@ -79,14 +83,14 @@ class LightViewController: UIViewController {
             .rx
             .modelSelected(LightCellViewModel.self)
             .debounce(0.2, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { selectedLightCellViewModel in
-                guard let _ = self.lightsTableView.indexPathForSelectedRow else {
+            .subscribe(onNext: { [weak self] selectedLightCellViewModel in
+                guard let _ = self?.lightsTableView.indexPathForSelectedRow else {
                     return
                 }
                 
-                self.handleCellSelection(
+                self?.handleCellSelection(
                     selectedLightCellViewModel: selectedLightCellViewModel,
-                    selectedRowIndexPath: self.lightsTableView.indexPathForSelectedRow!
+                    selectedRowIndexPath: (self?.lightsTableView.indexPathForSelectedRow!)!
                 )
             }).addDisposableTo(disposalBag)
     }
@@ -96,8 +100,8 @@ class LightViewController: UIViewController {
             .rx
             .modelDeselected(LightCellViewModel.self)
             .debounce(0.2, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { deselctedLightCellViewModel in
-                self.lightViewModel.selectedLights.value.removeValue(forKey: deselctedLightCellViewModel.area.value)
+            .subscribe(onNext: { [weak self] deselctedLightCellViewModel in
+                self?.lightViewModel.selectedLights.value.removeValue(forKey: deselctedLightCellViewModel.area.value)
             }).addDisposableTo(disposalBag)
     }
     
@@ -106,48 +110,48 @@ class LightViewController: UIViewController {
         Observable.combineLatest(
             lightViewModel.requireCellShake.asObservable(),
             lightViewModel.mockupLights.asObservable()
-        ).subscribe(onNext: { _ in
+        ).subscribe(onNext: { [weak self] _ in
             DispatchQueue.main.async {
-                self.lightsTableView.reloadData()
+                self?.lightsTableView.reloadData()
             }
         }).addDisposableTo(disposalBag)
         
         lightViewModel.viewColorObserver
-            .subscribe(onNext: { viewBackgroundColor in
+            .subscribe(onNext: { [weak self] viewBackgroundColor in
                 UIView.animate(withDuration: 0.4, animations: { 
-                    self.view.backgroundColor = viewBackgroundColor
+                    self?.view.backgroundColor = viewBackgroundColor
                 })
             }).addDisposableTo(disposalBag)
         
         lightViewModel.tableViewColorObserver
-            .subscribe(onNext: { tableViewBackgroundColor in
+            .subscribe(onNext: { [weak self] tableViewBackgroundColor in
                 UIView.animate(withDuration: 0.4, animations: { 
-                    self.lightsTableView.backgroundColor = tableViewBackgroundColor
+                    self?.lightsTableView.backgroundColor = tableViewBackgroundColor
                 })
             }).addDisposableTo(disposalBag)
         
         lightViewModel.tableViewBottomConstraintObserver
-            .subscribe(onNext: { constant in
+            .subscribe(onNext: { [weak self] constant in
                 UIView.animate(withDuration: 0.4, animations: { 
-                    self.bottomConstraintTableViewToSuperview.constant = CGFloat(constant)
+                    self?.bottomConstraintTableViewToSuperview.constant = CGFloat(constant)
                 })
             }).addDisposableTo(disposalBag)
         
         lightViewModel.cancelSelectionViewOriginYObserver
-            .subscribe(onNext: { originY in
+            .subscribe(onNext: { [weak self] originY in
                 UIView.animate(withDuration: 0.4, animations: { 
-                    self.cancelSelectionView.center.y = CGFloat(originY)
+                    self?.cancelSelectionView.center.y = CGFloat(originY)
                 })
             }).addDisposableTo(disposalBag)
     
         lightViewModel.barButtonTitleObserver
-            .subscribe(onNext: { title in
-                self.lightsSelectionButton.title = title
+            .subscribe(onNext: { [weak self] title in
+                self?.lightsSelectionButton.title = title
             }).addDisposableTo(disposalBag)
         
         lightViewModel.barButtonEnableObserver
-            .subscribe(onNext: { shouldEnable in
-                self.lightsSelectionButton.isEnabled = shouldEnable
+            .subscribe(onNext: { [weak self] shouldEnable in
+                self?.lightsSelectionButton.isEnabled = shouldEnable
             }).addDisposableTo(disposalBag)
     }
     
