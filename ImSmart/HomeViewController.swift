@@ -64,10 +64,10 @@ class HomeViewController: UIViewController {
 //** Mark: BRAND LOGO
         
         self.homeViewModel.brandLogoOriginXObserver
-            .subscribe(onNext: { brandLogoOriginX in
+            .subscribe(onNext: { [weak self] brandLogoOriginX in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.brandLogoImageView.center.x = CGFloat(brandLogoOriginX)
+                        self?.brandLogoImageView.center.x = CGFloat(brandLogoOriginX)
                     })
                 }
             }).addDisposableTo(disposalBag)
@@ -75,10 +75,10 @@ class HomeViewController: UIViewController {
 //** Mark: WELCOME TEXT
         
         self.homeViewModel.welcomeTextOriginXObserver
-            .subscribe(onNext: { welcomeTextOriginX in
+            .subscribe(onNext: { [weak self] welcomeTextOriginX in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.welcomeTextImageView.center.x = CGFloat(welcomeTextOriginX)
+                        self?.welcomeTextImageView.center.x = CGFloat(welcomeTextOriginX)
                     })
                 }
             }).addDisposableTo(disposalBag)
@@ -86,13 +86,13 @@ class HomeViewController: UIViewController {
 //** Mark: MAIN BUTTON
         
         self.homeViewModel.mainButtonSizeObserver
-            .subscribe(onNext: { (width, height) in
+            .subscribe(onNext: { [weak self] (width, height) in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.mainButton.frame.size.width            = CGFloat(width)
-                        self.mainButton.frame.size.height           = CGFloat(height)
-                        self.mainButtonImageView.frame.size.width   = CGFloat(width)
-                        self.mainButtonImageView.frame.size.height  = CGFloat(height)
+                        self?.mainButton.frame.size.width            = CGFloat(width)
+                        self?.mainButton.frame.size.height           = CGFloat(height)
+                        self?.mainButtonImageView.frame.size.width   = CGFloat(width)
+                        self?.mainButtonImageView.frame.size.height  = CGFloat(height)
                     })
                 }
             }).addDisposableTo(disposalBag)
@@ -100,11 +100,11 @@ class HomeViewController: UIViewController {
 //** Mark: CANCEL BUTTON
 
         self.homeViewModel.cancelButtonSizeObserver
-            .subscribe(onNext: { (width, height) in
+            .subscribe(onNext: { [weak self] (width, height) in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.cancelButton.frame.size.width  = CGFloat(width)
-                        self.cancelButton.frame.size.height = CGFloat(height)
+                        self?.cancelButton.frame.size.width  = CGFloat(width)
+                        self?.cancelButton.frame.size.height = CGFloat(height)
                     })
                 }
             }).addDisposableTo(disposalBag)
@@ -112,10 +112,10 @@ class HomeViewController: UIViewController {
 //** Mark: LIGHT BUTTON
 
         self.homeViewModel.lightsButtonPositionObserver
-            .subscribe(onNext: { lightsButtonCoordinate in
+            .subscribe(onNext: { [weak self] lightsButtonCoordinate in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.lightsButton.center = CGPoint(
+                        self?.lightsButton.center = CGPoint(
                             x: CGFloat(lightsButtonCoordinate.x),
                             y: CGFloat(lightsButtonCoordinate.y)
                         )
@@ -126,10 +126,10 @@ class HomeViewController: UIViewController {
 //** Mark: AIR CONDITIONER BUTTON
 
         self.homeViewModel.airConditionerPositionObserver
-            .subscribe(onNext: { airConditionerButtonCoordinate in
+            .subscribe(onNext: { [weak self] airConditionerButtonCoordinate in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.airConditionerButton.center = CGPoint(
+                        self?.airConditionerButton.center = CGPoint(
                             x: CGFloat(airConditionerButtonCoordinate.x),
                             y: CGFloat(airConditionerButtonCoordinate.y)
                         )
@@ -140,10 +140,10 @@ class HomeViewController: UIViewController {
 //** Mark: SHOPPING CART BUTTON
 
         self.homeViewModel.shoppingCartButtonPositionObserver
-            .subscribe(onNext: { shoppingCartButtonCoordinate in
+            .subscribe(onNext: { [weak self] shoppingCartButtonCoordinate in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.shoppingCartButton.center = CGPoint(
+                        self?.shoppingCartButton.center = CGPoint(
                             x: CGFloat(shoppingCartButtonCoordinate.x),
                             y: CGFloat(shoppingCartButtonCoordinate.y)
                         )
@@ -154,10 +154,10 @@ class HomeViewController: UIViewController {
 //** Mark: FRIDGE BUTTON
 
         self.homeViewModel.fridgeButtonPositionObserver
-            .subscribe(onNext: { fridgeButtonCoordinate in
+            .subscribe(onNext: { [weak self] fridgeButtonCoordinate in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.fridgeButton.center = CGPoint(
+                        self?.fridgeButton.center = CGPoint(
                             x: CGFloat(fridgeButtonCoordinate.x),
                             y: CGFloat(fridgeButtonCoordinate.y)
                         )
@@ -168,10 +168,10 @@ class HomeViewController: UIViewController {
 //** Mark: CONNECTED DEVICES LIST
         
         self.homeViewModel.connectedDevices.asObservable()
-            .subscribe(onNext: { connectedDevices in
+            .subscribe(onNext: { [weak self] connectedDevices in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.drawDevicesView(connectedDevices: connectedDevices)
+                        self?.drawDevicesView(connectedDevices: connectedDevices)
                     })
                 }
             }).addDisposableTo(disposalBag)
@@ -179,10 +179,10 @@ class HomeViewController: UIViewController {
 //** Mark: CONNECTIONS LABEL
         
         self.homeViewModel.connectionsLabelObserver
-            .subscribe(onNext: { connectionsLabel in
+            .subscribe(onNext: { [weak self] connectionsLabel in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: {
-                        self.connectionsLabel.text = connectionsLabel
+                        self?.connectionsLabel.text = connectionsLabel
                     })
                 }
             }).addDisposableTo(disposalBag)
@@ -191,10 +191,10 @@ class HomeViewController: UIViewController {
         
         self.homeViewModel.menuViewOriginXObserver
             .map({ CGFloat($0) })
-            .subscribe(onNext: { menuViewOriginX in
+            .subscribe(onNext: { [weak self] menuViewOriginX in
                 DispatchQueue.main.async {
                     UIView.animate(withDuration: 0.4, animations: { 
-                        self.menuView.center.x = menuViewOriginX
+                        self?.menuView.center.x = menuViewOriginX
                     })
                 }
             }).addDisposableTo(disposalBag)
@@ -202,9 +202,9 @@ class HomeViewController: UIViewController {
 //** Mark: ACTIVITY INDICATOR
         
         self.homeViewModel.activityIndicatorShouldSpin
-            .subscribe(onNext: { shouldSpin in
+            .subscribe(onNext: { [weak self] shouldSpin in
                 DispatchQueue.main.async {
-                    shouldSpin ? self.activityIndicator.startAnimating() : self.activityIndicator.stopAnimating()
+                    shouldSpin ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
                 }
             }).addDisposableTo(disposalBag)
     }
