@@ -11,9 +11,13 @@ import XCTest
 
 class HelperTests: XCTestCase {
     
+    var lightViewModel: LightViewModel!
+    
     override func setUp() {
         super.setUp()
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        self.lightViewModel = LightViewModel()
     }
     
     override func tearDown() {
@@ -34,8 +38,7 @@ class HelperTests: XCTestCase {
     }
     
     func testJsonStringify() {
-        let lightViewModel          = LightViewModel()
-        let invalidJsonObject       = [lightViewModel]
+        let invalidJsonObject       = [self.lightViewModel]
         let invalidConvertedString  = Helper.jsonStringify(jsonObject: invalidJsonObject as AnyObject)
         
         XCTAssertEqual(invalidConvertedString, String())
@@ -45,21 +48,13 @@ class HelperTests: XCTestCase {
                                                 "age"   : 18
                                             ]
         let validConvertedString     = Helper.jsonStringify(jsonObject: validJsonObject as AnyObject)
-        let expectedConversionResult = "{\"name\":\"testname\",\"age\":18}"
+        let expectedConversionResult = "{\"age\":18,\"name\":\"testname\"}"
     
         XCTAssertEqual(validConvertedString, expectedConversionResult)
     }
     
     func testBuildJSONObject() {
-        let lightViewModel      = LightViewModel()
-        var mockupLightsReduce  = [LightCellViewModel]()
-        
-        for i in 0...lightViewModel.mockupLights.value.count {
-            if i > 3 {
-                break
-            }
-            mockupLightsReduce.append(lightViewModel.mockupLights.value[i])
-        }
+        let mockupLightsReduce = reduceMockupLights()
         
         let jsonObject: [[String: Any]] = Helper.buildJSONObject(fromLightCellViewModel: mockupLightsReduce)
         let firstItem   = jsonObject[0]
@@ -77,6 +72,48 @@ class HelperTests: XCTestCase {
         XCTAssertEqual(thirdItem["isOn"] as! Bool, false)
         XCTAssertEqual(thirdItem["brightness"] as! Int, 70)
         XCTAssertEqual(thirdItem["area"] as! String, "Front yard")
+    }
+    
+    func testParseJSONToLightCellViewModel() {
+        let mockupLightsReduce      = reduceMockupLights()
+        let jsonObject              = Helper.buildJSONObject(fromLightCellViewModel: mockupLightsReduce)
+        let jsonString              = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
+        let data                    = jsonString.data(using: .utf8)!
+        
+        let convertedMockupLights   = Helper.parseJSONToLightCellViewModel(
+            data: data,
+            lightViewModel: self.lightViewModel
+        )
+        
+        let firstLightViewModel     = convertedMockupLights[0]
+        let secondLightViewModel    = convertedMockupLights[1]
+        let thirdLightViewModel     = convertedMockupLights[2]
+        
+        XCTAssertEqual(firstLightViewModel.isOn.value, false)
+        XCTAssertEqual(firstLightViewModel.brightness.value, 0)
+        XCTAssertEqual(firstLightViewModel.area.value, "Kitchen")
+        
+        XCTAssertEqual(secondLightViewModel.isOn.value, false)
+        XCTAssertEqual(secondLightViewModel.brightness.value, 0)
+        XCTAssertEqual(secondLightViewModel.area.value, "Livingroom")
+        
+        XCTAssertEqual(thirdLightViewModel.isOn.value, false)
+        XCTAssertEqual(thirdLightViewModel.brightness.value, 70)
+        XCTAssertEqual(thirdLightViewModel.area.value, "Front yard")
+    }
+    
+    func reduceMockupLights() -> [LightCellViewModel] {
+        var mockupLightsReduce = [LightCellViewModel]()
+        
+        for i in 0...self.lightViewModel.mockupLights.value.count {
+            if i > 3 {
+                break
+            }
+            print(self.lightViewModel.mockupLights.value[i].area.value)
+            mockupLightsReduce.append(self.lightViewModel.mockupLights.value[i])
+        }
+        
+        return mockupLightsReduce
     }
 
 }
