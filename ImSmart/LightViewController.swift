@@ -118,40 +118,52 @@ class LightViewController: UIViewController {
         
         lightViewModel.viewColorObserver
             .subscribe(onNext: { [weak self] viewBackgroundColor in
-                UIView.animate(withDuration: 0.4, animations: { 
-                    self?.view.backgroundColor = viewBackgroundColor
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self?.view.backgroundColor = viewBackgroundColor
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
         lightViewModel.tableViewColorObserver
             .subscribe(onNext: { [weak self] tableViewBackgroundColor in
-                UIView.animate(withDuration: 0.4, animations: { 
-                    self?.lightsTableView.backgroundColor = tableViewBackgroundColor
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self?.lightsTableView.backgroundColor = tableViewBackgroundColor
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
         lightViewModel.tableViewBottomConstraintObserver
             .subscribe(onNext: { [weak self] constant in
-                UIView.animate(withDuration: 0.4, animations: { 
-                    self?.bottomConstraintTableViewToSuperview.constant = CGFloat(constant)
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self?.bottomConstraintTableViewToSuperview.constant = CGFloat(constant)
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
         lightViewModel.cancelSelectionViewOriginYObserver
             .subscribe(onNext: { [weak self] originY in
-                UIView.animate(withDuration: 0.4, animations: { 
-                    self?.cancelSelectionView.center.y = CGFloat(originY)
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self?.cancelSelectionView.center.y = CGFloat(originY)
+                    })
+                }
             }).addDisposableTo(disposalBag)
     
         lightViewModel.barButtonTitleObserver
             .subscribe(onNext: { [weak self] title in
-                self?.lightsSelectionButton.title = title
+                DispatchQueue.main.async {
+                    self?.lightsSelectionButton.title = title
+                }
             }).addDisposableTo(disposalBag)
         
         lightViewModel.barButtonEnableObserver
             .subscribe(onNext: { [weak self] shouldEnable in
-                self?.lightsSelectionButton.isEnabled = shouldEnable
+                DispatchQueue.main.async {
+                    self?.lightsSelectionButton.isEnabled = shouldEnable
+                }
             }).addDisposableTo(disposalBag)
     }
     
@@ -177,18 +189,22 @@ class LightViewController: UIViewController {
         if !lightViewModel.requireCellShake.value {
             self.lightViewModel.requireCellShake.value = true
         } else {
-            self.performSegue(withIdentifier: Constants.Lights.SegueIdentifier.toBrightnessVC, sender: self)
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: Constants.Lights.SegueIdentifier.toBrightnessVC, sender: self)
+            }
         }
     }
     
     private func handleCellSelection(selectedLightCellViewModel: LightCellViewModel, selectedRowIndexPath: IndexPath) {
-        if !lightViewModel.requireCellShake.value {
-            self.lightsTableView.deselectRow(at: selectedRowIndexPath, animated: true)
-            selectedLightCellViewModel.isOn.value = !selectedLightCellViewModel.isOn.value
-            self.lightsTableView.reloadRows(at: [selectedRowIndexPath], with: .fade)
-        } else {
-            lightViewModel.selectedLights.value[selectedLightCellViewModel.area.value] = selectedLightCellViewModel
-            self.lightsTableView.selectRow(at: selectedRowIndexPath, animated: true, scrollPosition: .none)
+        DispatchQueue.main.async {
+            if !self.lightViewModel.requireCellShake.value {
+                self.lightsTableView.deselectRow(at: selectedRowIndexPath, animated: true)
+                selectedLightCellViewModel.isOn.value = !selectedLightCellViewModel.isOn.value
+                self.lightsTableView.reloadRows(at: [selectedRowIndexPath], with: .fade)
+            } else {
+                self.lightViewModel.selectedLights.value[selectedLightCellViewModel.area.value] = selectedLightCellViewModel
+                self.lightsTableView.selectRow(at: selectedRowIndexPath, animated: true, scrollPosition: .none)
+            }
         }
     }
     
@@ -197,7 +213,6 @@ class LightViewController: UIViewController {
         drawCancelSelectionView()
         drawCancelButton()
     }
-    
     
 //** Mark: DRAWING CANCEL BUTTON
     
