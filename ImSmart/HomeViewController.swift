@@ -65,88 +65,104 @@ class HomeViewController: UIViewController {
         
         self.homeViewModel.brandLogoOriginXObserver
             .subscribe(onNext: { brandLogoOriginX in
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.brandLogoImageView.center.x = CGFloat(brandLogoOriginX)
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.brandLogoImageView.center.x = CGFloat(brandLogoOriginX)
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
 //** Mark: WELCOME TEXT
         
         self.homeViewModel.welcomeTextOriginXObserver
             .subscribe(onNext: { welcomeTextOriginX in
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.welcomeTextImageView.center.x = CGFloat(welcomeTextOriginX)
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.welcomeTextImageView.center.x = CGFloat(welcomeTextOriginX)
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
 //** Mark: MAIN BUTTON
         
         self.homeViewModel.mainButtonSizeObserver
             .subscribe(onNext: { (width, height) in
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.mainButton.frame.size.width            = CGFloat(width)
-                    self.mainButton.frame.size.height           = CGFloat(height)
-                    self.mainButtonImageView.frame.size.width   = CGFloat(width)
-                    self.mainButtonImageView.frame.size.height  = CGFloat(height)
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.mainButton.frame.size.width            = CGFloat(width)
+                        self.mainButton.frame.size.height           = CGFloat(height)
+                        self.mainButtonImageView.frame.size.width   = CGFloat(width)
+                        self.mainButtonImageView.frame.size.height  = CGFloat(height)
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
 //** Mark: CANCEL BUTTON
 
         self.homeViewModel.cancelButtonSizeObserver
             .subscribe(onNext: { (width, height) in
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.cancelButton.frame.size.width  = CGFloat(width)
-                    self.cancelButton.frame.size.height = CGFloat(height)
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.cancelButton.frame.size.width  = CGFloat(width)
+                        self.cancelButton.frame.size.height = CGFloat(height)
+                    })
+                }
             }).addDisposableTo(disposalBag)
 
 //** Mark: LIGHT BUTTON
 
         self.homeViewModel.lightsButtonPositionObserver
             .subscribe(onNext: { lightsButtonCoordinate in
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.lightsButton.center = CGPoint(
-                        x: CGFloat(lightsButtonCoordinate.x),
-                        y: CGFloat(lightsButtonCoordinate.y)
-                    )
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.lightsButton.center = CGPoint(
+                            x: CGFloat(lightsButtonCoordinate.x),
+                            y: CGFloat(lightsButtonCoordinate.y)
+                        )
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
 //** Mark: AIR CONDITIONER BUTTON
 
         self.homeViewModel.airConditionerPositionObserver
             .subscribe(onNext: { airConditionerButtonCoordinate in
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.airConditionerButton.center = CGPoint(
-                        x: CGFloat(airConditionerButtonCoordinate.x),
-                        y: CGFloat(airConditionerButtonCoordinate.y)
-                    )
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.airConditionerButton.center = CGPoint(
+                            x: CGFloat(airConditionerButtonCoordinate.x),
+                            y: CGFloat(airConditionerButtonCoordinate.y)
+                        )
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
 //** Mark: SHOPPING CART BUTTON
 
         self.homeViewModel.shoppingCartButtonPositionObserver
             .subscribe(onNext: { shoppingCartButtonCoordinate in
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.shoppingCartButton.center = CGPoint(
-                        x: CGFloat(shoppingCartButtonCoordinate.x),
-                        y: CGFloat(shoppingCartButtonCoordinate.y)
-                    )
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.shoppingCartButton.center = CGPoint(
+                            x: CGFloat(shoppingCartButtonCoordinate.x),
+                            y: CGFloat(shoppingCartButtonCoordinate.y)
+                        )
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
 //** Mark: FRIDGE BUTTON
 
         self.homeViewModel.fridgeButtonPositionObserver
             .subscribe(onNext: { fridgeButtonCoordinate in
-                UIView.animate(withDuration: 0.4, animations: {
-                    self.fridgeButton.center = CGPoint(
-                        x: CGFloat(fridgeButtonCoordinate.x),
-                        y: CGFloat(fridgeButtonCoordinate.y)
-                    )
-                })
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self.fridgeButton.center = CGPoint(
+                            x: CGFloat(fridgeButtonCoordinate.x),
+                            y: CGFloat(fridgeButtonCoordinate.y)
+                        )
+                    })
+                }
             }).addDisposableTo(disposalBag)
         
 //** Mark: CONNECTED DEVICES LIST
