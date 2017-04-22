@@ -2,3 +2,4 @@ github "SnapKit/SnapKit" ~> 3.0
 github "ReactiveX/RxSwift" ~> 3.0
 github "IBanimatable/IBAnimatable"
 github "willowtreeapps/spruce-ios"
+github "socketio/socket.io-client-swift" ~> 8.3.3
