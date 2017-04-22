@@ -628,7 +628,11 @@ class HomeViewController: UIViewController {
         switch segue.identifier {
         case Constants.Home.SegueIdentifier.toLightVC?:
             if let lightViewController = segue.destination as? LightViewController {
-                let lightViewModel                  = LightViewModel(dataSynchronizeManager: homeViewModel.dataSynchronizeManager)
+                guard let dataSynchronizeManager = homeViewModel.dataSynchronizeManager else {
+                    NSLog("@%", "Error: Data synchronize manager is nil")
+                    return
+                }
+                let lightViewModel                  = LightViewModel(dataSynchronizeManager: dataSynchronizeManager)
                 lightViewController.lightViewModel  = lightViewModel
             }
         default:

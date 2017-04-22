@@ -12,7 +12,7 @@ import RxSwift
 class HomeViewModel{
     
     var localStore                          : LocalStore!
-    var dataSynchronizeManager              = DataSynchronizationManager()
+    var dataSynchronizeManager              : DataSynchronizationManager?
     
     var isMainButtonShown                   : Variable<Bool>        = Variable(true)
     var connectedDevices                    : Variable<[String]>    = Variable([String]())
@@ -32,7 +32,8 @@ class HomeViewModel{
     private var disposalBag                 = DisposeBag()
     
     init() {
-        dataSynchronizeManager.delegate = self
+        dataSynchronizeManager              = DataSynchronizationManager()
+        dataSynchronizeManager?.delegate    = self
         bindRx()
     }
     

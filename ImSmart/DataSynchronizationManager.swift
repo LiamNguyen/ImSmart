@@ -9,7 +9,7 @@
 import Foundation
 import MultipeerConnectivity
 
-protocol DataSynchronizationManagerDelegate {
+protocol DataSynchronizationManagerDelegate: class {
 
     func connectedDevicesChanged(manager: DataSynchronizationManager, connectedDevices: [String])
     func onDataReceived(manager: DataSynchronizationManager, data: Any)
@@ -23,7 +23,7 @@ class DataSynchronizationManager: NSObject {
     private let myPeerId            = MCPeerID(displayName: UIDevice.current.name)
     private let serviceAdvertiser   : MCNearbyServiceAdvertiser
     private let serviceBrowser      : MCNearbyServiceBrowser
-    var delegate                    : DataSynchronizationManagerDelegate?
+    weak var delegate               : DataSynchronizationManagerDelegate?
 
     lazy var session : MCSession = {
         let session = MCSession(peer: self.myPeerId, securityIdentity: nil, encryptionPreference: .required)

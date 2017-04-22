@@ -76,5 +76,6 @@ class Helper {
                 print("Light is on \(lightCellViewModel.isOn.value)")
                 print("__________End item")
             })
+        print("\n_____________DONE RECEVING_____________\n")
     }
 }
