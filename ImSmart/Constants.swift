@@ -85,6 +85,20 @@ struct Constants {
     struct AirConditioner {
         struct View {
             static let title                = "Air Conditioners"
+            static let backIcon             = "backIcon.png"
+            static let snowFlake            = "snowFlake.png"
+            static let tearDropIcon         = "tearDropIcon.png"
+            static let sunIcon              = "sunIcon.png"
+            static let standFanIcon         = "standFanIcon.png"
+        }
+        
+        struct BarItem {
+            static let back                 = "Home"
+            static let areaLabel            = "Living Room"
+        }
+        
+        struct segueIdentifier {
+            static let toHomeVC             = "segue_AirConditionerToHomeVC"
         }
     }
     
