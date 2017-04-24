@@ -45,5 +45,10 @@
 	<string></string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
 	<string>Bluetooth is needed for synchronizing data between devices</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

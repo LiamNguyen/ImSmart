@@ -41,6 +41,9 @@
 		EDAB2C441E9533FC006DF616 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAB2C411E952EB4006DF616 /* RxCocoa.framework */; };
 		EDAB2C451E953407006DF616 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9C588B1E8E49C400F57B8F /* RxSwift.framework */; };
 		EDAB2C541E9537D5006DF616 /* LightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB2C531E9537D5006DF616 /* LightTests.swift */; };
+		EDC5047E1EAB64350086B377 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC5047D1EAB64350086B377 /* SocketIO.framework */; };
+		EDC5047F1EAB64350086B377 /* SocketIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EDC5047D1EAB64350086B377 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC504801EAB64710086B377 /* SocketIOManager.swift */; };
 		EDD938081E941DE000FB1797 /* LightCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938071E941DE000FB1797 /* LightCellViewModel.swift */; };
 		EDD9380A1E941E5300FB1797 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938091E941E5300FB1797 /* Light.swift */; };
 		EDD9380C1E942BC400FB1797 /* LightCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9380B1E942BC400FB1797 /* LightCellViewModelTests.swift */; };
@@ -75,6 +78,7 @@
 				EDAB2C431E952EB4006DF616 /* RxCocoa.framework in Embed Frameworks */,
 				ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */,
 				ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */,
+				EDC5047F1EAB64350086B377 /* SocketIO.framework in Embed Frameworks */,
 				ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */,
 				ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */,
 			);
@@ -118,6 +122,8 @@
 		EDAB2C411E952EB4006DF616 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		EDAB2C471E953411006DF616 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		EDAB2C531E9537D5006DF616 /* LightTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTests.swift; sourceTree = "<group>"; };
+		EDC5047D1EAB64350086B377 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
+		EDC504801EAB64710086B377 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		EDD938071E941DE000FB1797 /* LightCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightCellViewModel.swift; sourceTree = "<group>"; };
 		EDD938091E941E5300FB1797 /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		EDD9380B1E942BC400FB1797 /* LightCellViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightCellViewModelTests.swift; sourceTree = "<group>"; };
@@ -133,6 +139,7 @@
 				EDAB2C421E952EB4006DF616 /* RxCocoa.framework in Frameworks */,
 				ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */,
 				ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */,
+				EDC5047E1EAB64350086B377 /* SocketIO.framework in Frameworks */,
 				ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */,
 				ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */,
 			);
@@ -259,6 +266,7 @@
 				ED171EBE1E8F87EA006791C6 /* ViewModel */,
 				EDA77A811E957CEF002C801B /* MockupData */,
 				ED810EBE1E9BB399005F701E /* MultipeerConnectivity */,
+				EDC504821EAB64780086B377 /* Socket */,
 				ED810EBF1E9BB3ED005F701E /* Storyboards */,
 				ED810EC01E9BB41C005F701E /* SupportingFiles */,
 			);
@@ -315,6 +323,7 @@
 		ED810EC11E9BB440005F701E /* ExternalLibraries */ = {
 			isa = PBXGroup;
 			children = (
+				EDC5047D1EAB64350086B377 /* SocketIO.framework */,
 				ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */,
 				ED5954B31E981B3600C3E047 /* Spruce.framework */,
 				EDAB2C411E952EB4006DF616 /* RxCocoa.framework */,
@@ -384,6 +393,14 @@
 			children = (
 			);
 			name = Store;
+			sourceTree = "<group>";
+		};
+		EDC504821EAB64780086B377 /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				EDC504801EAB64710086B377 /* SocketIOManager.swift */,
+			);
+			name = Socket;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -534,6 +551,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Spruce.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SocketIO.framework",
 			);
 			outputPaths = (
 			);
@@ -573,6 +591,7 @@
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
 				ED1117951E9AD337006EC259 /* Helper.swift in Sources */,
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
+				EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
 				EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */,

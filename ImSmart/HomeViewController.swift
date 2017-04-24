@@ -167,14 +167,14 @@ class HomeViewController: UIViewController {
         
 //** Mark: CONNECTED DEVICES LIST
         
-        self.homeViewModel.connectedDevices.asObservable()
-            .subscribe(onNext: { [weak self] connectedDevices in
-                DispatchQueue.main.async {
-                    UIView.animate(withDuration: 0.4, animations: {
-                        self?.drawDevicesView(connectedDevices: connectedDevices)
-                    })
-                }
-            }).addDisposableTo(disposalBag)
+//        self.homeViewModel.connectedDevices.asObservable()
+//            .subscribe(onNext: { [weak self] connectedDevices in
+//                DispatchQueue.main.async {
+//                    UIView.animate(withDuration: 0.4, animations: {
+//                        self?.drawDevicesView(connectedDevices: connectedDevices)
+//                    })
+//                }
+//            }).addDisposableTo(disposalBag)
         
 //** Mark: CONNECTIONS LABEL
         
@@ -476,7 +476,7 @@ class HomeViewController: UIViewController {
     private func drawConnectionsLabel() {
         self.connectionsLabel = UILabel()
         
-        connectionsLabel.text = Constants.Home.Menu.waitingConnections
+        connectionsLabel.text = Constants.Home.Menu.waitingConnection
         
         self.menuView.addSubview(connectionsLabel)
         
@@ -619,6 +619,11 @@ class HomeViewController: UIViewController {
 //** Mark: HANDLE EVENT WHEN UIVIEW IS TOUCHED
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let _ = self.homeViewModel else {
+            print("Home view model not set")
+            return
+        }
+        
         self.homeViewModel.menuViewShouldShow.value = false
     }
     
@@ -628,11 +633,7 @@ class HomeViewController: UIViewController {
         switch segue.identifier {
         case Constants.Home.SegueIdentifier.toLightVC?:
             if let lightViewController = segue.destination as? LightViewController {
-                guard let dataSynchronizeManager = homeViewModel.dataSynchronizeManager else {
-                    NSLog("@%", "Error: Data synchronize manager is nil")
-                    return
-                }
-                let lightViewModel                  = LightViewModel(dataSynchronizeManager: dataSynchronizeManager)
+                let lightViewModel                  = LightViewModel()
                 lightViewController.lightViewModel  = lightViewModel
             }
         default:

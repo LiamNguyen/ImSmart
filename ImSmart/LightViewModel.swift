@@ -11,8 +11,6 @@ import RxSwift
 import UIKit
 
 class LightViewModel {
-    var dataSynchronizeManager              : DataSynchronizationManager!
-    
     var requireCellShake                    = Variable<Bool>(false)
     var requireSynchronization              = Variable<Bool>(false)
     var mockupLights                        : Variable<[LightCellViewModel]>!
@@ -33,12 +31,7 @@ class LightViewModel {
     
     init() {
         bindRx()
-    }
-    
-    convenience init(dataSynchronizeManager: DataSynchronizationManager) {
-        self.init()
-        self.dataSynchronizeManager             = dataSynchronizeManager
-        self.dataSynchronizeManager.delegate    = self
+        onReceiveRequireLightsUpdate()
     }
     
     func bindRx() {
@@ -92,26 +85,13 @@ class LightViewModel {
         
         requireSynchronization.asObservable()
             .subscribe(onNext: { _ in
-                guard let _ = self.dataSynchronizeManager else {
-                    NSLog("@%", "Error: Data synchronize manager is nil")
-                    return
-                }
-                let jsonObject = Helper.buildJSONObject(fromLightCellViewModel: (self.mockupLights.value))
-                let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
-                
-                self.dataSynchronizeManager?.senđData(dataToBeSent: jsonString)
+                SocketIOManager.sharedInstance.requireUpdateLights()
             }).addDisposableTo(disposalBag)
     }
     
-    
-}
-
-extension LightViewModel: DataSynchronizationManagerDelegate {
-    func connectedDevicesChanged(manager: DataSynchronizationManager, connectedDevices: [String]) {
-        NSLog("%@", "Connections: \(connectedDevices)")
-    }
-    
-    func onDataReceived(manager: DataSynchronizationManager, data: Any) {
-        mockupLights.value = data as! [LightCellViewModel]
+    private func onReceiveRequireLightsUpdate() {
+        SocketIOManager.sharedInstance.onReceiveRequireLightsUpdate {
+            print("Please update lights")
+        }
     }
 }
