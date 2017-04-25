@@ -11,28 +11,13 @@ import CoreBluetooth
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate, CBPeripheralDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window          : UIWindow?
-    let homeViewModel   = HomeViewModel()
-    let localStore      = LocalStore()
-    var centralManager  : CBCentralManager!
+    var window                  : UIWindow?
+    var homeViewModel           : HomeViewModel!
+    let localStore              = LocalStore()
     
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        switch (central.state) {
-        case .poweredOff:
-            print("CoreBluetooth BLE hardware is powered off")
-        case .poweredOn:
-            print("CoreBluetooth BLE hardware is powered on and ready")
-            
-        default: break
-        }
-    }
-    
-    private func startUpCentralManager() {
-        print("Initializing central manager")
-        centralManager = CBCentralManager(delegate: self, queue: nil)
-    }
+    var isFirstTimeBecomeActive = true
 
     private func customizeAppearance() {
         if UIScreen.main.bounds.height > 736 { //Device is not iPhone
@@ -43,11 +28,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate,
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         customizeAppearance()
-        startUpCentralManager()
+        homeViewModel = HomeViewModel()
+
+        SocketIOManager.sharedInstance.socketConnect()
+        SocketIOManager.sharedInstance.registerDevice()
+        SocketIOManager.sharedInstance.onReceiveNotificationWhenOthersRegistered()
         
         if let navigationController = window?.rootViewController as? UINavigationController,
-            let homeViewController = navigationController.viewControllers.first as? HomeViewController {
+            let homeViewController  = navigationController.viewControllers.first as? HomeViewController {
                 homeViewModel.localStore            = localStore
                 homeViewController.homeViewModel    = homeViewModel
         }
@@ -58,11 +48,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate,
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        
+        isFirstTimeBecomeActive = false
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+
+        SocketIOManager.sharedInstance.socketDisconnect()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {
@@ -71,6 +65,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CBCentralManagerDelegate,
 
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        if (!isFirstTimeBecomeActive) {
+            SocketIOManager.sharedInstance.socketConnect()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

@@ -10,9 +10,18 @@ import Foundation
 import UIKit
 
 struct Constants {
+    
+    static let deviceUUID = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    static let deviceName = UIDevice.current.name
+    
     struct Window {
         static let screenWidth  = Float(UIScreen.main.bounds.width)
         static let screenHeight = Float(UIScreen.main.bounds.height)
+    }
+    
+    struct SocketIO {
+        static let socketServerURL  = "http://192.168.20.106"
+        static let socketServerPort = "1208" 
     }
     
     struct Home {
@@ -34,8 +43,8 @@ struct Constants {
         
         struct Menu {
             static let title                = "Menu"
-            static let connectionsLabel     = "Connected devices"
-            static let waitingConnections   = "Waiting for devices..."
+            static let waitingConnection    = "Joining network..."
+            static let welcomeDevice        = "Welcome home"
             static let tcButton             = "Terms and Conditions"
             static let privacyStatement     = "Privacy Statement"
             static let version              = "Version \(Bundle.main.infoDictionary!["CFBundleShortVersionString"]!)"
@@ -76,6 +85,20 @@ struct Constants {
     struct AirConditioner {
         struct View {
             static let title                = "Air Conditioners"
+            static let backIcon             = "backIcon.png"
+            static let snowFlake            = "snowFlake.png"
+            static let tearDropIcon         = "tearDropIcon.png"
+            static let sunIcon              = "sunIcon.png"
+            static let standFanIcon         = "standFanIcon.png"
+        }
+        
+        struct BarItem {
+            static let back                 = "Home"
+            static let areaLabel            = "Living Room"
+        }
+        
+        struct segueIdentifier {
+            static let toHomeVC             = "segue_AirConditionerToHomeVC"
         }
     }
     
