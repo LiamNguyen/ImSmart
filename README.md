@@ -6,7 +6,8 @@
   #### Better design __Network Management Layer__, avoiding big fat Singleton
   #### Try out __Alamofire, Argo or SwiftyJSON__ for network management layer
   #### Try out IOS unit test 
-  #### Data synchronization between devices with MultiPeer Connectivity
+  #### Data synchronization between devices with MultiPeer Connectivity/SocketIO (Node.js)
   #### Using CoreData
+  #### Using CLLocationManager
   
   ## Let's go
