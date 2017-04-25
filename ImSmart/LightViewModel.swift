@@ -93,6 +93,7 @@ class LightViewModel {
         requireSynchronization.asObservable()
             .subscribe(onNext: { _ in
                 guard let _ = self.dataSynchronizeManager else {
+                    NSLog("@%", "Error: Data synchronize manager is nil")
                     return
                 }
                 let jsonObject = Helper.buildJSONObject(fromLightCellViewModel: (self.mockupLights.value))
