@@ -50,9 +50,9 @@ class Helper {
                 let receivedMockupLights = array.map({ item -> LightCellViewModel in
                     let dictionary = item as? NSDictionary
                     let light = Light(
-                        brightness  : dictionary?["brightness"] as! Int,
-                        area        : dictionary?["area"] as! String,
-                        isOn        : dictionary?["isOn"] as! Bool
+                        brightness  : dictionary?["Brightness"] as? Int ?? 0,
+                        area        : dictionary?["Area"] as? String ?? "",
+                        isOn        : dictionary?["IsOn"] as? Bool ?? false
                     )
                     return LightCellViewModel(light: light, requireCellShake: lightViewModel.requireCellShake, requireSynchronization: lightViewModel.requireSynchronization)
                 })

@@ -28,6 +28,7 @@
 		ED75D3381E8C478B006D6082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3371E8C478B006D6082 /* Assets.xcassets */; };
 		ED75D33B1E8C478B006D6082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3391E8C478B006D6082 /* LaunchScreen.storyboard */; };
 		ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED810EC21E9BB4A9005F701E /* DataSynchronizationManager.swift */; };
+		ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8896CD1EAEC3F90064404E /* RemoteStore.swift */; };
 		ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9792D21E9010A5004827D4 /* UIFunctionality.swift */; };
 		ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; };
 		ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -113,6 +114,7 @@
 		ED75D34C1E8C478B006D6082 /* ImSmartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImSmartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED75D3521E8C478B006D6082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED810EC21E9BB4A9005F701E /* DataSynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSynchronizationManager.swift; sourceTree = "<group>"; };
+		ED8896CD1EAEC3F90064404E /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteStore.swift; sourceTree = "<group>"; };
 		ED9792D21E9010A5004827D4 /* UIFunctionality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFunctionality.swift; sourceTree = "<group>"; };
 		ED9792D41E907C34004827D4 /* IBAnimatable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IBAnimatable.framework; path = Carthage/Build/iOS/IBAnimatable.framework; sourceTree = "<group>"; };
 		ED9C588B1E8E49C400F57B8F /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				ED171EC61E8F8CEF006791C6 /* LocalStore.swift */,
+				ED8896CD1EAEC3F90064404E /* RemoteStore.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				EDA77A7F1E957CE0002C801B /* LightsMockup.swift in Sources */,
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */,
+				ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
 				ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */,
 				ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */,

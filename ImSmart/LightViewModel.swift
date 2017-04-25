@@ -13,7 +13,7 @@ import UIKit
 class LightViewModel {
     var requireCellShake                    = Variable<Bool>(false)
     var requireSynchronization              = Variable<Bool>(false)
-    var mockupLights                        : Variable<[LightCellViewModel]>!
+    var mockupLights                        : Variable<[LightCellViewModel]> = Variable([LightCellViewModel]())
     var selectedLights                      = Variable<[String: LightCellViewModel]>([String: LightCellViewModel]())
     
     var viewColorObserver                   : Observable<UIColor>!
@@ -27,6 +27,7 @@ class LightViewModel {
     var brightnessValue                     = Variable<Float>(0.0)
     var sampleLightBrightness               : Observable<UIColor>!
     
+    private var firstTimeGetLights          = true
     private let disposalBag                 = DisposeBag()
     
     init() {
@@ -35,7 +36,12 @@ class LightViewModel {
     }
     
     func bindRx() {
-        mockupLights = Variable(LightsMockup.lights(requireCellShake: requireCellShake, requireSynchronization: requireSynchronization))
+        
+        RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
+            self?.firstTimeGetLights       = false
+            self?.mockupLights.value = allLights
+        })
+//        mockupLights = Variable(LightsMockup.lights(requireCellShake: requireCellShake, requireSynchronization: requireSynchronization))
         
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
@@ -84,14 +90,23 @@ class LightViewModel {
         }
         
         requireSynchronization.asObservable()
-            .subscribe(onNext: { _ in
+            .subscribe(onNext: { [weak self] _ in
+                guard let _ = self?.mockupLights.value, !(self?.firstTimeGetLights)! else {
+                    return
+                }
+                let jsonObject = Helper.buildJSONObject(fromLightCellViewModel: (self?.mockupLights.value)!)
+                let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
+                
+                print(jsonString)
                 SocketIOManager.sharedInstance.requireUpdateLights()
             }).addDisposableTo(disposalBag)
     }
     
     private func onReceiveRequireLightsUpdate() {
         SocketIOManager.sharedInstance.onReceiveRequireLightsUpdate {
-            print("Please update lights")
+            RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
+                self?.mockupLights.value = allLights
+            })
         }
     }
 }

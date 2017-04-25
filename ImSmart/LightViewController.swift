@@ -37,6 +37,7 @@ class LightViewController: UIViewController {
         bindRxCellForRowAtIndexPath()
         bindRxDidSelectRowAtIndexPath()
         bindRxDidDeselectRowAtIndexPath()
+        
         bindRxAction()
         bindRxObserver()
         
@@ -50,12 +51,6 @@ class LightViewController: UIViewController {
         super.viewWillAppear(true)
         
         self.lightsTableView.isHidden = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        UIFunctionality.applySmoothAnimation(elementToBeSmooth: lightsTableView)
     }
     
     deinit {
@@ -113,6 +108,7 @@ class LightViewController: UIViewController {
         ).subscribe(onNext: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.lightsTableView.reloadData()
+                UIFunctionality.applySmoothAnimation(elementToBeSmooth: (self?.lightsTableView)!)
             }
         }).addDisposableTo(disposalBag)
         
