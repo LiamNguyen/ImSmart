@@ -9,6 +9,6 @@
   #### Data synchronization between devices with MultiPeer Connectivity/SocketIO (Node.js)
   #### Using CoreData
   #### Using CLLocationManager
-  #### Codebase UI
+  #### Codebase UI (SnapKit)
   
   ## Let's go
