@@ -13,7 +13,9 @@ import UIKit
 class LightViewModel {
     var requireCellShake                    = Variable<Bool>(false)
     var requireSynchronization              = Variable<Bool>(false)
-    var mockupLights                        : Variable<[LightCellViewModel]> = Variable([LightCellViewModel]())
+    var isReceiving                         = Variable<Bool>(false)
+    var isFirstTimeGetLights                = Variable<Bool>(true)
+    var allLights                           : Variable<[LightCellViewModel]> = Variable([LightCellViewModel]())
     var selectedLights                      = Variable<[String: LightCellViewModel]>([String: LightCellViewModel]())
     
     var viewColorObserver                   : Observable<UIColor>!
@@ -27,7 +29,6 @@ class LightViewModel {
     var brightnessValue                     = Variable<Float>(0.0)
     var sampleLightBrightness               : Observable<UIColor>!
     
-    private var firstTimeGetLights          = true
     private let disposalBag                 = DisposeBag()
     
     init() {
@@ -38,10 +39,9 @@ class LightViewModel {
     func bindRx() {
         
         RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
-            self?.firstTimeGetLights       = false
-            self?.mockupLights.value = allLights
+            self?.allLights.value               = allLights
+            self?.isFirstTimeGetLights.value    = false
         })
-//        mockupLights = Variable(LightsMockup.lights(requireCellShake: requireCellShake, requireSynchronization: requireSynchronization))
         
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
@@ -91,22 +91,41 @@ class LightViewModel {
         
         requireSynchronization.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                guard let _ = self?.mockupLights.value, !(self?.firstTimeGetLights)! else {
+                guard let _ = self?.allLights.value, !(self?.isFirstTimeGetLights.value)! else {
                     return
                 }
-                let jsonObject = Helper.buildJSONObject(fromLightCellViewModel: (self?.mockupLights.value)!)
+                let jsonObject = self?.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
                 let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
                 
-                print(jsonString)
-                SocketIOManager.sharedInstance.requireUpdateLights()
+                RemoteStore.sharedInstance.updateAllLights(lights: jsonString, completionHandler: { success in
+                    if success {
+                        SocketIOManager.sharedInstance.requireUpdateLights()
+                    } else {
+                        print("Error when updating lights")
+                    }
+                })
             }).addDisposableTo(disposalBag)
     }
     
     private func onReceiveRequireLightsUpdate() {
         SocketIOManager.sharedInstance.onReceiveRequireLightsUpdate {
+                self.isReceiving.value  = true
             RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
-                self?.mockupLights.value = allLights
+                self?.allLights.value   = allLights
             })
         }
+    }
+    
+    //** Mark: BUILD JSON OBJECT FROM ARRAY OF LIGHTS
+    
+    private func buildJSONObject(fromLightCellViewModel dataArray: [LightCellViewModel]) -> [[String: Any]] {
+        return dataArray
+            .map({ lightCellViewModel in
+                return [
+                    "isOn"      : lightCellViewModel.isOn.value,
+                    "brightness": lightCellViewModel.brightness.value,
+                    "area"      : lightCellViewModel.area.value
+                ]
+            })
     }
 }

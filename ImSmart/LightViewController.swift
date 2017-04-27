@@ -53,13 +53,19 @@ class LightViewController: UIViewController {
         self.lightsTableView.isHidden = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        UIFunctionality.applySmoothAnimation(elementToBeSmooth: (lightsTableView)!)
+    }
+    
     deinit {
         print("Light VC -> Dead")
     }
     
     private func bindRxCellForRowAtIndexPath() {
 //        The same as cellForRowAtIndexPath
-        lightViewModel.mockupLights.asObservable()
+        lightViewModel.allLights.asObservable()
             .bindTo(
                 lightsTableView
                     .rx
@@ -102,13 +108,17 @@ class LightViewController: UIViewController {
     
     private func bindRxObserver() {
         
+        lightViewModel.isFirstTimeGetLights.asObservable()
+            .subscribe(onNext: { [weak self] _ in
+                UIFunctionality.applySmoothAnimation(elementToBeSmooth: (self?.lightsTableView)!)
+            }).addDisposableTo(disposalBag)
+        
         Observable.combineLatest(
             lightViewModel.requireCellShake.asObservable(),
-            lightViewModel.mockupLights.asObservable()
+            lightViewModel.allLights.asObservable()
         ).subscribe(onNext: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.lightsTableView.reloadData()
-                UIFunctionality.applySmoothAnimation(elementToBeSmooth: (self?.lightsTableView)!)
             }
         }).addDisposableTo(disposalBag)
         

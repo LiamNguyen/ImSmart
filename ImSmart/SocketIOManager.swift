@@ -14,7 +14,7 @@ class SocketIOManager {
     static let sharedInstance = SocketIOManager()
     
     private var socket = SocketIOClient(
-        socketURL: URL(string: "\(Constants.SocketIO.socketServerURL):\(Constants.SocketIO.socketServerPort)")!
+        socketURL: URL(string: "\(SocketServerURL.home.rawValue):\(SocketServerPort.generalPort.rawValue)")!
     )
     
     var isDeviceConnectedToSocket = Variable(false)
@@ -75,5 +75,14 @@ class SocketIOManager {
         case confirmRegistered              = "confirmRegistered"
         case requireUpdateLights            = "requireUpdateLights"
         case notifyOthersForLightsUpdate    = "notifyOthersForLightsUpdate"
+    }
+    
+    private enum SocketServerURL: String {
+        case edenred    = "http://192.168.2.69"
+        case home       = "http://192.168.20.106"
+    }
+    
+    private enum SocketServerPort: String {
+        case generalPort = "1208"
     }
 }
