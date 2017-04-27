@@ -19,8 +19,9 @@ class LightViewController: UIViewController {
     @IBOutlet fileprivate weak var lightsSelectionButton                : UIBarButtonItem!
     @IBOutlet fileprivate weak var bottomConstraintTableViewToSuperview : NSLayoutConstraint!
     
-    private var cancelSelectionView: UIView!
-    private var cancelButton: UIButton!
+    private var cancelSelectionView : UIView!
+    private var cancelButton        : UIButton!
+    private var activityIndicator   : UIActivityIndicatorView!
     
     fileprivate let disposalBag = DisposeBag()
 
@@ -171,6 +172,13 @@ class LightViewController: UIViewController {
                     self?.lightsSelectionButton.isEnabled = shouldEnable
                 }
             }).addDisposableTo(disposalBag)
+        
+        lightViewModel.isFirstTimeGetLights.asObservable()
+            .subscribe(onNext: { [weak self] isFirstTimeGetLights in
+                DispatchQueue.main.async {
+                    isFirstTimeGetLights ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
+                }
+            }).addDisposableTo(disposalBag)
     }
     
     private func bindRxAction() {
@@ -218,6 +226,7 @@ class LightViewController: UIViewController {
         self.navigationItem.title = Constants.Lights.View.title
         drawCancelSelectionView()
         drawCancelButton()
+        drawActivityIndicatorView()
     }
     
 //** Mark: DRAWING CANCEL BUTTON
@@ -248,6 +257,22 @@ class LightViewController: UIViewController {
         self.cancelSelectionView.alpha           = 0.9
         
         self.view.addSubview(self.cancelSelectionView)
+    }
+    
+//** Mark: DRAWING ACTIVITY INDICATOR VIEW
+    
+    private func drawActivityIndicatorView() {
+        self.activityIndicator                          = UIActivityIndicatorView()
+        
+        activityIndicator.hidesWhenStopped              = true
+        activityIndicator.activityIndicatorViewStyle    = .gray
+        
+        self.view.addSubview(activityIndicator)
+        
+        activityIndicator.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.centerY.equalToSuperview()
+        }
     }
     
 //** Mark: SEGUE PREPARATIONS

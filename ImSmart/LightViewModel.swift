@@ -15,8 +15,8 @@ class LightViewModel {
     var requireSynchronization              = Variable<Bool>(false)
     var isReceiving                         = Variable<Bool>(false)
     var isFirstTimeGetLights                = Variable<Bool>(true)
-    var allLights                           : Variable<[LightCellViewModel]> = Variable([LightCellViewModel]())
-    var selectedLights                      = Variable<[String: LightCellViewModel]>([String: LightCellViewModel]())
+    var allLights                           : Variable<[LightCellViewModel]>            = Variable([LightCellViewModel]())
+    var selectedLights                      : Variable<[String: LightCellViewModel]>    = Variable([String: LightCellViewModel]())
     
     var viewColorObserver                   : Observable<UIColor>!
     var tableViewColorObserver              : Observable<UIColor>!
