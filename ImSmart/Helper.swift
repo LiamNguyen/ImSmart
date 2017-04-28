@@ -27,19 +27,6 @@ class Helper {
         return String()
     }
     
-//** Mark: BUILD JSON OBJECT FROM ARRAY OF LIGHTS
-    
-    static func buildJSONObject(fromLightCellViewModel dataArray: [LightCellViewModel]) -> [[String: Any]] {
-        return dataArray
-                .map({ lightCellViewModel in
-                    return [
-                        "isOn"      : lightCellViewModel.isOn.value,
-                        "brightness": lightCellViewModel.brightness.value,
-                        "area"      : lightCellViewModel.area.value
-                    ]
-                })
-    }
-    
 //** Mark: PARSE JSON TO MODEL AND RETURN ARRAY OF LIGHTS
     
     static func parseJSONToLightCellViewModel(data: Data, lightViewModel: LightViewModel) -> [LightCellViewModel] {
@@ -47,16 +34,16 @@ class Helper {
             let decoded = try JSONSerialization.jsonObject(with: data, options: [])
             
             if let array = decoded as? NSArray {
-                let receivedMockupLights = array.map({ item -> LightCellViewModel in
+                let receivedAllLights = array.map({ item -> LightCellViewModel in
                     let dictionary = item as? NSDictionary
                     let light = Light(
-                        brightness  : dictionary?["brightness"] as! Int,
-                        area        : dictionary?["area"] as! String,
-                        isOn        : dictionary?["isOn"] as! Bool
+                        brightness  : dictionary?["Brightness"] as? Int ?? 0,
+                        area        : dictionary?["Area"] as? String ?? "",
+                        isOn        : dictionary?["IsOn"] as? Bool ?? false
                     )
-                    return LightCellViewModel(light: light, requireCellShake: lightViewModel.requireCellShake, requireSynchronization: lightViewModel.requireSynchronization)
+                    return LightCellViewModel(light: light, lightViewModel: lightViewModel)
                 })
-                return receivedMockupLights
+                return receivedAllLights
             } else {
                 NSLog("%@", "NSArray conversion failed")
             }
