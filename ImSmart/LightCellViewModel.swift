@@ -10,22 +10,22 @@ import Foundation
 import RxSwift
 
 class LightCellViewModel {
-    fileprivate let light                   : Light!
-    fileprivate let requireCellShake        : Variable<Bool>!
-    fileprivate let requireSynchronization  : Variable<Bool>!
+    private var light               : Light!
+    private weak var lightViewModel : LightViewModel!
     
     var isOn          : Variable<Bool>!
     var brightness    : Variable<Int>!
     var area          : Variable<String>!
     
     var cellMustShake : Observable<Bool>!
-    
+
+    private var isReceiving = false
     private let disposalBag = DisposeBag()
     
-    init(light: Light, requireCellShake: Variable<Bool>, requireSynchronization: Variable<Bool>) {
+    init(light: Light, lightViewModel: LightViewModel) {
         self.light                  = light
-        self.requireCellShake       = requireCellShake
-        self.requireSynchronization = requireSynchronization
+        
+        self.lightViewModel         = lightViewModel
         self.isOn                   = Variable<Bool>(self.light.isOn)
         self.brightness             = Variable<Int>(self.light.brightness)
         self.area                   = Variable<String>(self.light.area)
@@ -35,33 +35,45 @@ class LightCellViewModel {
     
     private func bindRx() {
         isOn.asObservable()
-            .subscribe(onNext: { isOn in
-                self.light.isOn = isOn
+            .subscribe(onNext: { [weak self] isOn in
+                self?.light.isOn = isOn
             }).addDisposableTo(disposalBag)
         
         brightness.asObservable()
-            .filter({ _ in
-                return self.isOn.value ? true : false
+            .filter({ [weak self] _ in
+                return (self?.isOn.value)! ? true : false
             })
-            .subscribe(onNext: { brightness in
-                self.light.brightness = brightness
+            .subscribe(onNext: { [weak self] brightness in
+                self?.light.brightness = brightness
             }).addDisposableTo(disposalBag)
         
         area.asObservable()
-            .subscribe(onNext: { area in
-                self.light.area = area
+            .subscribe(onNext: { [weak self] area in
+                self?.light.area = area
             }).addDisposableTo(disposalBag)
         
-        cellMustShake = requireCellShake.asObservable()
+        lightViewModel.isReceiving.asObservable()
+            .bindNext { [weak self] isReceiving in
+                self?.isReceiving = isReceiving
+        }.addDisposableTo(disposalBag)
+        
+        cellMustShake = lightViewModel.requireCellShake.asObservable()
             .map({ return $0 })
         
         let  _ = Observable.combineLatest(
             isOn.asObservable(),
             brightness.asObservable(),
             area.asObservable())
-            .throttle(1.7, scheduler: MainScheduler.instance)
-            .subscribe(onNext: { _ in
-                self.requireSynchronization.value = true
+            .throttle(2.2, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] _ in
+                if (self?.lightViewModel.isFirstTimeGetLights.value)! {
+                    return
+                }
+                if (self?.isReceiving)! {
+                    self?.isReceiving = !(self?.isReceiving)!
+                    return
+                }
+                self?.lightViewModel.requireSynchronization.value = true
             })
     }
 }

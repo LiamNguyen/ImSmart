@@ -11,12 +11,12 @@ import RxSwift
 import UIKit
 
 class LightViewModel {
-    var dataSynchronizeManager              : DataSynchronizationManager!
-    
     var requireCellShake                    = Variable<Bool>(false)
     var requireSynchronization              = Variable<Bool>(false)
-    var mockupLights                        : Variable<[LightCellViewModel]>!
-    var selectedLights                      = Variable<[String: LightCellViewModel]>([String: LightCellViewModel]())
+    var isReceiving                         = Variable<Bool>(false)
+    var isFirstTimeGetLights                = Variable<Bool>(true)
+    var allLights                           : Variable<[LightCellViewModel]>            = Variable([LightCellViewModel]())
+    var selectedLights                      : Variable<[String: LightCellViewModel]>    = Variable([String: LightCellViewModel]())
     
     var viewColorObserver                   : Observable<UIColor>!
     var tableViewColorObserver              : Observable<UIColor>!
@@ -33,16 +33,15 @@ class LightViewModel {
     
     init() {
         bindRx()
-    }
-    
-    convenience init(dataSynchronizeManager: DataSynchronizationManager) {
-        self.init()
-        self.dataSynchronizeManager             = dataSynchronizeManager
-        self.dataSynchronizeManager.delegate    = self
+        onReceiveRequireLightsUpdate()
     }
     
     func bindRx() {
-        mockupLights = Variable(LightsMockup.lights(requireCellShake: requireCellShake, requireSynchronization: requireSynchronization))
+        
+        RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
+            self?.allLights.value               = allLights
+            self?.isFirstTimeGetLights.value    = false
+        })
         
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
@@ -91,27 +90,42 @@ class LightViewModel {
         }
         
         requireSynchronization.asObservable()
-            .subscribe(onNext: { _ in
-                guard let _ = self.dataSynchronizeManager else {
-                    NSLog("@%", "Error: Data synchronize manager is nil")
+            .subscribe(onNext: { [weak self] _ in
+                guard let _ = self?.allLights.value, !(self?.isFirstTimeGetLights.value)! else {
                     return
                 }
-                let jsonObject = Helper.buildJSONObject(fromLightCellViewModel: (self.mockupLights.value))
+                let jsonObject = self?.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
                 let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
                 
-                self.dataSynchronizeManager?.senđData(dataToBeSent: jsonString)
+                RemoteStore.sharedInstance.updateAllLights(lights: jsonString, completionHandler: { success in
+                    if success {
+                        SocketIOManager.sharedInstance.requireUpdateLights()
+                    } else {
+                        print("Error when updating lights")
+                    }
+                })
             }).addDisposableTo(disposalBag)
     }
     
-    
-}
-
-extension LightViewModel: DataSynchronizationManagerDelegate {
-    func connectedDevicesChanged(manager: DataSynchronizationManager, connectedDevices: [String]) {
-        NSLog("%@", "Connections: \(connectedDevices)")
+    private func onReceiveRequireLightsUpdate() {
+        SocketIOManager.sharedInstance.onReceiveRequireLightsUpdate {
+                self.isReceiving.value  = true
+            RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
+                self?.allLights.value   = allLights
+            })
+        }
     }
     
-    func onDataReceived(manager: DataSynchronizationManager, data: Any) {
-        mockupLights.value = data as! [LightCellViewModel]
+    //** Mark: BUILD JSON OBJECT FROM ARRAY OF LIGHTS
+    
+    private func buildJSONObject(fromLightCellViewModel dataArray: [LightCellViewModel]) -> [[String: Any]] {
+        return dataArray
+            .map({ lightCellViewModel in
+                return [
+                    "isOn"      : lightCellViewModel.isOn.value,
+                    "brightness": lightCellViewModel.brightness.value,
+                    "area"      : lightCellViewModel.area.value
+                ]
+            })
     }
 }

@@ -12,10 +12,8 @@ import RxSwift
 class HomeViewModel{
     
     var localStore                          : LocalStore!
-    var dataSynchronizeManager              : DataSynchronizationManager?
     
     var isMainButtonShown                   : Variable<Bool>        = Variable(true)
-    var connectedDevices                    : Variable<[String]>    = Variable([String]())
     var menuViewShouldShow                  : Variable<Bool>        = Variable(false)
     var brandLogoOriginXObserver            : Observable<Float>!
     var welcomeTextOriginXObserver          : Observable<Float>!
@@ -32,8 +30,6 @@ class HomeViewModel{
     private var disposalBag                 = DisposeBag()
     
     init() {
-        dataSynchronizeManager              = DataSynchronizationManager()
-        dataSynchronizeManager?.delegate    = self
         bindRx()
     }
     
@@ -78,9 +74,9 @@ class HomeViewModel{
                 return isMainButtonShown ? self.buttonsCoordinate(position: .Origin) : self.buttonsCoordinate(buttonType: .Fridge)
             })
         
-        connectionsLabelObserver = connectedDevices.asObservable()
-            .map({ connectedDevices in
-                return connectedDevices.isEmpty ? Constants.Home.Menu.waitingConnections : Constants.Home.Menu.connectionsLabel
+        connectionsLabelObserver = SocketIOManager.sharedInstance.isDeviceConnectedToSocket.asObservable()
+            .map({ isDeviceConnected in
+                return isDeviceConnected ? Constants.Home.Menu.welcomeDevice : Constants.Home.Menu.waitingConnection
             })
         
         menuViewOriginXObserver = menuViewShouldShow.asObservable()
@@ -89,9 +85,9 @@ class HomeViewModel{
             })
         
         activityIndicatorShouldSpin = Observable.combineLatest(
-            connectedDevices.asObservable(),
-            menuViewShouldShow.asObservable(), resultSelector: { (connectedDevices, menuViewShouldShow) -> Bool in
-                return connectedDevices.isEmpty && menuViewShouldShow
+            SocketIOManager.sharedInstance.isDeviceConnectedToSocket.asObservable(),
+            menuViewShouldShow.asObservable(), resultSelector: { (isDeviceConnected, menuViewShouldShow) -> Bool in
+                return !isDeviceConnected && menuViewShouldShow
         })
     }
     
@@ -141,15 +137,5 @@ class HomeViewModel{
     private enum ButtonPosition {
         case Origin
         case Destination
-    }
-}
-
-extension HomeViewModel: DataSynchronizationManagerDelegate {
-    func connectedDevicesChanged(manager: DataSynchronizationManager, connectedDevices: [String]) {
-        self.connectedDevices.value = connectedDevices
-    }
-    
-    func onDataReceived(manager: DataSynchronizationManager, data: Any) {
-        
     }
 }

@@ -28,9 +28,10 @@
 		ED75D3381E8C478B006D6082 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3371E8C478B006D6082 /* Assets.xcassets */; };
 		ED75D33B1E8C478B006D6082 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED75D3391E8C478B006D6082 /* LaunchScreen.storyboard */; };
 		ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED810EC21E9BB4A9005F701E /* DataSynchronizationManager.swift */; };
+		ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8896CD1EAEC3F90064404E /* RemoteStore.swift */; };
+		ED953A0B1EB37B5900D622CB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED953A0A1EB37B5900D622CB /* Alamofire.framework */; };
+		ED953A0C1EB37B5900D622CB /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED953A0A1EB37B5900D622CB /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED9792D21E9010A5004827D4 /* UIFunctionality.swift */; };
-		ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; };
-		ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED9792D41E907C34004827D4 /* IBAnimatable.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9C588B1E8E49C400F57B8F /* RxSwift.framework */; };
 		ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED9C588B1E8E49C400F57B8F /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA77A7C1E9571DB002C801B /* LightsTableViewCell.swift */; };
@@ -41,6 +42,9 @@
 		EDAB2C441E9533FC006DF616 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDAB2C411E952EB4006DF616 /* RxCocoa.framework */; };
 		EDAB2C451E953407006DF616 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED9C588B1E8E49C400F57B8F /* RxSwift.framework */; };
 		EDAB2C541E9537D5006DF616 /* LightTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAB2C531E9537D5006DF616 /* LightTests.swift */; };
+		EDC5047E1EAB64350086B377 /* SocketIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDC5047D1EAB64350086B377 /* SocketIO.framework */; };
+		EDC5047F1EAB64350086B377 /* SocketIO.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EDC5047D1EAB64350086B377 /* SocketIO.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDC504801EAB64710086B377 /* SocketIOManager.swift */; };
 		EDD938081E941DE000FB1797 /* LightCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938071E941DE000FB1797 /* LightCellViewModel.swift */; };
 		EDD9380A1E941E5300FB1797 /* Light.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD938091E941E5300FB1797 /* Light.swift */; };
 		EDD9380C1E942BC400FB1797 /* LightCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDD9380B1E942BC400FB1797 /* LightCellViewModelTests.swift */; };
@@ -73,9 +77,10 @@
 			dstSubfolderSpec = 10;
 			files = (
 				EDAB2C431E952EB4006DF616 /* RxCocoa.framework in Embed Frameworks */,
+				ED953A0C1EB37B5900D622CB /* Alamofire.framework in Embed Frameworks */,
 				ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */,
 				ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */,
-				ED9792D61E907C34004827D4 /* IBAnimatable.framework in Embed Frameworks */,
+				EDC5047F1EAB64350086B377 /* SocketIO.framework in Embed Frameworks */,
 				ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -109,8 +114,9 @@
 		ED75D34C1E8C478B006D6082 /* ImSmartUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImSmartUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED75D3521E8C478B006D6082 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ED810EC21E9BB4A9005F701E /* DataSynchronizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSynchronizationManager.swift; sourceTree = "<group>"; };
+		ED8896CD1EAEC3F90064404E /* RemoteStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoteStore.swift; sourceTree = "<group>"; };
+		ED953A0A1EB37B5900D622CB /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		ED9792D21E9010A5004827D4 /* UIFunctionality.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFunctionality.swift; sourceTree = "<group>"; };
-		ED9792D41E907C34004827D4 /* IBAnimatable.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IBAnimatable.framework; path = Carthage/Build/iOS/IBAnimatable.framework; sourceTree = "<group>"; };
 		ED9C588B1E8E49C400F57B8F /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		EDA77A7C1E9571DB002C801B /* LightsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightsTableViewCell.swift; sourceTree = "<group>"; };
 		EDA77A7E1E957CE0002C801B /* LightsMockup.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightsMockup.swift; sourceTree = "<group>"; };
@@ -118,6 +124,8 @@
 		EDAB2C411E952EB4006DF616 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		EDAB2C471E953411006DF616 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 		EDAB2C531E9537D5006DF616 /* LightTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightTests.swift; sourceTree = "<group>"; };
+		EDC5047D1EAB64350086B377 /* SocketIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SocketIO.framework; path = Carthage/Build/iOS/SocketIO.framework; sourceTree = "<group>"; };
+		EDC504801EAB64710086B377 /* SocketIOManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOManager.swift; sourceTree = "<group>"; };
 		EDD938071E941DE000FB1797 /* LightCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightCellViewModel.swift; sourceTree = "<group>"; };
 		EDD938091E941E5300FB1797 /* Light.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		EDD9380B1E942BC400FB1797 /* LightCellViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightCellViewModelTests.swift; sourceTree = "<group>"; };
@@ -131,9 +139,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDAB2C421E952EB4006DF616 /* RxCocoa.framework in Frameworks */,
+				ED953A0B1EB37B5900D622CB /* Alamofire.framework in Frameworks */,
 				ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */,
 				ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */,
-				ED9792D51E907C34004827D4 /* IBAnimatable.framework in Frameworks */,
+				EDC5047E1EAB64350086B377 /* SocketIO.framework in Frameworks */,
 				ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -212,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				ED171EC61E8F8CEF006791C6 /* LocalStore.swift */,
+				ED8896CD1EAEC3F90064404E /* RemoteStore.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -227,6 +237,7 @@
 		ED75D3241E8C4782006D6082 = {
 			isa = PBXGroup;
 			children = (
+				ED953A0A1EB37B5900D622CB /* Alamofire.framework */,
 				ED810EC11E9BB440005F701E /* ExternalLibraries */,
 				ED75D32F1E8C478A006D6082 /* ImSmart */,
 				ED75D3441E8C478B006D6082 /* ImSmartTests */,
@@ -259,6 +270,7 @@
 				ED171EBE1E8F87EA006791C6 /* ViewModel */,
 				EDA77A811E957CEF002C801B /* MockupData */,
 				ED810EBE1E9BB399005F701E /* MultipeerConnectivity */,
+				EDC504821EAB64780086B377 /* Socket */,
 				ED810EBF1E9BB3ED005F701E /* Storyboards */,
 				ED810EC01E9BB41C005F701E /* SupportingFiles */,
 			);
@@ -315,10 +327,10 @@
 		ED810EC11E9BB440005F701E /* ExternalLibraries */ = {
 			isa = PBXGroup;
 			children = (
+				EDC5047D1EAB64350086B377 /* SocketIO.framework */,
 				ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */,
 				ED5954B31E981B3600C3E047 /* Spruce.framework */,
 				EDAB2C411E952EB4006DF616 /* RxCocoa.framework */,
-				ED9792D41E907C34004827D4 /* IBAnimatable.framework */,
 				ED9C588B1E8E49C400F57B8F /* RxSwift.framework */,
 			);
 			name = ExternalLibraries;
@@ -384,6 +396,14 @@
 			children = (
 			);
 			name = Store;
+			sourceTree = "<group>";
+		};
+		EDC504821EAB64780086B377 /* Socket */ = {
+			isa = PBXGroup;
+			children = (
+				EDC504801EAB64710086B377 /* SocketIOManager.swift */,
+			);
+			name = Socket;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -530,10 +550,11 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/IBAnimatable.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Spruce.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SocketIO.framework",
 			);
 			outputPaths = (
 			);
@@ -573,6 +594,7 @@
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
 				ED1117951E9AD337006EC259 /* Helper.swift in Sources */,
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
+				EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
 				EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */,
@@ -581,6 +603,7 @@
 				EDA77A7F1E957CE0002C801B /* LightsMockup.swift in Sources */,
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */,
+				ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
 				ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */,
 				ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */,
