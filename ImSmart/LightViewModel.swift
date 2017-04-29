@@ -115,7 +115,7 @@ class LightViewModel {
                     print("ERROR: Self is nil")
                     return
                 }
-                guard let _ = self?.allLights.value, self!.isFirstTimeGetLights.value else {
+                guard let _ = self?.allLights.value, !self!.isFirstTimeGetLights.value else {
                     return
                 }
                 let jsonObject = self!.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)

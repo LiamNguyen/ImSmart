@@ -60,7 +60,7 @@ class RemoteStore {
         }
         
         var urlRequest          = URLRequest(url: url!)
-        urlRequest.httpMethod   = "PUT"
+        urlRequest.httpMethod   = "POST"
         urlRequest.httpBody     = lights.data(using: .utf8)
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
