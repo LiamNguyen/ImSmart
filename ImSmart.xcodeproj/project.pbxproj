@@ -18,6 +18,7 @@
 		ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */; };
 		ED5168101EB4B523000813C7 /* Retrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED51680F1EB4B523000813C7 /* Retrier.swift */; };
+		ED5168151EB50201000813C7 /* GSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5168141EB50201000813C7 /* GSMessage.swift */; };
 		ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */; };
 		ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; };
 		ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -100,6 +101,7 @@
 		ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessViewController.swift; sourceTree = "<group>"; };
 		ED51680F1EB4B523000813C7 /* Retrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retrier.swift; sourceTree = "<group>"; };
+		ED5168141EB50201000813C7 /* GSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMessage.swift; sourceTree = "<group>"; };
 		ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
 		ED5954B31E981B3600C3E047 /* Spruce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spruce.framework; path = Carthage/Build/iOS/Spruce.framework; sourceTree = "<group>"; };
 		ED5954B61E9898FB00C3E047 /* LightViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewModel.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 		ED171EC21E8F8CAB006791C6 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				ED5168141EB50201000813C7 /* GSMessage.swift */,
 				ED9792D21E9010A5004827D4 /* UIFunctionality.swift */,
 				EDAB2C3F1E95287F006DF616 /* Constants.swift */,
 				ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */,
@@ -616,6 +619,7 @@
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */,
 				ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */,
+				ED5168151EB50201000813C7 /* GSMessage.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
 				ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */,
 				ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */,

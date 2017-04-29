@@ -15,6 +15,7 @@ class LightViewModel {
     var requireSynchronization              = Variable<Bool>(false)
     var isReceiving                         = Variable<Bool>(false)
     var isFirstTimeGetLights                = Variable<Bool>(true)
+    var isHavingServerError                 = Variable<Bool>(false)
     var allLights                           : Variable<[LightCellViewModel]>!
     var selectedLights                      : Variable<[String: LightCellViewModel]>!
     
@@ -25,6 +26,7 @@ class LightViewModel {
     var cancelSelectionViewOriginYObserver  : Observable<Float>!
     var barButtonTitleObserver              : Observable<String>!
     var barButtonEnableObserver             : Observable<Bool>!
+    var activityIndicatorShouldSpin         : Observable<Bool>!
     
     var brightnessValue                     = Variable<Float>(0.0)
     var sampleLightBrightness               : Observable<UIColor>!
@@ -40,11 +42,12 @@ class LightViewModel {
 //        **MARK: NOTIFICATION OBSERVERS
         
         NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(LightViewModel.onReceiveRequireLightsUpdate),
-            name: NSNotification.Name(rawValue: Constants.NotificationName.requiredUpdateLights),
-            object: nil
-        )
+            forName: NSNotification.Name(rawValue: Constants.NotificationName.requiredUpdateLights),
+            object: nil,
+            queue: nil) { [weak self] _ in
+                self?.isReceiving.value = true
+                self?.getAllLights()
+        }
     }
     
     deinit {
@@ -54,14 +57,7 @@ class LightViewModel {
     
     func bindRx() {
         
-        RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] allLights in
-            guard let _ = self?.parseJSONToLightCellViewModel(json: allLights) else {
-                print("ERROR: Self is nil")
-                return
-            }
-            self?.allLights.value               = self!.parseJSONToLightCellViewModel(json: allLights)
-            self?.isFirstTimeGetLights.value    = false
-        })
+        getAllLights()
         
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
@@ -109,6 +105,13 @@ class LightViewModel {
                 return requireCellShake ? !selectedLights.values.isEmpty : true
         }
         
+        activityIndicatorShouldSpin = Observable.combineLatest(
+            isFirstTimeGetLights.asObservable(),
+            isHavingServerError.asObservable()
+        ).map({ (isFirstTimeGetLights, isHavingServerError) in
+            return isFirstTimeGetLights && !isHavingServerError
+        })
+        
         requireSynchronization.asObservable()
             .subscribe(onNext: { [weak self] _ in
                 guard let _ = self?.isFirstTimeGetLights.value, let _ = self?.allLights.value, let _ = self?.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!) else {
@@ -116,6 +119,7 @@ class LightViewModel {
                     return
                 }
                 guard let _ = self?.allLights.value, !self!.isFirstTimeGetLights.value else {
+                    print("Lights is not fetched or this is the first time getting lights")
                     return
                 }
                 let jsonObject = self!.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
@@ -131,14 +135,21 @@ class LightViewModel {
             }).addDisposableTo(disposalBag)
     }
     
-    @objc private func onReceiveRequireLightsUpdate(notification: Notification) {
-        isReceiving.value = true
-        RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] allLights in
+    func getAllLights() {
+        RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] (allLights, error) in
+            if !error.isEmpty {
+                self?.isHavingServerError.value = true
+                return
+            }
             guard let _ = self?.parseJSONToLightCellViewModel(json: allLights) else {
                 print("ERROR: Self is nil")
                 return
             }
-            self?.allLights.value   = self!.parseJSONToLightCellViewModel(json: allLights)
+            self?.allLights.value               = self!.parseJSONToLightCellViewModel(json: allLights)
+            self?.isHavingServerError.value     = false
+            if self!.isFirstTimeGetLights.value {
+                self?.isFirstTimeGetLights.value = false
+            }
         })
     }
     

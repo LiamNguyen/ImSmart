@@ -18,7 +18,7 @@ class RemoteStore {
         
     }
     
-    func getAllLights(completionHandler: @escaping ((_ allLights: NSArray) -> Void)) {
+    func getAllLights(completionHandler: @escaping ((_ allLights: NSArray, _ error: String) -> Void)) {
         let url = URL(string: "\(BaseURL.BETA.rawValue)/lights")
         
         guard let _ = url else {
@@ -41,12 +41,13 @@ class RemoteStore {
                     return
                 }
                 
-                completionHandler(response.result.value as! NSArray)
+                completionHandler(response.result.value as! NSArray, "")
             case .failure(let error):
                 print(error.localizedDescription)
                 if let response = response.response {
                     print(response)
                 }
+                completionHandler([], "ERROR")
             }
         }
     }

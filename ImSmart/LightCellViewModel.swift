@@ -60,7 +60,7 @@ class LightCellViewModel {
         cellMustShake = lightViewModel.requireCellShake.asObservable()
             .map({ return $0 })
         
-        let  _ = Observable.combineLatest(
+        Observable.combineLatest(
             isOn.asObservable(),
             brightness.asObservable(),
             area.asObservable())
@@ -74,6 +74,6 @@ class LightCellViewModel {
                     return
                 }
                 self?.lightViewModel.requireSynchronization.value = true
-            })
+            }).addDisposableTo(disposalBag)
     }
 }

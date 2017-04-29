@@ -21,7 +21,12 @@ class LightViewController: UIViewController {
     
     private var cancelSelectionView : UIView!
     private var cancelButton        : UIButton!
+    private var refreshButton       : UIButton!
     private var activityIndicator   : UIActivityIndicatorView!
+    
+    private var longTextLineNumbers: Int = {
+        return Constants.DeviceModel.deviceType() == .iPhone5 || Constants.DeviceModel.deviceType() == .iPhone4 ? 3 : 2
+    }()
     
     fileprivate let disposalBag = DisposeBag()
 
@@ -165,10 +170,27 @@ class LightViewController: UIViewController {
                 }
             }).addDisposableTo(disposalBag)
         
-        lightViewModel.isFirstTimeGetLights.asObservable()
-            .subscribe(onNext: { [weak self] isFirstTimeGetLights in
+        lightViewModel.activityIndicatorShouldSpin
+            .subscribe(onNext: { [weak self] activityIndicatorShouldSpin in
                 DispatchQueue.main.async {
-                    isFirstTimeGetLights ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
+                    activityIndicatorShouldSpin ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
+                }
+            }).addDisposableTo(disposalBag)
+        
+        lightViewModel.isHavingServerError.asObservable()
+            .subscribe(onNext: { [weak self] isHavingServerError in
+                DispatchQueue.main.async {
+                    if isHavingServerError {
+                        self?.showMessage(
+                            Constants.Lights.Message.serverError,
+                            type: .error,
+                            options: [.autoHide(false), .hideOnTap(false), .textNumberOfLines(self!.longTextLineNumbers), .height(80.0)]
+                        )
+                        self?.refreshButton.isHidden = false
+                    } else {
+                        self?.hideMessage()
+                        self?.refreshButton.isHidden = true
+                    }
                 }
             }).addDisposableTo(disposalBag)
     }
@@ -186,6 +208,14 @@ class LightViewController: UIViewController {
             .tap
             .subscribe(onNext: { [weak self] in
                 self?.lightViewModel.requireCellShake.value = false
+            }).addDisposableTo(disposalBag)
+        
+        refreshButton
+            .rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+                self?.lightViewModel.isHavingServerError.value = false
+                self?.lightViewModel.getAllLights()
             }).addDisposableTo(disposalBag)
     }
     
@@ -220,6 +250,7 @@ class LightViewController: UIViewController {
         drawCancelSelectionView()
         drawCancelButton()
         drawActivityIndicatorView()
+        drawRefreshButton()
     }
     
 //** Mark: DRAWING CANCEL BUTTON
@@ -263,6 +294,24 @@ class LightViewController: UIViewController {
         self.view.addSubview(activityIndicator)
         
         activityIndicator.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.centerY.equalToSuperview()
+        }
+    }
+    
+//** Mark: DRAWING REFRESH BUTTON
+    
+    private func drawRefreshButton() {
+        let refreshButtonImage              = UIImage(named: Constants.Lights.View.refreshIcon)?.cgImage
+        
+        self.refreshButton                  = UIButton()
+        refreshButton.layer.contents        = refreshButtonImage
+        
+        self.view.addSubview(self.refreshButton)
+        
+        refreshButton.snp.makeConstraints { maker in
+            maker.width.equalTo(40)
+            maker.height.equalTo(45)
             maker.centerX.equalToSuperview()
             maker.centerY.equalToSuperview()
         }

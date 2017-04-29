@@ -19,6 +19,28 @@ struct Constants {
         static let screenHeight = Float(UIScreen.main.bounds.height)
     }
     
+    struct DeviceModel {
+        static func deviceType() -> DeviceType {
+            switch Constants.Window.screenHeight {
+            case 480:
+                return .iPhone4
+            case 568:
+                return .iPhone5
+            case 667:
+                return .iPhone6
+            case 736:
+                return .iPhone6Plus
+            case 1024:
+                return .iPadMini
+            case 1366:
+                return .iPadPro
+            default:
+                print("Undefined device type")
+                return .iPhone6
+            }
+        }
+    }
+    
     struct Home {
         struct View {
             static let title                = "Home"
@@ -58,6 +80,7 @@ struct Constants {
             static let title                = "Lights"
             static let lightOn              = "lightOn.png"
             static let lightOff             = "lightOff.png"
+            static let refreshIcon          = "refreshIcon.png"
         }
         
         struct Buttons {
@@ -67,6 +90,10 @@ struct Constants {
         
         struct SegueIdentifier {
             static let toBrightnessVC       = "segue_LightToBrightnessVC"
+        }
+        
+        struct Message {
+            static let serverError          = "Server error. Please check internet connection or contact customer service to get support"
         }
     }
     
@@ -137,5 +164,14 @@ struct Constants {
         static let notImplemented           = 501
         static let badGateway               = 502
         static let gatewayTimeout           = 504
+    }
+    
+    public enum DeviceType {
+        case iPhone4
+        case iPhone5
+        case iPhone6
+        case iPhone6Plus
+        case iPadMini
+        case iPadPro
     }
 }
