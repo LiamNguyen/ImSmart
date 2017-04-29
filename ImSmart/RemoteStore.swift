@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Alamofire
 
 class RemoteStore {
     static let sharedInstance = RemoteStore()
@@ -15,31 +16,26 @@ class RemoteStore {
         
     }
     
-    func getAllLights(lightViewModel: LightViewModel, completionHandler: @escaping ((_ allLights: [LightCellViewModel]) -> Void)) {
-        let url     = URL(string: "\(BaseURL.BETA.rawValue)/lights")
+    func getAllLights(completionHandler: @escaping ((_ allLights: NSArray) -> Void)) {
+        let url = URL(string: "\(BaseURL.BETA.rawValue)/lights")
         
         guard let _ = url else {
             print("URL error")
             return
         }
         
-        var request = URLRequest(url: url!)
-        request.httpMethod = "GET"
-        
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            guard let _ = data, error == nil else {
-                print("Error in server response\nError: \(String(describing: error))")
+        Alamofire.request(url!).validate().responseJSON { response in
+            if let response = response.response {
+                print(response)
+            }
+            
+            guard let _ = response.result.value as? NSArray else {
+                print("Response is in the wrong type")
                 return
             }
             
-            if data?.count == 0 {
-                print("Server return no data")
-                return
-            }
-            
-            let allLights = Helper.parseJSONToLightCellViewModel(data: data!, lightViewModel: lightViewModel)
-            completionHandler(allLights)
-        }.resume()
+            completionHandler(response.result.value as! NSArray)
+        }
     }
     
     func updateAllLights(lights: String, completionHandler: @escaping ((_ success: Bool) -> Void)) {

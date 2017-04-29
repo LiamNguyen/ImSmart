@@ -28,6 +28,8 @@ class LightViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.lightViewModel = LightViewModel()
+                
         guard let _ = self.lightViewModel else {
             print("Light view model not set")
             return
@@ -46,18 +48,6 @@ class LightViewController: UIViewController {
             .rx
             .setDelegate(self)
             .addDisposableTo(disposalBag)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        
-        self.lightsTableView.isHidden = true
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        UIFunctionality.applySmoothAnimation(elementToBeSmooth: (lightsTableView)!)
     }
     
     deinit {
@@ -110,8 +100,10 @@ class LightViewController: UIViewController {
     private func bindRxObserver() {
         
         lightViewModel.isFirstTimeGetLights.asObservable()
-            .subscribe(onNext: { [weak self] _ in
-                UIFunctionality.applySmoothAnimation(elementToBeSmooth: (self?.lightsTableView)!)
+            .subscribe(onNext: { [weak self] isFirstTimeGetLights in
+                if !isFirstTimeGetLights {
+                    UIFunctionality.applySmoothAnimation(elementToBeSmooth: (self?.lightsTableView)!)
+                }
             }).addDisposableTo(disposalBag)
         
         Observable.combineLatest(
@@ -223,7 +215,8 @@ class LightViewController: UIViewController {
     }
     
     private func customizeAppearance() {
-        self.navigationItem.title = Constants.Lights.View.title
+        self.navigationItem.title       = Constants.Lights.View.title
+        self.lightsTableView.isHidden   = true
         drawCancelSelectionView()
         drawCancelButton()
         drawActivityIndicatorView()

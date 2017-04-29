@@ -29,6 +29,13 @@ class SocketIOManager {
             self?.isDeviceConnectedToSocket.value = false
             print("Device disconnected")
         }
+        
+        socket.on(SocketKey.notifyOthersForLightsUpdate.rawValue) { _ in
+            NotificationCenter.default.post(
+                name: Notification.Name(rawValue: Constants.NotificationName.requiredUpdateLights),
+                object: nil
+            )
+        }
     }
     
     func socketConnect() {
@@ -59,12 +66,6 @@ class SocketIOManager {
     
     func requireUpdateLights() {
         socket.emit(SocketKey.requireUpdateLights.rawValue)
-    }
-    
-    func onReceiveRequireLightsUpdate(completionHandler: @escaping ( () -> Void)) {
-        socket.on(SocketKey.notifyOthersForLightsUpdate.rawValue) { _ in
-            completionHandler()
-        }
     }
     
     private enum SocketKey: String {

@@ -15,8 +15,8 @@ class LightViewModel {
     var requireSynchronization              = Variable<Bool>(false)
     var isReceiving                         = Variable<Bool>(false)
     var isFirstTimeGetLights                = Variable<Bool>(true)
-    var allLights                           : Variable<[LightCellViewModel]>            = Variable([LightCellViewModel]())
-    var selectedLights                      : Variable<[String: LightCellViewModel]>    = Variable([String: LightCellViewModel]())
+    var allLights                           : Variable<[LightCellViewModel]>!
+    var selectedLights                      : Variable<[String: LightCellViewModel]>!
     
     var viewColorObserver                   : Observable<UIColor>!
     var tableViewColorObserver              : Observable<UIColor>!
@@ -32,14 +32,34 @@ class LightViewModel {
     private let disposalBag                 = DisposeBag()
     
     init() {
+        self.allLights      = Variable([LightCellViewModel]())
+        self.selectedLights = Variable([String: LightCellViewModel]())
+        
         bindRx()
-        onReceiveRequireLightsUpdate()
+        
+//        **MARK: NOTIFICATION OBSERVERS
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(LightViewModel.onReceiveRequireLightsUpdate),
+            name: NSNotification.Name(rawValue: Constants.NotificationName.requiredUpdateLights),
+            object: nil
+        )
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        print("Light view model -> Dead")
     }
     
     func bindRx() {
         
-        RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
-            self?.allLights.value               = allLights
+        RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] allLights in
+            guard let _ = self?.parseJSONToLightCellViewModel(json: allLights) else {
+                print("Self is nil")
+                return
+            }
+            self?.allLights.value               = self!.parseJSONToLightCellViewModel(json: allLights)
             self?.isFirstTimeGetLights.value    = false
         })
         
@@ -107,13 +127,15 @@ class LightViewModel {
             }).addDisposableTo(disposalBag)
     }
     
-    private func onReceiveRequireLightsUpdate() {
-        SocketIOManager.sharedInstance.onReceiveRequireLightsUpdate {
-                self.isReceiving.value  = true
-            RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
-                self?.allLights.value   = allLights
-            })
-        }
+    @objc private func onReceiveRequireLightsUpdate(notification: Notification) {
+        isReceiving.value = true
+        RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] allLights in
+            guard let _ = self?.parseJSONToLightCellViewModel(json: allLights) else {
+                print("Self is nil")
+                return
+            }
+            self?.allLights.value   = self!.parseJSONToLightCellViewModel(json: allLights)
+        })
     }
     
     //** Mark: BUILD JSON OBJECT FROM ARRAY OF LIGHTS
@@ -127,5 +149,20 @@ class LightViewModel {
                     "area"      : lightCellViewModel.area.value
                 ]
             })
+    }
+    
+    //** Mark: PARSE JSON TO MODEL AND RETURN ARRAY OF LIGHTS
+    
+    private func parseJSONToLightCellViewModel(json: NSArray) -> [LightCellViewModel] {
+        let receivedAllLights = json.map({ item -> LightCellViewModel in
+            let dictionary = item as? NSDictionary
+            let light = Light(
+                brightness  : dictionary?["Brightness"] as? Int ?? 0,
+                area        : dictionary?["Area"] as? String ?? "",
+                isOn        : dictionary?["IsOn"] as? Bool ?? false
+            )
+            return LightCellViewModel(light: light, lightViewModel: self)
+        })
+        return receivedAllLights
     }
 }

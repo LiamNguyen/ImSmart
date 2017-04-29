@@ -627,19 +627,5 @@ class HomeViewController: UIViewController {
         self.homeViewModel.menuViewShouldShow.value = false
     }
     
-//** Mark: SEGUE PREPARATIONS
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case Constants.Home.SegueIdentifier.toLightVC?:
-            if let lightViewController = segue.destination as? LightViewController {
-                let lightViewModel                  = LightViewModel()
-                lightViewController.lightViewModel  = lightViewModel
-            }
-        default:
-            return
-        }
-    }
-    
     @IBAction func unwindToHomeViewController(segue: UIStoryboardSegue) {}
 }

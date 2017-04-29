@@ -109,6 +109,10 @@ struct Constants {
         }
     }
     
+    struct NotificationName {
+        static let requiredUpdateLights     = "requiredUpdateLights"
+    }
+    
     struct HttpStatusCode {
         //    2XX Sucess
         

@@ -27,33 +27,6 @@ class Helper {
         return String()
     }
     
-//** Mark: PARSE JSON TO MODEL AND RETURN ARRAY OF LIGHTS
-    
-    static func parseJSONToLightCellViewModel(data: Data, lightViewModel: LightViewModel) -> [LightCellViewModel] {
-        do {
-            let decoded = try JSONSerialization.jsonObject(with: data, options: [])
-            
-            if let array = decoded as? NSArray {
-                let receivedAllLights = array.map({ item -> LightCellViewModel in
-                    let dictionary = item as? NSDictionary
-                    let light = Light(
-                        brightness  : dictionary?["Brightness"] as? Int ?? 0,
-                        area        : dictionary?["Area"] as? String ?? "",
-                        isOn        : dictionary?["IsOn"] as? Bool ?? false
-                    )
-                    return LightCellViewModel(light: light, lightViewModel: lightViewModel)
-                })
-                return receivedAllLights
-            } else {
-                NSLog("%@", "NSArray conversion failed")
-            }
-        } catch let error {
-            NSLog("%@", "Failed to decode. Error: \(error)")
-        }
-        
-        return [LightCellViewModel]()
-    }
-    
     static func printMockupLights(mockupLights: [LightCellViewModel]) {
         let _ = mockupLights
             .map({ lightCellViewModel in
