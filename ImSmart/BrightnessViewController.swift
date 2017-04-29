@@ -48,6 +48,10 @@ class BrightnessViewController: UIViewController {
         clearRequireState()
     }
     
+    deinit {
+        print("Brightness VC -> Dead")
+    }
+    
     private func bindRxObserver() {
         lightViewModel.brightnessValue.asObservable()
             .map { value in
@@ -57,20 +61,20 @@ class BrightnessViewController: UIViewController {
         .addDisposableTo(disposalBag)
         
         lightViewModel.sampleLightBrightness
-        .subscribe(onNext: { brightness in
-            self.sampleLightBrightness.layer.backgroundColor = brightness.cgColor
+        .subscribe(onNext: { [weak self] brightness in
+            self?.sampleLightBrightness.layer.backgroundColor = brightness.cgColor
         }).addDisposableTo(disposalBag)
         
         lightViewModel.brightnessValue.asObservable()
             .map({ brightness in
                 return Int(brightness)
             })
-            .subscribe(onNext: { brightness in
-                if !self.sliderValueDidChange {
+            .subscribe(onNext: { [weak self] brightness in
+                if !(self?.sliderValueDidChange)! {
                     return
                 }
                 
-                for lightCellViewModel in self.lightViewModel.selectedLights.value.values {
+                for lightCellViewModel in (self?.lightViewModel.selectedLights.value.values)! {
                     lightCellViewModel.brightness.value = brightness
                     if brightness == 0 {
                         lightCellViewModel.isOn.value   = false
