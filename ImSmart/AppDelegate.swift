@@ -9,6 +9,7 @@
 import UIKit
 import CoreBluetooth
 import CoreData
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        setupLocationManager()
         customizeAppearance()
         homeViewModel = HomeViewModel()
 
@@ -122,6 +123,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-
+    func setupLocationManager() {
+        switch CLLocationManager.authorizationStatus() {
+            case .notDetermined:
+                LocationManager.shared.requestAlwaysAuthorization()
+                break
+            case .authorizedAlways:
+                LocationManager.shared.startMonitoring()
+                break
+            case .authorizedWhenInUse:
+                LocationManager.shared.startMonitoring()
+                break
+            default:
+                LocationManager.shared.stopMonitoring()
+        }
+    }
 }
 
