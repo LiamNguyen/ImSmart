@@ -12,6 +12,8 @@ import Alamofire
 class RemoteStore {
     static let sharedInstance = RemoteStore()
     
+    private let manager = SessionManager()
+    
     private init() {
         
     }
@@ -23,8 +25,15 @@ class RemoteStore {
             print("URL error")
             return
         }
+        let retrier     = Retrier()
+        let request     = manager.request(url!)
         
-        Alamofire.request(url!).validate().responseJSON { response in
+        manager.retrier = retrier
+        retrier.addRetryInfo(request: request)
+        
+        request.response { _ in
+            retrier.deleteRetryInfo(request: request)
+        }.validate().responseJSON { response in
             if let response = response.response {
                 print(response)
             }
