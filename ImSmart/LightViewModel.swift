@@ -56,7 +56,7 @@ class LightViewModel {
         
         RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] allLights in
             guard let _ = self?.parseJSONToLightCellViewModel(json: allLights) else {
-                print("Self is nil")
+                print("ERROR: Self is nil")
                 return
             }
             self?.allLights.value               = self!.parseJSONToLightCellViewModel(json: allLights)
@@ -111,17 +111,21 @@ class LightViewModel {
         
         requireSynchronization.asObservable()
             .subscribe(onNext: { [weak self] _ in
-                guard let _ = self?.allLights.value, !(self?.isFirstTimeGetLights.value)! else {
+                guard let _ = self?.isFirstTimeGetLights.value, let _ = self?.allLights.value, let _ = self?.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!) else {
+                    print("ERROR: Self is nil")
                     return
                 }
-                let jsonObject = self?.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
+                guard let _ = self?.allLights.value, self!.isFirstTimeGetLights.value else {
+                    return
+                }
+                let jsonObject = self!.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
                 let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
                 
                 RemoteStore.sharedInstance.updateAllLights(lights: jsonString, completionHandler: { success in
                     if success {
                         SocketIOManager.sharedInstance.requireUpdateLights()
                     } else {
-                        print("Error when updating lights")
+                        print("ERROR: Error when updating lights")
                     }
                 })
             }).addDisposableTo(disposalBag)
@@ -131,7 +135,7 @@ class LightViewModel {
         isReceiving.value = true
         RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] allLights in
             guard let _ = self?.parseJSONToLightCellViewModel(json: allLights) else {
-                print("Self is nil")
+                print("ERROR: Self is nil")
                 return
             }
             self?.allLights.value   = self!.parseJSONToLightCellViewModel(json: allLights)
