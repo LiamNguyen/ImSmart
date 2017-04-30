@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */; };
+		1AABF7DC1EB553A000BFAD42 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1AABF7DB1EB553A000BFAD42 /* default.gpx */; };
 		7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7639CB161EA355760050FEF2 /* Model.xcdatamodeld */; };
 		ED1117951E9AD337006EC259 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1117941E9AD337006EC259 /* Helper.swift */; };
 		ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC01E8F89EB006791C6 /* HomeViewController.swift */; };
@@ -91,6 +93,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		1AABF7DB1EB553A000BFAD42 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = default.gpx; path = ../../../Downloads/default.gpx; sourceTree = "<group>"; };
 		7639CB171EA355760050FEF2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		ED1117941E9AD337006EC259 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ED171EC01E8F89EB006791C6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -170,6 +174,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1AABF7DD1EB5D53600BFAD42 /* CLLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */,
+			);
+			name = CLLocationManager;
+			sourceTree = "<group>";
+		};
+		1AABF7DE1EB5DB9800BFAD42 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				1AABF7DB1EB553A000BFAD42 /* default.gpx */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		7639CB151EA3554E0050FEF2 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,6 +304,7 @@
 				EDA77A811E957CEF002C801B /* MockupData */,
 				ED810EBE1E9BB399005F701E /* MultipeerConnectivity */,
 				EDC504821EAB64780086B377 /* Socket */,
+				1AABF7DD1EB5D53600BFAD42 /* CLLocationManager */,
 				ED810EBF1E9BB3ED005F701E /* Storyboards */,
 				ED810EC01E9BB41C005F701E /* SupportingFiles */,
 			);
@@ -361,6 +382,7 @@
 		EDA77A811E957CEF002C801B /* MockupData */ = {
 			isa = PBXGroup;
 			children = (
+				1AABF7DE1EB5DB9800BFAD42 /* Location */,
 				EDA77A7E1E957CE0002C801B /* LightsMockup.swift */,
 			);
 			name = MockupData;
@@ -535,6 +557,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED75D33B1E8C478B006D6082 /* LaunchScreen.storyboard in Resources */,
+				1AABF7DC1EB553A000BFAD42 /* default.gpx in Resources */,
 				ED75D3381E8C478B006D6082 /* Assets.xcassets in Resources */,
 				ED75D3361E8C478B006D6082 /* Main.storyboard in Resources */,
 			);
@@ -610,6 +633,7 @@
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
 				EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
+				1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
 				ED5168101EB4B523000813C7 /* Retrier.swift in Sources */,
 				EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */,
