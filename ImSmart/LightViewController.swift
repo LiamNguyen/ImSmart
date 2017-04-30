@@ -49,9 +49,6 @@ class LightViewController: UIViewController {
         bindRxAction()
         bindRxObserver()
         
-        bindRegionEnterNotification()
-        bindRegionExitNotification()
-        
         lightsTableView
             .rx
             .setDelegate(self)
@@ -61,38 +58,7 @@ class LightViewController: UIViewController {
     deinit {
         print("Light VC -> Dead")
     }
-    
-    private func bindRegionEnterNotification() {
-        NotificationCenter.default.addObserver(
-            forName: NSNotification.Name(rawValue: Constants.NotificationName.enterRegionIdentifier),
-            object: nil,
-            queue: nil,
-            using: { [weak self]_ in
-                self?.showMessage(
-                    Constants.NotificationName.enterRegionTitle + "\n" + Constants.NotificationName.enterRegionBody,
-                    type: .error,
-                    options: [.autoHide(false), .hideOnTap(false), .textNumberOfLines(self!.longTextLineNumbers), .height(80.0)]
-                )
-            }
-        )
-    }
-    
-    private func bindRegionExitNotification() {
-        NotificationCenter.default.addObserver(
-            forName: NSNotification.Name(rawValue: Constants.NotificationName.exitRegionIdentifier),
-            object: nil,
-            queue: nil,
-            using: { [weak self]_ in
-                self?.showMessage(
-                    Constants.NotificationName.exitRegionTitle + "\n" + Constants.NotificationName.exitRegionBody,
-                    type: .error,
-                    options: [.autoHide(false), .hideOnTap(false), .textNumberOfLines(self!.longTextLineNumbers), .height(80.0)]
-                )
-            }
-        )
-    }
-
-    
+   
     private func bindRxCellForRowAtIndexPath() {
 //        The same as cellForRowAtIndexPath
         lightViewModel.allLights.asObservable()

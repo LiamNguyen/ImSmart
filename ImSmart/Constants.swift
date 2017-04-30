@@ -138,12 +138,20 @@ struct Constants {
     
     struct NotificationName {
         static let requiredUpdateLights     = "requiredUpdateLights"
-        static let enterRegionIdentifier    = "enterRegion"
-        static let enterRegionTitle         = "Almost home"
-        static let enterRegionBody          = "Do you want to turn some devices on?"
-        static let exitRegionIdentifier     = "exitRegion"
-        static let exitRegionTitle          = "Forget something?"
-        static let exitRegionBody           = "Some devices are still on. Do you want to turn them off?"
+    }
+    
+    struct UserNotification {
+        struct EnterRegion {
+            static let identifier           = "enterRegion"
+            static let title                = "Almost home"
+            static let body                 = "Heat up your room?"
+        }
+        
+        struct ExitRegion {
+            static let identifier           = "exitRegion"
+            static let title                = "Forget something?"
+            static let body                 = "Turn some running đevices off?"
+        }
     }
     
     struct Coordinate {

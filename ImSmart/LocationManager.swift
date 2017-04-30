@@ -46,11 +46,19 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
-        notifyRegionChanged(identifier: Constants.NotificationName.enterRegionIdentifier, title: Constants.NotificationName.enterRegionTitle, body: Constants.NotificationName.enterRegionBody)
+        notifyRegionChanged(
+            identifier: Constants.UserNotification.EnterRegion.identifier,
+            title: Constants.UserNotification.EnterRegion.title,
+            body: Constants.UserNotification.EnterRegion.body
+        )
     }
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
-        notifyRegionChanged(identifier: Constants.NotificationName.exitRegionIdentifier, title: Constants.NotificationName.exitRegionTitle, body: Constants.NotificationName.exitRegionBody)
+        notifyRegionChanged(
+            identifier: Constants.UserNotification.ExitRegion.identifier,
+            title: Constants.UserNotification.ExitRegion.title,
+            body: Constants.UserNotification.ExitRegion.body
+        )
     }
 
     private func notifyRegionChanged(identifier: String, title: String, body: String) {
@@ -58,7 +66,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         if appState == .background {
             showNotification(identifier: identifier, title: title, body: body)
         } else {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: identifier), object: nil)
+            showOnScreenNotification(identifier: identifier)
         }
     }
     
@@ -68,6 +76,20 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         } else {
             addRequestNotification(title: title, body: body)
         }
+    }
+    
+    private func showOnScreenNotification(identifier: String) {
+            let title = identifier == Constants.UserNotification.EnterRegion.identifier ? Constants.UserNotification.EnterRegion.title : Constants.UserNotification.ExitRegion.title
+            let body = identifier == Constants.UserNotification.EnterRegion.identifier ? Constants.UserNotification.EnterRegion.body : Constants.UserNotification.ExitRegion.body
+        
+        if let topViewController = UIApplication.topViewController() {
+            topViewController.showMessage(
+                title + "\n" + body,
+                type: .info,
+                options: [.textNumberOfLines(3), .animation(.fade)]
+            )
+        }
+
     }
     
     /*

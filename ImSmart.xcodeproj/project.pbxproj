@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */; };
-		1AABF7DC1EB553A000BFAD42 /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = 1AABF7DB1EB553A000BFAD42 /* default.gpx */; };
 		7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7639CB161EA355760050FEF2 /* Model.xcdatamodeld */; };
 		ED1117951E9AD337006EC259 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1117941E9AD337006EC259 /* Helper.swift */; };
 		ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC01E8F89EB006791C6 /* HomeViewController.swift */; };
@@ -19,6 +18,8 @@
 		ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; };
 		ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */; };
+		ED2D3C791EB6127500BC46AF /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = ED2D3C781EB6127500BC46AF /* default.gpx */; };
+		ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */; };
 		ED5168101EB4B523000813C7 /* Retrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED51680F1EB4B523000813C7 /* Retrier.swift */; };
 		ED5168151EB50201000813C7 /* GSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5168141EB50201000813C7 /* GSMessage.swift */; };
 		ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */; };
@@ -94,7 +95,6 @@
 
 /* Begin PBXFileReference section */
 		1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		1AABF7DB1EB553A000BFAD42 /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = default.gpx; path = ../../../Downloads/default.gpx; sourceTree = "<group>"; };
 		7639CB171EA355760050FEF2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		ED1117941E9AD337006EC259 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ED171EC01E8F89EB006791C6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +104,8 @@
 		ED1BACC81E98EAB2005F7F75 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessViewController.swift; sourceTree = "<group>"; };
+		ED2D3C781EB6127500BC46AF /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
+		ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		ED51680F1EB4B523000813C7 /* Retrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retrier.swift; sourceTree = "<group>"; };
 		ED5168141EB50201000813C7 /* GSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMessage.swift; sourceTree = "<group>"; };
 		ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
@@ -185,7 +187,7 @@
 		1AABF7DE1EB5DB9800BFAD42 /* Location */ = {
 			isa = PBXGroup;
 			children = (
-				1AABF7DB1EB553A000BFAD42 /* default.gpx */,
+				ED2D3C781EB6127500BC46AF /* default.gpx */,
 			);
 			name = Location;
 			sourceTree = "<group>";
@@ -235,7 +237,6 @@
 				ED5168141EB50201000813C7 /* GSMessage.swift */,
 				ED9792D21E9010A5004827D4 /* UIFunctionality.swift */,
 				EDAB2C3F1E95287F006DF616 /* Constants.swift */,
-				ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */,
 				ED1BACC81E98EAB2005F7F75 /* Theme.swift */,
 				ED1117941E9AD337006EC259 /* Helper.swift */,
 			);
@@ -250,6 +251,15 @@
 				ED8896CD1EAEC3F90064404E /* RemoteStore.swift */,
 			);
 			name = Store;
+			sourceTree = "<group>";
+		};
+		ED2D3C7A1EB619BB00BC46AF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */,
+				ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		ED51680E1EB4B515000813C7 /* Alamofire */ = {
@@ -297,6 +307,7 @@
 				7639CB151EA3554E0050FEF2 /* CoreData */,
 				ED171EC31E8F8CB4006791C6 /* Store */,
 				ED171EC21E8F8CAB006791C6 /* Helper */,
+				ED2D3C7A1EB619BB00BC46AF /* Extensions */,
 				ED171EBF1E8F87F5006791C6 /* Controller */,
 				ED171EBD1E8F87E2006791C6 /* Model */,
 				EDA77A7B1E9571A8002C801B /* View */,
@@ -557,9 +568,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED75D33B1E8C478B006D6082 /* LaunchScreen.storyboard in Resources */,
-				1AABF7DC1EB553A000BFAD42 /* default.gpx in Resources */,
 				ED75D3381E8C478B006D6082 /* Assets.xcassets in Resources */,
 				ED75D3361E8C478B006D6082 /* Main.storyboard in Resources */,
+				ED2D3C791EB6127500BC46AF /* default.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +638,7 @@
 				ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
+				ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */,
 				ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */,
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
 				ED1117951E9AD337006EC259 /* Helper.swift in Sources */,
