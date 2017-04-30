@@ -11,27 +11,20 @@ import CoreLocation
 import UserNotifications
 import UIKit
 
-protocol LocationManagerDelegate: class {
-    func onEnterRegion()
-    func onExitRegion()
-}
-
 class LocationManager: NSObject, CLLocationManagerDelegate {
-    static let shared = LocationManager()
-    private var cllManager : CLLocationManager
-    weak var delegate : LocationManagerDelegate?
+    static let shared       = LocationManager()
+    private var cllManager  : CLLocationManager
     
     private override init() {
         cllManager = CLLocationManager()
         super.init()
         cllManager.delegate = self
-        cllManager.desiredAccuracy = kCLLocationAccuracyBest
-        
+        cllManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
     }
     
     func getRegion() -> CLCircularRegion {
-        let myCurrentLocation = CLLocationCoordinate2D(latitude: 60.207943, longitude: 24.663332)
-        let region = CLCircularRegion(center: myCurrentLocation, radius: 0.5, identifier: "Home")
+        let myCurrentLocation = CLLocationCoordinate2D(latitude: Constants.Coordinate.Home.latitude, longitude: Constants.Coordinate.Home.longitude)
+        let region = CLCircularRegion(center: myCurrentLocation, radius: Constants.Location.radius, identifier: Constants.Coordinate.Home.identifier)
         return region
     }
     
@@ -44,36 +37,34 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func startMonitoring() {
-        cllManager.startMonitoring(for: getRegion())
-        cllManager.requestState(for: getRegion())
-    }
+        cllManager.startMonitoring(for: getRegion())    }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if (status == .authorizedAlways) {
+        if (status == .authorizedAlways || status == .authorizedWhenInUse) {
             startMonitoring()
         }
     }
     
-    func locationManager(_ manager: CLLocationManager, didDetermineState state: CLRegionState, for region: CLRegion) {
-        switch state {
-            case .inside:
-                print("Enter")
-                showNotification(identifier: "enterRegion", title: "Almost home", body: "Do you want to turn some devices on?")
-                delegate?.onEnterRegion()
-                break
-            case .outside:
-                print("Exit")
-                showNotification(identifier: "exitRegion", title: "Forgot something?", body: "Some devices are still on. Do you want to turn them off?")
-                delegate?.onExitRegion()
-                break
-            default:
-                break
+    func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
+        notifyRegionChanged(identifier: Constants.NotificationName.enterRegionIdentifier, title: Constants.NotificationName.enterRegionTitle, body: Constants.NotificationName.enterRegionBody)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
+        notifyRegionChanged(identifier: Constants.NotificationName.exitRegionIdentifier, title: Constants.NotificationName.exitRegionTitle, body: Constants.NotificationName.exitRegionBody)
+    }
+
+    private func notifyRegionChanged(identifier: String, title: String, body: String) {
+        let appState = UIApplication.shared.applicationState
+        if appState == .background {
+            showNotification(identifier: identifier, title: title, body: body)
+        } else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: identifier), object: nil)
         }
     }
     
-    func showNotification(identifier: String, title: String, body: String) {
+    private func showNotification(identifier: String, title: String, body: String) {
         if #available(iOS 10.0, *) {
-            addRequestNotification(request: getRegionNotificationRequest(identifier: identifier, title: title, body: body))
+            addRequestNotification(request: getNotificationRequest(identifier: identifier, title: title, body: body))
         } else {
             addRequestNotification(title: title, body: body)
         }
@@ -82,16 +73,16 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     /*
      * This method adds notification for iOS version < 10
      */
-    func addRequestNotification(title: String, body: String) {
+    private func addRequestNotification(title: String, body: String) {
         let notification = UILocalNotification()
         notification.alertTitle = title
         notification.alertBody = body
-        notification.fireDate = NSDate().addingTimeInterval(5) as Date
+        notification.fireDate = NSDate().addingTimeInterval(3) as Date
         UIApplication.shared.scheduleLocalNotification(notification)
     }
     
     @available(iOS 10.0, *)
-    func addRequestNotification(request: UNNotificationRequest) {
+    private func addRequestNotification(request: UNNotificationRequest) {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
             if let error = error {
@@ -101,25 +92,18 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     @available(iOS 10.0, *)
-    func getRegionNotificationRequest(identifier: String, title: String, body: String) -> UNNotificationRequest {
+    private func getNotificationRequest(identifier: String, title: String, body: String) -> UNNotificationRequest {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body
         content.sound = UNNotificationSound.default()
             
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         
         let requestIdentifier = identifier
         
         let request = UNNotificationRequest(identifier: requestIdentifier, content: content, trigger: trigger)
         
         return request
-    }
-}
-
-extension LocationManager: UNUserNotificationCenterDelegate {
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        completionHandler()
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 import CoreBluetooth
 import CoreData
 import CoreLocation
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        setupNotification()
         setupLocationManager()
         customizeAppearance()
         homeViewModel = HomeViewModel()
@@ -123,7 +125,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func setupLocationManager() {
+    private func setupNotification() {
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
+            { (granted, error) in
+                if granted == true{
+                    NSLog("Granted")
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                if let _ = error {
+                   NSLog("Error")
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    private func setupLocationManager() {
         switch CLLocationManager.authorizationStatus() {
             case .notDetermined:
                 LocationManager.shared.requestAlwaysAuthorization()

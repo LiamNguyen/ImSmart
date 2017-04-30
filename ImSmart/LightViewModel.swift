@@ -34,13 +34,9 @@ class LightViewModel {
     private let disposalBag                 = DisposeBag()
     
     init() {
-<<<<<<< Updated upstream
         self.allLights      = Variable([LightCellViewModel]())
         self.selectedLights = Variable([String: LightCellViewModel]())
-        
-=======
-        LocationManager.shared.delegate = self
->>>>>>> Stashed changes
+
         bindRx()
         
 //        **MARK: NOTIFICATION OBSERVERS
@@ -60,15 +56,7 @@ class LightViewModel {
     }
     
     func bindRx() {
-<<<<<<< Updated upstream
-        
         getAllLights()
-=======
-        RemoteStore.sharedInstance.getAllLights(lightViewModel: self, completionHandler: { [weak self] allLights in
-            self?.allLights.value               = allLights
-            self?.isFirstTimeGetLights.value    = false
-        })
->>>>>>> Stashed changes
         
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
@@ -191,20 +179,4 @@ class LightViewModel {
         })
         return receivedAllLights
     }
-}
-
-extension LightViewModel: LocationManagerDelegate {
-    func onEnterRegion() {
-        LocationManager.shared.showNotification(identifier: "enterRegion", title: "Almost home", body: "Do you want to turn some devices on?")
-    }
-    
-    func onExitRegion() {
-        for light in allLights.value {
-            if light.isOn.value {
-                LocationManager.shared.showNotification(identifier: "exitRegion", title: "Forgot something?", body: "Some devices are still on. Do you want to turn them off?")
-                return
-            }
-        }
-    }
-
 }
