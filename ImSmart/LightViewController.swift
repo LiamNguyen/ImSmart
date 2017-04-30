@@ -58,7 +58,7 @@ class LightViewController: UIViewController {
     deinit {
         print("Light VC -> Dead")
     }
-    
+   
     private func bindRxCellForRowAtIndexPath() {
 //        The same as cellForRowAtIndexPath
         lightViewModel.allLights.asObservable()

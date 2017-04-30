@@ -140,6 +140,28 @@ struct Constants {
         static let requiredUpdateLights     = "requiredUpdateLights"
     }
     
+    struct UserNotification {
+        struct EnterRegion {
+            static let identifier           = "enterRegion"
+            static let title                = "Almost home"
+            static let body                 = "Heat up your room?"
+        }
+        
+        struct ExitRegion {
+            static let identifier           = "exitRegion"
+            static let title                = "Forget something?"
+            static let body                 = "Turn some running đevices off?"
+        }
+    }
+    
+    struct Coordinate {
+        static let Home                     = (latitude: 60.207943, longitude: 24.663332, identifier: "Home")
+    }
+    
+    struct Location {
+        static let radius                   = 1.0
+    }
+    
     struct HttpStatusCode {
         //    2XX Sucess
         
