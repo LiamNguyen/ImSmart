@@ -75,7 +75,7 @@ class BrightnessViewController: UIViewController {
                 }
                 
                 for lightCellViewModel in (self?.lightViewModel.selectedLights.value.values)! {
-                    lightCellViewModel.brightness.value = brightness
+                    lightCellViewModel.brightness.value = Int16(brightness)
                     if brightness == 0 {
                         lightCellViewModel.isOn.value   = false
                     }
