@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Byy-FK-4uE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Byy-FK-4uE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -77,7 +77,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5S-QV-fBw">
-                                                    <rect key="frame" x="2" y="5" width="284" height="92"/>
+                                                    <rect key="frame" x="2" y="5" width="339" height="92"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="spR-M2-cR3">
                                                             <rect key="frame" x="0.0" y="7" width="63" height="79"/>
@@ -336,22 +336,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="qsj-K8-jYM">
                                                 <rect key="frame" x="0.0" y="74" width="102" height="40"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHH-V2-Q5h">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="PPa-2W-dvZ"/>
-                                                            <constraint firstAttribute="height" constant="40" id="SXQ-fi-h7k"/>
-                                                        </constraints>
-                                                        <state key="normal" image="fanButton">
-                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="btn_FanSpeed_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="YB1-Iv-HqJ"/>
-                                                            <action selector="btn_TempUp_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="HPO-BI-rej"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHE-sX-iTG">
-                                                        <rect key="frame" x="62" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="5KK-SV-6bo"/>
                                                             <constraint firstAttribute="width" constant="40" id="a19-1D-ysu"/>
@@ -362,6 +348,20 @@
                                                         <connections>
                                                             <action selector="btn_Swing_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="Me2-T9-Sgc"/>
                                                             <action selector="btn_TempUp_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="lfP-HI-4s7"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHH-V2-Q5h">
+                                                        <rect key="frame" x="62" y="0.0" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="PPa-2W-dvZ"/>
+                                                            <constraint firstAttribute="height" constant="40" id="SXQ-fi-h7k"/>
+                                                        </constraints>
+                                                        <state key="normal" image="fanButton">
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="btn_FanSpeed_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="YB1-Iv-HqJ"/>
+                                                            <action selector="btn_TempUp_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="HPO-BI-rej"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>

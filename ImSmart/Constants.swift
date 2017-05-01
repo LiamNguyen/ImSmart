@@ -122,6 +122,19 @@ struct Constants {
             static let areaLabel            = "Living Room"
         }
         
+        struct FanSpeed {
+            static let high                 = "HI"
+            static let medium               = "MED"
+            static let low                  = "LO"
+        }
+        
+        struct Swing {
+            static let left                 = "LEFT"
+            static let middle               = "MID"
+            static let right                = "RIGHT"
+            static let auto                 = "AUTO"
+        }
+        
         struct segueIdentifier {
             static let toHomeVC             = "segue_AirConditionerToHomeVC"
         }
