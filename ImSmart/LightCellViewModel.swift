@@ -14,7 +14,7 @@ class LightCellViewModel {
     private weak var lightViewModel : LightViewModel!
     
     var isOn          : Variable<Bool>!
-    var brightness    : Variable<Int>!
+    var brightness    : Variable<Int16>!
     var area          : Variable<String>!
     
     var cellMustShake : Observable<Bool>!
@@ -27,8 +27,8 @@ class LightCellViewModel {
         
         self.lightViewModel         = lightViewModel
         self.isOn                   = Variable<Bool>(self.light.isOn)
-        self.brightness             = Variable<Int>(self.light.brightness)
-        self.area                   = Variable<String>(self.light.area)
+        self.brightness             = Variable<Int16>(self.light.brightness)
+        self.area                   = Variable<String>(self.light.area!)
         
         bindRx()
     }
@@ -60,7 +60,7 @@ class LightCellViewModel {
         cellMustShake = lightViewModel.requireCellShake.asObservable()
             .map({ return $0 })
         
-        let  _ = Observable.combineLatest(
+        Observable.combineLatest(
             isOn.asObservable(),
             brightness.asObservable(),
             area.asObservable())
@@ -74,6 +74,6 @@ class LightCellViewModel {
                     return
                 }
                 self?.lightViewModel.requireSynchronization.value = true
-            })
+            }).addDisposableTo(disposalBag)
     }
 }

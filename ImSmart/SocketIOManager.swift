@@ -20,14 +20,21 @@ class SocketIOManager {
     var isDeviceConnectedToSocket = Variable(false)
     
     private init() {
-        socket.on(SocketKey.connect.rawValue) { [weak self] _ in
-            self?.isDeviceConnectedToSocket.value = true
+        socket.on(SocketKey.connect.rawValue) { [unowned self] _ in
+            self.isDeviceConnectedToSocket.value = true
             print("Device connected")
         }
         
-        socket.on(SocketKey.disconnect.rawValue) { [weak self] _ in
-            self?.isDeviceConnectedToSocket.value = false
+        socket.on(SocketKey.disconnect.rawValue) { [unowned self] _ in
+            self.isDeviceConnectedToSocket.value = false
             print("Device disconnected")
+        }
+        
+        socket.on(SocketKey.notifyOthersForLightsUpdate.rawValue) { _ in
+            NotificationCenter.default.post(
+                name: Notification.Name(rawValue: Constants.NotificationName.requiredUpdateLights),
+                object: nil
+            )
         }
     }
     
@@ -40,8 +47,8 @@ class SocketIOManager {
     }
     
     func registerDevice() {
-        socket.on(SocketKey.connect.rawValue) { [weak self] _ in
-            self?.socket.emit(SocketKey.registerDevice.rawValue, Constants.deviceUUID, Constants.deviceName)
+        socket.on(SocketKey.connect.rawValue) { [unowned self] _ in
+            self.socket.emit(SocketKey.registerDevice.rawValue, Constants.deviceUUID, Constants.deviceName)
         }
     }
     
@@ -59,12 +66,6 @@ class SocketIOManager {
     
     func requireUpdateLights() {
         socket.emit(SocketKey.requireUpdateLights.rawValue)
-    }
-    
-    func onReceiveRequireLightsUpdate(completionHandler: @escaping ( () -> Void)) {
-        socket.on(SocketKey.notifyOthersForLightsUpdate.rawValue) { _ in
-            completionHandler()
-        }
     }
     
     private enum SocketKey: String {

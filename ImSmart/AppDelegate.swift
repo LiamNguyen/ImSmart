@@ -9,6 +9,8 @@
 import UIKit
 import CoreBluetooth
 import CoreData
+import CoreLocation
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
+        setupNotification()
+        setupLocationManager()
         customizeAppearance()
         homeViewModel = HomeViewModel()
 
@@ -85,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          application to it. This property is optional since there are legitimate
          error conditions that could cause the creation of the store to fail.
          */
-        let container = NSPersistentContainer(name: "CoreData")
+        let container = NSPersistentContainer(name: "Model")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
@@ -122,6 +125,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-
+    private func setupNotification() {
+        if #available(iOS 10.0, *) {
+            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
+            { (granted, error) in
+                if granted == true{
+                    NSLog("Granted")
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+                if let _ = error {
+                   NSLog("Error")
+                }
+            }
+        } else {
+            // Fallback on earlier versions
+        }
+    }
+    
+    private func setupLocationManager() {
+        switch CLLocationManager.authorizationStatus() {
+            case .notDetermined:
+                LocationManager.shared.requestAlwaysAuthorization()
+                break
+            case .authorizedAlways:
+                LocationManager.shared.startMonitoring()
+                break
+            case .authorizedWhenInUse:
+                LocationManager.shared.startMonitoring()
+                break
+            default:
+                LocationManager.shared.stopMonitoring()
+        }
+    }
 }
 

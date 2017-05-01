@@ -34,11 +34,11 @@ class LightsTableViewCell: UITableViewCell {
                 .addDisposableTo(disposalBag)
             
             lightCellViewModel.cellMustShake.asObservable()
-                .subscribe(onNext: { cellMustShake in
+                .subscribe(onNext: { [weak self] cellMustShake in
                     if cellMustShake {
-                        UIFunctionality.applyShakyAnimation(elementToBeShake: self.cellBackground, duration: 0.15)
+                        UIFunctionality.applyShakyAnimation(elementToBeShake: (self?.cellBackground)!, duration: 0.15)
                     } else {
-                        self.cellBackground.layer.removeAllAnimations()
+                        self?.cellBackground.layer.removeAllAnimations()
                     }
                 }).addDisposableTo(disposalBag)
             

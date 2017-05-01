@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */; };
 		7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7639CB161EA355760050FEF2 /* Model.xcdatamodeld */; };
 		ED1117951E9AD337006EC259 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1117941E9AD337006EC259 /* Helper.swift */; };
 		ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC01E8F89EB006791C6 /* HomeViewController.swift */; };
@@ -17,6 +18,12 @@
 		ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; };
 		ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */; };
+		ED2D3C791EB6127500BC46AF /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = ED2D3C781EB6127500BC46AF /* default.gpx */; };
+		ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */; };
+		ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */; };
+		ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */; };
+		ED5168101EB4B523000813C7 /* Retrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED51680F1EB4B523000813C7 /* Retrier.swift */; };
+		ED5168151EB50201000813C7 /* GSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5168141EB50201000813C7 /* GSMessage.swift */; };
 		ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */; };
 		ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; };
 		ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED5954B31E981B3600C3E047 /* Spruce.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -89,6 +96,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7639CB171EA355760050FEF2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		ED1117941E9AD337006EC259 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ED171EC01E8F89EB006791C6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -98,6 +106,12 @@
 		ED1BACC81E98EAB2005F7F75 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessViewController.swift; sourceTree = "<group>"; };
+		ED2D3C781EB6127500BC46AF /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
+		ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
+		ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLightOperations.swift; sourceTree = "<group>"; };
+		ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightProperties.swift; sourceTree = "<group>"; };
+		ED51680F1EB4B523000813C7 /* Retrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retrier.swift; sourceTree = "<group>"; };
+		ED5168141EB50201000813C7 /* GSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMessage.swift; sourceTree = "<group>"; };
 		ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
 		ED5954B31E981B3600C3E047 /* Spruce.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Spruce.framework; path = Carthage/Build/iOS/Spruce.framework; sourceTree = "<group>"; };
 		ED5954B61E9898FB00C3E047 /* LightViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightViewModel.swift; sourceTree = "<group>"; };
@@ -166,10 +180,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1AABF7DD1EB5D53600BFAD42 /* CLLocationManager */ = {
+			isa = PBXGroup;
+			children = (
+				1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */,
+			);
+			name = CLLocationManager;
+			sourceTree = "<group>";
+		};
+		1AABF7DE1EB5DB9800BFAD42 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				ED2D3C781EB6127500BC46AF /* default.gpx */,
+			);
+			name = Location;
+			sourceTree = "<group>";
+		};
 		7639CB151EA3554E0050FEF2 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
 				7639CB161EA355760050FEF2 /* Model.xcdatamodeld */,
+				ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -178,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				EDD938091E941E5300FB1797 /* Light.swift */,
+				ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -208,9 +240,9 @@
 		ED171EC21E8F8CAB006791C6 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				ED5168141EB50201000813C7 /* GSMessage.swift */,
 				ED9792D21E9010A5004827D4 /* UIFunctionality.swift */,
 				EDAB2C3F1E95287F006DF616 /* Constants.swift */,
-				ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */,
 				ED1BACC81E98EAB2005F7F75 /* Theme.swift */,
 				ED1117941E9AD337006EC259 /* Helper.swift */,
 			);
@@ -220,10 +252,28 @@
 		ED171EC31E8F8CB4006791C6 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				ED51680E1EB4B515000813C7 /* Alamofire */,
 				ED171EC61E8F8CEF006791C6 /* LocalStore.swift */,
 				ED8896CD1EAEC3F90064404E /* RemoteStore.swift */,
 			);
 			name = Store;
+			sourceTree = "<group>";
+		};
+		ED2D3C7A1EB619BB00BC46AF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				ED1BACC61E98EA64005F7F75 /* ColorExtension.swift */,
+				ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		ED51680E1EB4B515000813C7 /* Alamofire */ = {
+			isa = PBXGroup;
+			children = (
+				ED51680F1EB4B523000813C7 /* Retrier.swift */,
+			);
+			name = Alamofire;
 			sourceTree = "<group>";
 		};
 		ED5954B81E98990200C3E047 /* CellViewModel */ = {
@@ -237,7 +287,6 @@
 		ED75D3241E8C4782006D6082 = {
 			isa = PBXGroup;
 			children = (
-				ED953A0A1EB37B5900D622CB /* Alamofire.framework */,
 				ED810EC11E9BB440005F701E /* ExternalLibraries */,
 				ED75D32F1E8C478A006D6082 /* ImSmart */,
 				ED75D3441E8C478B006D6082 /* ImSmartTests */,
@@ -264,6 +313,7 @@
 				7639CB151EA3554E0050FEF2 /* CoreData */,
 				ED171EC31E8F8CB4006791C6 /* Store */,
 				ED171EC21E8F8CAB006791C6 /* Helper */,
+				ED2D3C7A1EB619BB00BC46AF /* Extensions */,
 				ED171EBF1E8F87F5006791C6 /* Controller */,
 				ED171EBD1E8F87E2006791C6 /* Model */,
 				EDA77A7B1E9571A8002C801B /* View */,
@@ -271,6 +321,7 @@
 				EDA77A811E957CEF002C801B /* MockupData */,
 				ED810EBE1E9BB399005F701E /* MultipeerConnectivity */,
 				EDC504821EAB64780086B377 /* Socket */,
+				1AABF7DD1EB5D53600BFAD42 /* CLLocationManager */,
 				ED810EBF1E9BB3ED005F701E /* Storyboards */,
 				ED810EC01E9BB41C005F701E /* SupportingFiles */,
 			);
@@ -327,6 +378,7 @@
 		ED810EC11E9BB440005F701E /* ExternalLibraries */ = {
 			isa = PBXGroup;
 			children = (
+				ED953A0A1EB37B5900D622CB /* Alamofire.framework */,
 				EDC5047D1EAB64350086B377 /* SocketIO.framework */,
 				ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */,
 				ED5954B31E981B3600C3E047 /* Spruce.framework */,
@@ -347,6 +399,7 @@
 		EDA77A811E957CEF002C801B /* MockupData */ = {
 			isa = PBXGroup;
 			children = (
+				1AABF7DE1EB5DB9800BFAD42 /* Location */,
 				EDA77A7E1E957CE0002C801B /* LightsMockup.swift */,
 			);
 			name = MockupData;
@@ -523,6 +576,7 @@
 				ED75D33B1E8C478B006D6082 /* LaunchScreen.storyboard in Resources */,
 				ED75D3381E8C478B006D6082 /* Assets.xcassets in Resources */,
 				ED75D3361E8C478B006D6082 /* Main.storyboard in Resources */,
+				ED2D3C791EB6127500BC46AF /* default.gpx in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -590,20 +644,26 @@
 				ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
+				ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */,
 				ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */,
+				ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */,
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
 				ED1117951E9AD337006EC259 /* Helper.swift in Sources */,
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
 				EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
+				1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
+				ED5168101EB4B523000813C7 /* Retrier.swift in Sources */,
 				EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */,
 				ED1BACC71E98EA64005F7F75 /* ColorExtension.swift in Sources */,
 				EDD938081E941DE000FB1797 /* LightCellViewModel.swift in Sources */,
 				EDA77A7F1E957CE0002C801B /* LightsMockup.swift in Sources */,
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */,
+				ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */,
 				ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */,
+				ED5168151EB50201000813C7 /* GSMessage.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
 				ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */,
 				ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */,
@@ -767,10 +827,12 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ImSmart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.letsdev.ImSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -784,10 +846,12 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ImSmart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.letsdev.ImSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

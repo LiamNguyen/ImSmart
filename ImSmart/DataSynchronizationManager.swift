@@ -104,11 +104,7 @@ extension DataSynchronizationManager : MCSessionDelegate {
     }
 
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
-        let updatedLightsData = Helper.parseJSONToLightCellViewModel(data: data, lightViewModel: LightViewModel())
-        print("\(UIDevice.current.name) RECEIVED")
-        Helper.printMockupLights(mockupLights: updatedLightsData)
-        
-        self.delegate?.onDataReceived(manager: self, data: updatedLightsData)
+
     }
 
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
