@@ -14,8 +14,10 @@ class LightViewModel {
     var requireCellShake                    = Variable<Bool>(false)
     var requireSynchronization              = Variable<Bool>(false)
     var isReceiving                         = Variable<Bool>(false)
+    var isRollingBack                       = Variable<Bool>(false)
     var isFirstTimeGetLights                = Variable<Bool>(true)
     var isHavingServerError                 = Variable<Bool>(false)
+    var isFailedToUpdate                    = Variable<Bool>(false)
     var allLights                           : Variable<[LightCellViewModel]>!
     var selectedLights                      : Variable<[String: LightCellViewModel]>!
     
@@ -32,6 +34,8 @@ class LightViewModel {
     var sampleLightBrightness               : Observable<UIColor>!
     
     private let disposalBag                 = DisposeBag()
+    
+    private var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init() {
         self.allLights      = Variable([LightCellViewModel]())
@@ -100,8 +104,9 @@ class LightViewModel {
         
         barButtonEnableObserver = Observable.combineLatest(
             requireCellShake.asObservable(),
-            selectedLights.asObservable()) { (requireCellShake, selectedLights) in
-                return requireCellShake ? !selectedLights.values.isEmpty : true
+            selectedLights.asObservable(),
+            isHavingServerError.asObservable()) { (requireCellShake, selectedLights, isHavingServerError) in
+                return requireCellShake ? !selectedLights.values.isEmpty : !isHavingServerError
         }
         
         activityIndicatorShouldSpin = Observable.combineLatest(
@@ -123,10 +128,16 @@ class LightViewModel {
                 let jsonObject = self!.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
                 let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
                 
-                RemoteStore.sharedInstance.updateAllLights(lights: jsonString, completionHandler: { success in
+                RemoteStore.sharedInstance.updateAllLights(lights: jsonString, completionHandler: { [weak self] success in
                     if success {
+                        self?.isFailedToUpdate.value    = false
                         SocketIOManager.sharedInstance.requireUpdateLights()
                     } else {
+                        self?.isRollingBack.value       = true
+                        self?.isFailedToUpdate.value    = true
+                        let rollBackLights              = CoreDataLightOperations.sharedInstance.getLights()
+                        self?.allLights.value           = self!.parseLightsFromCoreData(lights: rollBackLights)
+
                         print("ERROR: Error when updating lights")
                     }
                 })
@@ -169,15 +180,35 @@ class LightViewModel {
     private func parseJSONToLightCellViewModel(json: NSArray) -> [LightCellViewModel] {
         let receivedAllLights = json.map({ item -> LightCellViewModel in
             let dictionary = item as? NSDictionary
-            let light           = Light(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
-            
-            light.id            = dictionary?["Id"]         as? Int16   ?? 0
-            light.brightness    = dictionary?["Brightness"] as? Int16   ?? 0
-            light.area          = dictionary?["Area"]       as? String  ?? ""
-            light.isOn          = dictionary?["IsOn"]       as? Bool    ?? false
+            let light = LightModel(
+                id          : dictionary?["Id"]         as? Int     ?? 0,
+                isOn        : dictionary?["IsOn"]       as? Bool    ?? false,
+                brightness  : dictionary?["Brightness"] as? Int     ?? 0,
+                area        : dictionary?["Area"]       as? String  ?? ""
+            )
             
             return LightCellViewModel(light: light, lightViewModel: self)
         })
         return receivedAllLights
+    }
+    
+    //** Mark: PARSE LIGHTS FROM CORE DATA TO MODEL AND RETURN ARRAY OF LIGHTS
+    
+    private func parseLightsFromCoreData(lights: NSArray) -> [LightCellViewModel] {
+        return lights.map { light -> LightCellViewModel in
+            guard let _ = light as? Light else {
+                print("ERROR: Light type casting failed")
+                return LightCellViewModel()
+            }
+            
+            let light = light as! Light
+            let lightModel = LightModel(
+                id          : Int(light.id),
+                isOn        : light.isOn,
+                brightness  : Int(light.brightness),
+                area        : light.area!
+            )
+            return LightCellViewModel(light: lightModel, lightViewModel: self)
+        }
     }
 }

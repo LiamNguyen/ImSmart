@@ -75,9 +75,24 @@ class BrightnessViewController: UIViewController {
                 }
                 
                 for lightCellViewModel in (self?.lightViewModel.selectedLights.value.values)! {
-                    lightCellViewModel.brightness.value = Int16(brightness)
+                    lightCellViewModel.brightness.value = brightness
                     if brightness == 0 {
                         lightCellViewModel.isOn.value   = false
+                    }
+                }
+            }).addDisposableTo(disposalBag)
+        
+        lightViewModel.isFailedToUpdate.asObservable()
+            .subscribe(onNext: { [weak self] isFailedToUpdate in
+                DispatchQueue.main.async {
+                    if isFailedToUpdate {
+                        self?.showMessage(
+                            Constants.Lights.Message.serverError,
+                            type: .error,
+                            options: [.textNumberOfLines(Constants.longTextLineNumbers), .height(80.0)]
+                        )
+                    } else {
+                        self?.hideMessage()
                     }
                 }
             }).addDisposableTo(disposalBag)

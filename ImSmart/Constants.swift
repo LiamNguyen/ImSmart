@@ -13,6 +13,9 @@ struct Constants {
     
     static let deviceUUID = UIDevice.current.identifierForVendor?.uuidString ?? ""
     static let deviceName = UIDevice.current.name
+    static var longTextLineNumbers: Int = {
+        return Constants.DeviceModel.deviceType() == .iPhone5 || Constants.DeviceModel.deviceType() == .iPhone4 ? 3 : 2
+    }()
     
     struct Window {
         static let screenWidth  = Float(UIScreen.main.bounds.width)

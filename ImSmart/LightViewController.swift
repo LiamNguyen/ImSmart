@@ -24,10 +24,6 @@ class LightViewController: UIViewController {
     private var refreshButton       : UIButton!
     private var activityIndicator   : UIActivityIndicatorView!
     
-    private var longTextLineNumbers: Int = {
-        return Constants.DeviceModel.deviceType() == .iPhone5 || Constants.DeviceModel.deviceType() == .iPhone4 ? 3 : 2
-    }()
-    
     fileprivate let disposalBag = DisposeBag()
 
     override func viewDidLoad() {
@@ -184,12 +180,27 @@ class LightViewController: UIViewController {
                         self?.showMessage(
                             Constants.Lights.Message.serverError,
                             type: .error,
-                            options: [.autoHide(false), .hideOnTap(false), .textNumberOfLines(self!.longTextLineNumbers), .height(80.0)]
+                            options: [.autoHide(false), .hideOnTap(false), .textNumberOfLines(Constants.longTextLineNumbers), .height(80.0)]
                         )
                         self?.refreshButton.isHidden = false
                     } else {
                         self?.hideMessage()
                         self?.refreshButton.isHidden = true
+                    }
+                }
+            }).addDisposableTo(disposalBag)
+        
+        lightViewModel.isFailedToUpdate.asObservable()
+            .subscribe(onNext: { [weak self] isFailedToUpdate in
+                DispatchQueue.main.async {
+                    if isFailedToUpdate {
+                        self?.showMessage(
+                            Constants.Lights.Message.serverError,
+                            type: .error,
+                            options: [.textNumberOfLines(Constants.longTextLineNumbers), .height(80.0)]
+                        )
+                    } else {
+                        self?.hideMessage()
                     }
                 }
             }).addDisposableTo(disposalBag)
@@ -226,6 +237,7 @@ class LightViewController: UIViewController {
             self.lightViewModel.requireCellShake.value = true
         } else {
             DispatchQueue.main.async {
+                CoreDataLightOperations.sharedInstance.storeLights(lights: self.lightViewModel.allLights.value)
                 self.performSegue(withIdentifier: Constants.Lights.SegueIdentifier.toBrightnessVC, sender: self)
             }
         }
@@ -234,6 +246,7 @@ class LightViewController: UIViewController {
     private func handleCellSelection(selectedLightCellViewModel: LightCellViewModel, selectedRowIndexPath: IndexPath) {
         DispatchQueue.main.async {
             if !self.lightViewModel.requireCellShake.value {
+                CoreDataLightOperations.sharedInstance.storeLights(lights: self.lightViewModel.allLights.value)
                 self.lightsTableView.deselectRow(at: selectedRowIndexPath, animated: true)
                 selectedLightCellViewModel.isOn.value = !selectedLightCellViewModel.isOn.value
                 self.lightsTableView.reloadRows(at: [selectedRowIndexPath], with: .fade)

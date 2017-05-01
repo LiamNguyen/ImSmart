@@ -22,6 +22,7 @@
 		ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */; };
 		ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */; };
 		ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */; };
+		ED2D3CA71EB73FEB00BC46AF /* LightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */; };
 		ED5168101EB4B523000813C7 /* Retrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED51680F1EB4B523000813C7 /* Retrier.swift */; };
 		ED5168151EB50201000813C7 /* GSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5168141EB50201000813C7 /* GSMessage.swift */; };
 		ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */; };
@@ -110,6 +111,7 @@
 		ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLightOperations.swift; sourceTree = "<group>"; };
 		ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightProperties.swift; sourceTree = "<group>"; };
+		ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightModel.swift; sourceTree = "<group>"; };
 		ED51680F1EB4B523000813C7 /* Retrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retrier.swift; sourceTree = "<group>"; };
 		ED5168141EB50201000813C7 /* GSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMessage.swift; sourceTree = "<group>"; };
 		ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			children = (
 				EDD938091E941E5300FB1797 /* Light.swift */,
 				ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */,
+				ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
 				1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */,
+				ED2D3CA71EB73FEB00BC46AF /* LightModel.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
 				ED5168101EB4B523000813C7 /* Retrier.swift in Sources */,
 				EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */,

@@ -71,11 +71,12 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     private func showNotification(identifier: String, title: String, body: String) {
-        if #available(iOS 10.0, *) {
-            addRequestNotification(request: getNotificationRequest(identifier: identifier, title: title, body: body))
-        } else {
-            addRequestNotification(title: title, body: body)
-        }
+//        if #available(iOS 10.0, *) {
+//            addRequestNotification(request: getNotificationRequest(identifier: identifier, title: title, body: body))
+//        } else {
+//            addRequestNotification(title: title, body: body)
+//        }
+        addRequestNotification(request: getNotificationRequest(identifier: identifier, title: title, body: body))
     }
     
     private func showOnScreenNotification(identifier: String) {
@@ -86,24 +87,23 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             topViewController.showMessage(
                 title + "\n" + body,
                 type: .info,
-                options: [.textNumberOfLines(3), .animation(.fade)]
+                options: [.textNumberOfLines(Constants.longTextLineNumbers), .animation(.fade)]
             )
         }
 
     }
     
-    /*
-     * This method adds notification for iOS version < 10
-     */
-    private func addRequestNotification(title: String, body: String) {
-        let notification = UILocalNotification()
-        notification.alertTitle = title
-        notification.alertBody = body
-        notification.fireDate = NSDate().addingTimeInterval(3) as Date
-        UIApplication.shared.scheduleLocalNotification(notification)
-    }
+//    /*
+//     * This method adds notification for iOS version < 10
+//     */
+//    private func addRequestNotification(title: String, body: String) {
+//        let notification = UILocalNotification()
+//        notification.alertTitle = title
+//        notification.alertBody = body
+//        notification.fireDate = NSDate().addingTimeInterval(3) as Date
+//        UIApplication.shared.scheduleLocalNotification(notification)
+//    }
     
-    @available(iOS 10.0, *)
     private func addRequestNotification(request: UNNotificationRequest) {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
