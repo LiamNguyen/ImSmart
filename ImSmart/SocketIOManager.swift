@@ -20,13 +20,13 @@ class SocketIOManager {
     var isDeviceConnectedToSocket = Variable(false)
     
     private init() {
-        socket.on(SocketKey.connect.rawValue) { [weak self] _ in
-            self?.isDeviceConnectedToSocket.value = true
+        socket.on(SocketKey.connect.rawValue) { [unowned self] _ in
+            self.isDeviceConnectedToSocket.value = true
             print("Device connected")
         }
         
-        socket.on(SocketKey.disconnect.rawValue) { [weak self] _ in
-            self?.isDeviceConnectedToSocket.value = false
+        socket.on(SocketKey.disconnect.rawValue) { [unowned self] _ in
+            self.isDeviceConnectedToSocket.value = false
             print("Device disconnected")
         }
         
@@ -47,8 +47,8 @@ class SocketIOManager {
     }
     
     func registerDevice() {
-        socket.on(SocketKey.connect.rawValue) { [weak self] _ in
-            self?.socket.emit(SocketKey.registerDevice.rawValue, Constants.deviceUUID, Constants.deviceName)
+        socket.on(SocketKey.connect.rawValue) { [unowned self] _ in
+            self.socket.emit(SocketKey.registerDevice.rawValue, Constants.deviceUUID, Constants.deviceName)
         }
     }
     

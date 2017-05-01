@@ -20,6 +20,8 @@
 		ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */; };
 		ED2D3C791EB6127500BC46AF /* default.gpx in Resources */ = {isa = PBXBuildFile; fileRef = ED2D3C781EB6127500BC46AF /* default.gpx */; };
 		ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */; };
+		ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */; };
+		ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */; };
 		ED5168101EB4B523000813C7 /* Retrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED51680F1EB4B523000813C7 /* Retrier.swift */; };
 		ED5168151EB50201000813C7 /* GSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5168141EB50201000813C7 /* GSMessage.swift */; };
 		ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */; };
@@ -106,6 +108,8 @@
 		ED1BACCD1E999494005F7F75 /* BrightnessViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrightnessViewController.swift; sourceTree = "<group>"; };
 		ED2D3C781EB6127500BC46AF /* default.gpx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = default.gpx; sourceTree = "<group>"; };
 		ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
+		ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLightOperations.swift; sourceTree = "<group>"; };
+		ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightProperties.swift; sourceTree = "<group>"; };
 		ED51680F1EB4B523000813C7 /* Retrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retrier.swift; sourceTree = "<group>"; };
 		ED5168141EB50201000813C7 /* GSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMessage.swift; sourceTree = "<group>"; };
 		ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				7639CB161EA355760050FEF2 /* Model.xcdatamodeld */,
+				ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -204,6 +209,7 @@
 			isa = PBXGroup;
 			children = (
 				EDD938091E941E5300FB1797 /* Light.swift */,
+				ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -640,6 +646,7 @@
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
 				ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */,
 				ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */,
+				ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */,
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
 				ED1117951E9AD337006EC259 /* Helper.swift in Sources */,
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
@@ -654,6 +661,7 @@
 				EDA77A7F1E957CE0002C801B /* LightsMockup.swift in Sources */,
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */,
+				ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */,
 				ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */,
 				ED5168151EB50201000813C7 /* GSMessage.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
@@ -819,10 +827,12 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ImSmart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.letsdev.ImSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -836,10 +846,12 @@
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = ImSmart/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.letsdev.ImSmart;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

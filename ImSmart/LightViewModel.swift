@@ -118,7 +118,6 @@ class LightViewModel {
                     return
                 }
                 guard let _ = self?.allLights.value, !self!.isFirstTimeGetLights.value else {
-                    print("Lights is not fetched or this is the first time getting lights")
                     return
                 }
                 let jsonObject = self!.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
@@ -170,11 +169,13 @@ class LightViewModel {
     private func parseJSONToLightCellViewModel(json: NSArray) -> [LightCellViewModel] {
         let receivedAllLights = json.map({ item -> LightCellViewModel in
             let dictionary = item as? NSDictionary
-            let light = Light(
-                brightness  : dictionary?["Brightness"] as? Int ?? 0,
-                area        : dictionary?["Area"] as? String ?? "",
-                isOn        : dictionary?["IsOn"] as? Bool ?? false
-            )
+            let light           = Light(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+            
+            light.id            = dictionary?["Id"]         as? Int16   ?? 0
+            light.brightness    = dictionary?["Brightness"] as? Int16   ?? 0
+            light.area          = dictionary?["Area"]       as? String  ?? ""
+            light.isOn          = dictionary?["IsOn"]       as? Bool    ?? false
+            
             return LightCellViewModel(light: light, lightViewModel: self)
         })
         return receivedAllLights
