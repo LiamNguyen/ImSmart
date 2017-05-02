@@ -14,7 +14,7 @@ class SocketIOManager {
     static let sharedInstance = SocketIOManager()
     
     private var socket = SocketIOClient(
-        socketURL: URL(string: "\(SocketServerURL.home.rawValue):\(SocketServerPort.generalPort.rawValue)")!
+        socketURL: URL(string: "\(SocketServerURL.school.rawValue):\(SocketServerPort.generalPort.rawValue)")!
     )
     
     var isDeviceConnectedToSocket = Variable(false)
@@ -81,6 +81,7 @@ class SocketIOManager {
     private enum SocketServerURL: String {
         case edenred    = "http://192.168.2.69"
         case home       = "http://192.168.20.106"
+        case school     = "http://10.112.200.229"
     }
     
     private enum SocketServerPort: String {
