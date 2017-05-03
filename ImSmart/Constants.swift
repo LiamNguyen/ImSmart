@@ -154,6 +154,7 @@ struct Constants {
     
     struct NotificationName {
         static let requiredUpdateLights     = "requiredUpdateLights"
+        static let requiredUpdateAirCons    = "requiredUpdateAirCons"
     }
     
     struct UserNotification {

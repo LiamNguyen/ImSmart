@@ -12,6 +12,8 @@ import RxCocoa
 import SnapKit
 
 class AirConditionerViewController: UIViewController {
+    private var airConditionerViewModel: AirConditionerViewModel!
+    
     @IBOutlet private weak var view_AdjustTemperature   : UIView!
     @IBOutlet private weak var btn_Mode                 : UIButton!
     @IBOutlet private weak var btn_FanSpeed             : UIButton!
@@ -39,6 +41,13 @@ class AirConditionerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.airConditionerViewModel = AirConditionerViewModel()
+        
+        guard let _ = self.airConditionerViewModel else {
+            print("Air conditioner view model not set")
+            return
+        }
         
         customizeAppearance()
         

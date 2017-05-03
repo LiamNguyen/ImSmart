@@ -13,7 +13,7 @@ import SnapKit
 
 class LightViewController: UIViewController {
     
-    var lightViewModel: LightViewModel!
+    fileprivate var lightViewModel: LightViewModel!
     
     @IBOutlet fileprivate weak var lightsTableView                      : UITableView!
     @IBOutlet fileprivate weak var lightsSelectionButton                : UIBarButtonItem!

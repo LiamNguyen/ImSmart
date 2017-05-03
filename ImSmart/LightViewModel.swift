@@ -41,6 +41,7 @@ class LightViewModel {
         self.allLights      = Variable([LightCellViewModel]())
         self.selectedLights = Variable([String: LightCellViewModel]())
 
+        getAllLights()
         bindRx()
         
 //        **MARK: NOTIFICATION OBSERVERS
@@ -60,8 +61,6 @@ class LightViewModel {
     }
     
     func bindRx() {
-        getAllLights()
-        
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
                 return requireCellShake ? Theme.contentHighlighted : Theme.background

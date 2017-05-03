@@ -36,6 +36,13 @@ class SocketIOManager {
                 object: nil
             )
         }
+        
+        socket.on(SocketKey.notifyOthersForAirConssUpdate.rawValue) { _ in
+            NotificationCenter.default.post(
+                name: Notification.Name(rawValue: Constants.NotificationName.requiredUpdateAirCons),
+                object: nil
+            )
+        }
     }
     
     func socketConnect() {
@@ -68,6 +75,10 @@ class SocketIOManager {
         socket.emit(SocketKey.requireUpdateLights.rawValue)
     }
     
+    func requireUpdateAirConditioners() {
+        socket.emit(SocketKey.requireUpdateAirCons.rawValue)
+    }
+    
     private enum SocketKey: String {
         case connect                        = "connect"
         case disconnect                     = "disconnect"
@@ -76,6 +87,8 @@ class SocketIOManager {
         case confirmRegistered              = "confirmRegistered"
         case requireUpdateLights            = "requireUpdateLights"
         case notifyOthersForLightsUpdate    = "notifyOthersForLightsUpdate"
+        case requireUpdateAirCons           = "requireUpdateAirCons"
+        case notifyOthersForAirConssUpdate  = "notifyOthersForAirConssUpdate"
     }
     
     private enum SocketServerURL: String {

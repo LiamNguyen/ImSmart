@@ -21,7 +21,7 @@ class LightCellViewModel {
 
     private var isReceiving     = false
     private var isRollingBack   = false
-    private let disposalBag = DisposeBag()
+    private let disposalBag     = DisposeBag()
     
     init(light: LightModel, lightViewModel: LightViewModel) {
         self.light                  = light

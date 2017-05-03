@@ -68,6 +68,11 @@ io.on('connection', function(clientSocket){
   	clientSocket.broadcast.emit('notifyOthersForLightsUpdate');
   });
 
+  clientSocket.on('requireUpdateAirCons', function() {
+  	console.log('AIR CONDITIONER UPDATE REQUIRED');
+
+  	clientSocket.broadcast.emit('notifyOthersForAirConssUpdate');
+  });
 });
 
 checkDeviceExist = (deviceUUID, isDeviceExist) => {

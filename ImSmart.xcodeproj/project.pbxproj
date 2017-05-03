@@ -23,6 +23,13 @@
 		ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */; };
 		ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */; };
 		ED2D3CA71EB73FEB00BC46AF /* LightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */; };
+		ED3281261EB7C36D00DF20F6 /* AirConditionerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3281251EB7C36D00DF20F6 /* AirConditionerModel.swift */; };
+		ED504F611EB84FF100802BE3 /* AirConditioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F5F1EB84FF100802BE3 /* AirConditioner.swift */; };
+		ED504F621EB84FF100802BE3 /* AirConditionerProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F601EB84FF100802BE3 /* AirConditionerProperties.swift */; };
+		ED504F641EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F631EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift */; };
+		ED504F661EB851F900802BE3 /* AirConditionerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F651EB851F900802BE3 /* AirConditionerViewModel.swift */; };
+		ED504F681EB85A1100802BE3 /* AirConditionerCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F671EB85A1100802BE3 /* AirConditionerCellViewModel.swift */; };
+		ED504F6A1EB8912C00802BE3 /* StoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F691EB8912C00802BE3 /* StoreType.swift */; };
 		ED5168101EB4B523000813C7 /* Retrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED51680F1EB4B523000813C7 /* Retrier.swift */; };
 		ED5168151EB50201000813C7 /* GSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5168141EB50201000813C7 /* GSMessage.swift */; };
 		ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */; };
@@ -112,6 +119,13 @@
 		ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLightOperations.swift; sourceTree = "<group>"; };
 		ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightProperties.swift; sourceTree = "<group>"; };
 		ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightModel.swift; sourceTree = "<group>"; };
+		ED3281251EB7C36D00DF20F6 /* AirConditionerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerModel.swift; sourceTree = "<group>"; };
+		ED504F5F1EB84FF100802BE3 /* AirConditioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditioner.swift; sourceTree = "<group>"; };
+		ED504F601EB84FF100802BE3 /* AirConditionerProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerProperties.swift; sourceTree = "<group>"; };
+		ED504F631EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAirConditionerOperations.swift; sourceTree = "<group>"; };
+		ED504F651EB851F900802BE3 /* AirConditionerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerViewModel.swift; sourceTree = "<group>"; };
+		ED504F671EB85A1100802BE3 /* AirConditionerCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerCellViewModel.swift; sourceTree = "<group>"; };
+		ED504F691EB8912C00802BE3 /* StoreType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreType.swift; sourceTree = "<group>"; };
 		ED51680F1EB4B523000813C7 /* Retrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retrier.swift; sourceTree = "<group>"; };
 		ED5168141EB50201000813C7 /* GSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMessage.swift; sourceTree = "<group>"; };
 		ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
@@ -203,6 +217,7 @@
 			children = (
 				7639CB161EA355760050FEF2 /* Model.xcdatamodeld */,
 				ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */,
+				ED504F631EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -210,9 +225,12 @@
 		ED171EBD1E8F87E2006791C6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ED504F5F1EB84FF100802BE3 /* AirConditioner.swift */,
+				ED504F601EB84FF100802BE3 /* AirConditionerProperties.swift */,
 				EDD938091E941E5300FB1797 /* Light.swift */,
 				ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */,
 				ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */,
+				ED3281251EB7C36D00DF20F6 /* AirConditionerModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -223,6 +241,7 @@
 				ED5954B81E98990200C3E047 /* CellViewModel */,
 				ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */,
 				ED5954B61E9898FB00C3E047 /* LightViewModel.swift */,
+				ED504F651EB851F900802BE3 /* AirConditionerViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -258,6 +277,7 @@
 				ED51680E1EB4B515000813C7 /* Alamofire */,
 				ED171EC61E8F8CEF006791C6 /* LocalStore.swift */,
 				ED8896CD1EAEC3F90064404E /* RemoteStore.swift */,
+				ED504F691EB8912C00802BE3 /* StoreType.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -283,6 +303,7 @@
 			isa = PBXGroup;
 			children = (
 				EDD938071E941DE000FB1797 /* LightCellViewModel.swift */,
+				ED504F671EB85A1100802BE3 /* AirConditionerCellViewModel.swift */,
 			);
 			name = CellViewModel;
 			sourceTree = "<group>";
@@ -643,11 +664,13 @@
 			files = (
 				ED75D3311E8C478A006D6082 /* AppDelegate.swift in Sources */,
 				ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */,
+				ED504F621EB84FF100802BE3 /* AirConditionerProperties.swift in Sources */,
 				ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */,
 				ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
 				ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */,
+				ED504F611EB84FF100802BE3 /* AirConditioner.swift in Sources */,
 				ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */,
 				ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */,
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
@@ -656,6 +679,8 @@
 				EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
 				1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */,
+				ED504F661EB851F900802BE3 /* AirConditionerViewModel.swift in Sources */,
+				ED504F681EB85A1100802BE3 /* AirConditionerCellViewModel.swift in Sources */,
 				ED2D3CA71EB73FEB00BC46AF /* LightModel.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
 				ED5168101EB4B523000813C7 /* Retrier.swift in Sources */,
@@ -666,8 +691,11 @@
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */,
 				ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */,
+				ED3281261EB7C36D00DF20F6 /* AirConditionerModel.swift in Sources */,
+				ED504F641EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift in Sources */,
 				ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */,
 				ED5168151EB50201000813C7 /* GSMessage.swift in Sources */,
+				ED504F6A1EB8912C00802BE3 /* StoreType.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
 				ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */,
 				ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */,
