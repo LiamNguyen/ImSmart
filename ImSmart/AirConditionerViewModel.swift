@@ -27,7 +27,7 @@ class AirConditionerViewModel {
     init() {
         self.allAirConditioners = Variable([AirConditionerCellViewModel]())
         
-        bindRx()
+//        bindRx()
         
 //        **MARK: NOTIFICATION OBSERVERS
         
@@ -36,7 +36,7 @@ class AirConditionerViewModel {
             object: nil,
             queue: nil) { [weak self] _ in
                 self?.isReceiving.value = true
-                self?.getAllAirConditioners()
+//                self?.getAllAirConditioners()
         }
     }
     
