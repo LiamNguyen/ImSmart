@@ -15,6 +15,8 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     static let shared       = LocationManager()
     private var cllManager  : CLLocationManager
     
+    var beaconRegion: CLBeaconRegion!
+    
     private override init() {
         cllManager = CLLocationManager()
         super.init()
@@ -28,6 +30,14 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
         return region
     }
     
+    func setUpBeaconRegion() {
+        let mUUID = UUID(uuidString: Constants.Beacon.uuidStr)!
+        let majorInt = Int(Constants.Beacon.major, radix: 16)!
+        let minorInt = Int(Constants.Beacon.minor, radix: 16)!
+        
+        beaconRegion = CLBeaconRegion(proximityUUID: mUUID, major: CLBeaconMajorValue(majorInt), minor: CLBeaconMinorValue(minorInt), identifier: "MyBeacon")
+    }
+    
     func requestAlwaysAuthorization() {
         cllManager.requestAlwaysAuthorization()
     }
@@ -39,9 +49,36 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func startMonitoring() {
         cllManager.startMonitoring(for: getRegion())    }
     
+    func startBeaconMonitoring() {
+        cllManager.startRangingBeacons(in: beaconRegion)
+        
+    }
+    
+    func stopBeaconMonitoring() {
+        cllManager.stopRangingBeacons(in: beaconRegion)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        for beacon in beacons {
+            if (beacon.proximityUUID.uuidString == beaconRegion.proximityUUID.uuidString) {
+                print("My beacon found!")
+                stopBeaconMonitoring()
+                break
+            }
+        }
+        
+    }
+    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if (status == .authorizedAlways || status == .authorizedWhenInUse) {
             startMonitoring()
+            if(CLLocationManager.isMonitoringAvailable(for: CLBeaconRegion.self)){
+                if(CLLocationManager.isRangingAvailable()){
+                    setUpBeaconRegion()
+                    startBeaconMonitoring()
+                }
+            }
+            
         }
     }
     

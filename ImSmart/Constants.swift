@@ -178,6 +178,12 @@ struct Constants {
         static let radius                   = 1.0
     }
     
+    struct Beacon {
+        static let uuidStr                  = "135A1D6C-0B9F-482A-9944-33E230D8AF05"
+        static let major                    = "0001"
+        static let minor                    = "0001"
+    }
+    
     struct HttpStatusCode {
         //    2XX Sucess
         
