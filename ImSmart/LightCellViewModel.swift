@@ -27,9 +27,9 @@ class LightCellViewModel {
         self.light                  = light
         
         self.lightViewModel         = lightViewModel
-        self.isOn                   = Variable<Bool>(self.light.isOn)
-        self.brightness             = Variable<Int>(self.light.brightness)
-        self.area                   = Variable<String>(self.light.area!)
+        self.isOn                   = Variable<Bool>(self.light.isOn        ?? false)
+        self.brightness             = Variable<Int>(self.light.brightness   ?? 0)
+        self.area                   = Variable<String>(self.light.area      ?? "")
         
         bindRx()
     }

@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class AirConditionerCellViewModel {
-    private var airConditioner                  : AirConditionerModel!
+    var airConditioner                          : AirConditionerModel!
     private weak var airConditionerViewModel    : AirConditionerViewModel!
     
     var isOn        : Variable<Bool>!
@@ -19,7 +19,7 @@ class AirConditionerCellViewModel {
     var mode        : Variable<String>!
     var temperature : Variable<Double>!
     var isTimerOn   : Variable<Bool>!
-    var offTime     : Variable<NSDate>!
+    var offTime     : Variable<String>!
     var area        : Variable<String>!
     
     private var isReceiving     = false
@@ -30,14 +30,14 @@ class AirConditionerCellViewModel {
         self.airConditioner             = airConditioner
         
         self.airConditionerViewModel    = airConditionerViewModel
-        self.isOn                       = Variable<Bool>(self.airConditioner.isOn)
-        self.fanSpeed                   = Variable<String>(self.airConditioner.fanSpeed)
-        self.swing                      = Variable<String>(self.airConditioner.swing)
-        self.mode                       = Variable<String>(self.airConditioner.mode)
-        self.temperature                = Variable<Double>(self.airConditioner.temperature)
-        self.isTimerOn                  = Variable<Bool>(self.airConditioner.isTimerOn)
-        self.offTime                    = Variable<NSDate>(self.airConditioner.offTime)
-        self.area                       = Variable<String>(self.airConditioner.area)
+        self.isOn                       = Variable<Bool>(self.airConditioner.isOn           ?? false)
+        self.fanSpeed                   = Variable<String>(self.airConditioner.fanSpeed     ?? "")
+        self.swing                      = Variable<String>(self.airConditioner.swing        ?? "")
+        self.mode                       = Variable<String>(self.airConditioner.mode         ?? "")
+        self.temperature                = Variable<Double>(self.airConditioner.temperature  ?? -100)
+        self.isTimerOn                  = Variable<Bool>(self.airConditioner.isTimerOn      ?? false)
+        self.offTime                    = Variable<String>(self.airConditioner.offTime      ?? "00:00")
+        self.area                       = Variable<String>(self.airConditioner.area!)
         
         bindRx()
     }

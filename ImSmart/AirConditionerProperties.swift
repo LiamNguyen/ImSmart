@@ -23,7 +23,7 @@ extension AirConditioner {
     @NSManaged public var mode          : String?
     @NSManaged public var temperature   : Double
     @NSManaged public var isTimerOn     : Bool
-    @NSManaged public var offTime       : NSDate?
+    @NSManaged public var offTime       : String?
     @NSManaged public var area          : String?
 
 }

@@ -21,11 +21,19 @@ class CoreDataAirConditionerOperations {
         self.context        = appDelegate.persistentContainer.viewContext
     }
     
-    func storeAirConditioners(airConditioners: [AirConditionerViewModel]) {
+    func storeAirConditioners(airConditioners: [AirConditionerCellViewModel]) {
         clearAirConditioners()
         let _ = airConditioners.map { currentAirCon in
             let rollBackAirCon          = AirConditioner(context: self.context!)
-            //STORE TO CORE DATA
+            
+            rollBackAirCon.isOn         = currentAirCon.isOn.value
+            rollBackAirCon.fanSpeed     = currentAirCon.fanSpeed.value
+            rollBackAirCon.swing        = currentAirCon.swing.value
+            rollBackAirCon.mode         = currentAirCon.mode.value
+            rollBackAirCon.temperature  = currentAirCon.temperature.value
+            rollBackAirCon.isTimerOn    = currentAirCon.isTimerOn.value
+            rollBackAirCon.offTime      = currentAirCon.offTime.value
+            rollBackAirCon.area         = currentAirCon.area.value
             self.appDelegate.saveContext()
         }
         self.printAirConditionersFromCoreData()

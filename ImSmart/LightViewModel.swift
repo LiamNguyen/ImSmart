@@ -145,15 +145,15 @@ class LightViewModel {
     
     func getAllLights() {
         RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] (allLights, error) in
-            if !error.isEmpty {
+            if let _ = error {
                 self?.isHavingServerError.value = true
                 return
             }
-            guard let _ = self?.parseJSONToLightCellViewModel(json: allLights) else {
-                print("ERROR: Self is nil")
-                return
-            }
-            self?.allLights.value               = self!.parseJSONToLightCellViewModel(json: allLights)
+            
+            self?.allLights.value = allLights.map({ light -> LightCellViewModel in
+                return LightCellViewModel(light: light, lightViewModel: self!)
+            })
+            
             self?.isHavingServerError.value     = false
             if self!.isFirstTimeGetLights.value {
                 self?.isFirstTimeGetLights.value = false
@@ -172,23 +172,6 @@ class LightViewModel {
                     "area"      : lightCellViewModel.area.value
                 ]
             })
-    }
-    
-    //** Mark: PARSE JSON TO MODEL AND RETURN ARRAY OF LIGHTS
-    
-    private func parseJSONToLightCellViewModel(json: NSArray) -> [LightCellViewModel] {
-        let receivedAllLights = json.map({ item -> LightCellViewModel in
-            let dictionary = item as? NSDictionary
-            let light = LightModel(
-                id          : dictionary?["Id"]         as? Int     ?? 0,
-                isOn        : dictionary?["IsOn"]       as? Bool    ?? false,
-                brightness  : dictionary?["Brightness"] as? Int     ?? 0,
-                area        : dictionary?["Area"]       as? String  ?? ""
-            )
-            
-            return LightCellViewModel(light: light, lightViewModel: self)
-        })
-        return receivedAllLights
     }
     
     //** Mark: PARSE LIGHTS FROM CORE DATA TO MODEL AND RETURN ARRAY OF LIGHTS
