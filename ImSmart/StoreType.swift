@@ -11,11 +11,11 @@ import Foundation
 protocol StoreType {
 //    **MARK: LIGHTS
     
-    func getAllLights(completionHandler: @escaping (_ allLights: [LightModel], _ error: String?) -> Void) -> Void
-    func updateAllLights(lights: String, completionHandler: @escaping (_ success: Bool) -> Void) -> Void
+    func getAllLights(_ completionHandler: @escaping (_ allLights: [LightModel], _ error: String?) -> Void) -> Void
+    func updateAllLights(_ lights: String, completionHandler: @escaping (_ success: Bool) -> Void) -> Void
     
 //    **MARK: AIR CONDITIONERS
     
-    func getAllAirConditioners(completionHandler: @escaping (_ allAirConditioner: [AirConditionerModel], _ error: String?) -> Void) -> Void
-    func updateAllAirConditioners(allAirConditioners: String, completionHandler: @escaping (_ success: Bool) -> Void) -> Void
+    func getAllAirConditioners(_ completionHandler: @escaping (_ allAirConditioner: [AirConditionerModel], _ error: String?) -> Void) -> Void
+    func updateAllAirConditioners(_ allAirConditioners: String, completionHandler: @escaping (_ success: Bool) -> Void) -> Void
 }

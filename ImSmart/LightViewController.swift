@@ -19,10 +19,10 @@ class LightViewController: UIViewController {
     @IBOutlet fileprivate weak var lightsSelectionButton                : UIBarButtonItem!
     @IBOutlet fileprivate weak var bottomConstraintTableViewToSuperview : NSLayoutConstraint!
     
-    private var cancelSelectionView : UIView!
-    private var cancelButton        : UIButton!
-    private var refreshButton       : UIButton!
-    private var activityIndicator   : UIActivityIndicatorView!
+    fileprivate var cancelSelectionView : UIView!
+    fileprivate var cancelButton        : UIButton!
+    fileprivate var refreshButton       : UIButton!
+    fileprivate var activityIndicator   : UIActivityIndicatorView!
     
     fileprivate let disposalBag = DisposeBag()
 
@@ -55,7 +55,7 @@ class LightViewController: UIViewController {
         print("Light VC -> Dead")
     }
    
-    private func bindRxCellForRowAtIndexPath() {
+    fileprivate func bindRxCellForRowAtIndexPath() {
 //        The same as cellForRowAtIndexPath
         lightViewModel.allLights.asObservable()
             .bindTo(
@@ -70,7 +70,7 @@ class LightViewController: UIViewController {
         }.addDisposableTo(disposalBag)
     }
     
-    private func bindRxDidSelectRowAtIndexPath() {
+    fileprivate func bindRxDidSelectRowAtIndexPath() {
 //        The same as didSelectRowAtIndexPath
         lightsTableView
             .rx
@@ -82,13 +82,13 @@ class LightViewController: UIViewController {
                 }
                 
                 self?.handleCellSelection(
-                    selectedLightCellViewModel: selectedLightCellViewModel,
+                    selectedLightCellViewModel,
                     selectedRowIndexPath: (self?.lightsTableView.indexPathForSelectedRow!)!
                 )
             }).addDisposableTo(disposalBag)
     }
     
-    private func bindRxDidDeselectRowAtIndexPath() {
+    fileprivate func bindRxDidDeselectRowAtIndexPath() {
         lightsTableView
             .rx
             .modelDeselected(LightCellViewModel.self)
@@ -98,12 +98,12 @@ class LightViewController: UIViewController {
             }).addDisposableTo(disposalBag)
     }
     
-    private func bindRxObserver() {
+    fileprivate func bindRxObserver() {
         
         lightViewModel.isFirstTimeGetLights.asObservable()
             .subscribe(onNext: { [weak self] isFirstTimeGetLights in
                 if !isFirstTimeGetLights {
-                    UIFunctionality.applySmoothAnimation(elementToBeSmooth: (self?.lightsTableView)!)
+                    UIFunctionality.applySmoothAnimation((self?.lightsTableView)!)
                 }
             }).addDisposableTo(disposalBag)
         
@@ -206,7 +206,7 @@ class LightViewController: UIViewController {
             }).addDisposableTo(disposalBag)
     }
     
-    private func bindRxAction() {
+    fileprivate func bindRxAction() {
         lightsSelectionButton
             .rx
             .tap
@@ -232,21 +232,21 @@ class LightViewController: UIViewController {
     
 //** Mark: SUPPORT FUNCTIONS
     
-    private func handleBarButtonAction() {
+    fileprivate func handleBarButtonAction() {
         if !lightViewModel.requireCellShake.value {
             self.lightViewModel.requireCellShake.value = true
         } else {
             DispatchQueue.main.async {
-                CoreDataLightOperations.sharedInstance.storeLights(lights: self.lightViewModel.allLights.value)
+                CoreDataLightOperations.sharedInstance.storeLights(self.lightViewModel.allLights.value)
                 self.performSegue(withIdentifier: Constants.Lights.SegueIdentifier.toBrightnessVC, sender: self)
             }
         }
     }
     
-    private func handleCellSelection(selectedLightCellViewModel: LightCellViewModel, selectedRowIndexPath: IndexPath) {
+    fileprivate func handleCellSelection(_ selectedLightCellViewModel: LightCellViewModel, selectedRowIndexPath: IndexPath) {
         DispatchQueue.main.async {
             if !self.lightViewModel.requireCellShake.value {
-                CoreDataLightOperations.sharedInstance.storeLights(lights: self.lightViewModel.allLights.value)
+                CoreDataLightOperations.sharedInstance.storeLights(self.lightViewModel.allLights.value)
                 self.lightsTableView.deselectRow(at: selectedRowIndexPath, animated: true)
                 selectedLightCellViewModel.isOn.value = !selectedLightCellViewModel.isOn.value
                 self.lightsTableView.reloadRows(at: [selectedRowIndexPath], with: .fade)
@@ -257,7 +257,7 @@ class LightViewController: UIViewController {
         }
     }
     
-    private func customizeAppearance() {
+    fileprivate func customizeAppearance() {
         self.navigationItem.title       = Constants.Lights.View.title
         self.lightsTableView.isHidden   = true
         drawCancelSelectionView()
@@ -268,7 +268,7 @@ class LightViewController: UIViewController {
     
 //** Mark: DRAWING CANCEL BUTTON
     
-    private func drawCancelButton() {
+    fileprivate func drawCancelButton() {
         let cancelButtonImage    = UIImage(named: Constants.Home.View.cancelButton)?.cgImage
         
         self.cancelButton        = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -283,7 +283,7 @@ class LightViewController: UIViewController {
     
 //** Mark: DRAWING CANCEL SELECTION VIEW
     
-    private func drawCancelSelectionView() {
+    fileprivate func drawCancelSelectionView() {
         self.cancelSelectionView        = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60))
         
         self.cancelSelectionView.center = CGPoint(
@@ -298,7 +298,7 @@ class LightViewController: UIViewController {
     
 //** Mark: DRAWING ACTIVITY INDICATOR VIEW
     
-    private func drawActivityIndicatorView() {
+    fileprivate func drawActivityIndicatorView() {
         self.activityIndicator                          = UIActivityIndicatorView()
         
         activityIndicator.hidesWhenStopped              = true
@@ -314,7 +314,7 @@ class LightViewController: UIViewController {
     
 //** Mark: DRAWING REFRESH BUTTON
     
-    private func drawRefreshButton() {
+    fileprivate func drawRefreshButton() {
         let refreshButtonImage              = UIImage(named: Constants.Lights.View.refreshIcon)?.cgImage
         
         self.refreshButton                  = UIButton()

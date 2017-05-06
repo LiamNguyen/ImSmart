@@ -12,32 +12,32 @@ import RxCocoa
 import SnapKit
 
 class AirConditionerViewController: UIViewController {
-    private var airConditionerViewModel: AirConditionerViewModel!
+    fileprivate var airConditionerViewModel: AirConditionerViewModel!
     
-    @IBOutlet private weak var view_AdjustTemperature   : UIView!
-    @IBOutlet private weak var btn_Mode                 : UIButton!
-    @IBOutlet private weak var btn_FanSpeed             : UIButton!
-    @IBOutlet private weak var btn_Swing                : UIButton!
+    @IBOutlet fileprivate weak var view_AdjustTemperature   : UIView!
+    @IBOutlet fileprivate weak var btn_Mode                 : UIButton!
+    @IBOutlet fileprivate weak var btn_FanSpeed             : UIButton!
+    @IBOutlet fileprivate weak var btn_Swing                : UIButton!
     
-    private var topBar                  : UIView!
-    private var backIcon                : UIButton!
-    private var backButton              : UIButton!
-    private var modeSelectionView       : UIView!
-    private var fanSpeedSelectionView   : UIView!
-    private var swingSelectionView      : UIView!
-    private var coolModeButton          : UIButton!
-    private var autoModeButton          : UIButton!
-    private var dryModeButton           : UIButton!
-    private var easyModeButton          : UIButton!
-    private var lowFanSpeedButton       : UIButton!
-    private var mediumFanSpeedButton    : UIButton!
-    private var highFanSpeedButton      : UIButton!
-    private var leftSwingButton         : UIButton!
-    private var middleSwingButton       : UIButton!
-    private var rightSwingButton        : UIButton!
-    private var autoSwingButton         : UIButton!
+    fileprivate var topBar                  : UIView!
+    fileprivate var backIcon                : UIButton!
+    fileprivate var backButton              : UIButton!
+    fileprivate var modeSelectionView       : UIView!
+    fileprivate var fanSpeedSelectionView   : UIView!
+    fileprivate var swingSelectionView      : UIView!
+    fileprivate var coolModeButton          : UIButton!
+    fileprivate var autoModeButton          : UIButton!
+    fileprivate var dryModeButton           : UIButton!
+    fileprivate var easyModeButton          : UIButton!
+    fileprivate var lowFanSpeedButton       : UIButton!
+    fileprivate var mediumFanSpeedButton    : UIButton!
+    fileprivate var highFanSpeedButton      : UIButton!
+    fileprivate var leftSwingButton         : UIButton!
+    fileprivate var middleSwingButton       : UIButton!
+    fileprivate var rightSwingButton        : UIButton!
+    fileprivate var autoSwingButton         : UIButton!
     
-    private let disposalBag             = DisposeBag()
+    fileprivate let disposalBag             = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,11 +82,11 @@ class AirConditionerViewController: UIViewController {
         print("Air Con VC -> Dead")
     }
     
-    private func bindRxObserver() {
+    fileprivate func bindRxObserver() {
         
     }
     
-    private func bindRxActions() {
+    fileprivate func bindRxActions() {
         self.backButton
             .rx
             .tap
@@ -174,7 +174,7 @@ class AirConditionerViewController: UIViewController {
         }
     }
     
-    private func customizeAppearance() {
+    fileprivate func customizeAppearance() {
         drawTopBar()
         drawModeSelectionView()
         drawFanSpeedSelectionView()
@@ -183,7 +183,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING TOP BAR
     
-    private func drawTopBar() {
+    fileprivate func drawTopBar() {
         self.topBar = UIView()
         
         topBar.backgroundColor  = Theme.customBackgroundColor
@@ -205,7 +205,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING BACK ICON
 
-    private func drawBackIcon() {
+    fileprivate func drawBackIcon() {
         let backIconImage       = UIImage(named: Constants.AirConditioner.View.backIcon)?.cgImage
         
         self.backIcon           = UIButton()
@@ -223,7 +223,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING BACK BUTTON
 
-    private func drawBackButton() {
+    fileprivate func drawBackButton() {
         self.backButton = UIButton()
         
         backButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
@@ -242,7 +242,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING AREA TITLE
     
-    private func drawAreaTitle() {
+    fileprivate func drawAreaTitle() {
         let title           = UILabel()
         
         title.font          = UIFont.systemFont(ofSize: 22, weight: UIFontWeightBold)
@@ -260,7 +260,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING MODE SELECTION VIEW
     
-    private func drawModeSelectionView() {
+    fileprivate func drawModeSelectionView() {
         self.modeSelectionView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.modeSelectionView.center = CGPoint(
             x: Int(Constants.Window.screenWidth / 2 - 97),
@@ -271,7 +271,7 @@ class AirConditionerViewController: UIViewController {
         modeSelectionView.layer.borderWidth     = 3
         modeSelectionView.layer.borderColor     = UIColor.white.cgColor
         modeSelectionView.layer.cornerRadius    = 5
-        UIFunctionality.applyShadow(toView: modeSelectionView, withColor: UIColor.black)
+        UIFunctionality.applyShadow(modeSelectionView, withColor: UIColor.black)
         
         self.view.addSubview(modeSelectionView)
         
@@ -283,7 +283,7 @@ class AirConditionerViewController: UIViewController {
 
 //** Mark: DRAWING MODE OPTIONS: Cool
 
-    private func drawCoolMode() {
+    fileprivate func drawCoolMode() {
         
         let coolModeImage               = UIImage(named: Constants.AirConditioner.View.snowFlake)?.cgImage
         
@@ -296,7 +296,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING MODE OPTIONS: Cool
     
-    private func drawAutoMode() {
+    fileprivate func drawAutoMode() {
         
         let autoModeImage               = UIImage(named: Constants.AirConditioner.View.standFanIcon)?.cgImage
         
@@ -309,7 +309,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING MODE OPTIONS: Cool
     
-    private func drawDryMode() {
+    fileprivate func drawDryMode() {
         
         let dryModeImage               = UIImage(named: Constants.AirConditioner.View.sunIcon)?.cgImage
         
@@ -322,7 +322,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING MODE OPTIONS: Cool
     
-    private func drawEasyMode() {
+    fileprivate func drawEasyMode() {
         
         let easyModeImage               = UIImage(named: Constants.AirConditioner.View.tearDropIcon)?.cgImage
         
@@ -335,7 +335,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: COLLAPSE MODE SELECTION VIEW
     
-    private func collapseModeSelectionView() {
+    fileprivate func collapseModeSelectionView() {
         UIView.animate(withDuration: 0.5) {
             self.modeSelectionView.frame.size.width     = 0
             self.modeSelectionView.frame.size.height    = 0
@@ -358,7 +358,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING FAN SPEED SELECTION VIEW
     
-    private func drawFanSpeedSelectionView() {
+    fileprivate func drawFanSpeedSelectionView() {
         self.fanSpeedSelectionView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.fanSpeedSelectionView.center = CGPoint(
             x: Int(Constants.Window.screenWidth / 2 - 68),
@@ -369,7 +369,7 @@ class AirConditionerViewController: UIViewController {
         fanSpeedSelectionView.layer.borderWidth     = 3
         fanSpeedSelectionView.layer.borderColor     = UIColor.white.cgColor
         fanSpeedSelectionView.layer.cornerRadius    = 5
-        UIFunctionality.applyShadow(toView: fanSpeedSelectionView, withColor: UIColor.black)
+        UIFunctionality.applyShadow(fanSpeedSelectionView, withColor: UIColor.black)
         
         self.view.addSubview(fanSpeedSelectionView)
         
@@ -380,7 +380,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING HIGH FAN SPEED BUTTON
 
-    private func drawHighFanSpeedButton() {
+    fileprivate func drawHighFanSpeedButton() {
         self.highFanSpeedButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.highFanSpeedButton.center      = CGPoint(x: 15, y: 5)
         
@@ -393,7 +393,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING MEDIUM FAN SPEED BUTTON
     
-    private func drawMediumFanSpeedButton() {
+    fileprivate func drawMediumFanSpeedButton() {
         self.mediumFanSpeedButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.mediumFanSpeedButton.center      = CGPoint(x: 75, y: 5)
         
@@ -406,7 +406,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING LOW FAN SPEED BUTTON
     
-    private func drawLowFanSpeedButton() {
+    fileprivate func drawLowFanSpeedButton() {
         self.lowFanSpeedButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.lowFanSpeedButton.center      = CGPoint(x: 170, y: 5)
         
@@ -439,7 +439,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING SWING SELECTION VIEW
     
-    private func drawSwingSelectionView() {
+    fileprivate func drawSwingSelectionView() {
         self.swingSelectionView = UIView(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.swingSelectionView.center = CGPoint(
             x: Int(Constants.Window.screenWidth / 2 - 133),
@@ -450,7 +450,7 @@ class AirConditionerViewController: UIViewController {
         swingSelectionView.layer.borderWidth     = 3
         swingSelectionView.layer.borderColor     = UIColor.white.cgColor
         swingSelectionView.layer.cornerRadius    = 5
-        UIFunctionality.applyShadow(toView: swingSelectionView, withColor: UIColor.black)
+        UIFunctionality.applyShadow(swingSelectionView, withColor: UIColor.black)
         
         self.view.addSubview(swingSelectionView)
         
@@ -462,7 +462,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING LEFT SWING BUTTON
     
-    private func drawLeftSwingButton() {
+    fileprivate func drawLeftSwingButton() {
         self.leftSwingButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.leftSwingButton.center      = CGPoint(x: 10, y: 5)
         
@@ -475,7 +475,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING MIDDLE SWING BUTTON
     
-    private func drawMiddleSwingButton() {
+    fileprivate func drawMiddleSwingButton() {
         self.middleSwingButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.middleSwingButton.center      = CGPoint(x: 70, y: 5)
         middleSwingButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
@@ -487,7 +487,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING RIGHT SWING BUTTON
     
-    private func drawRightSwingButton() {
+    fileprivate func drawRightSwingButton() {
         self.rightSwingButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.rightSwingButton.center      = CGPoint(x: 133, y: 5)
         rightSwingButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
@@ -499,7 +499,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: DRAWING AUTO SWING BUTTON
     
-    private func drawAutoSwingButton() {
+    fileprivate func drawAutoSwingButton() {
         self.autoSwingButton = UIButton(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         self.autoSwingButton.center      = CGPoint(x: 205, y: 5)
         autoSwingButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
@@ -511,7 +511,7 @@ class AirConditionerViewController: UIViewController {
     
 //** Mark: COLLAPSE SWING SELECTION VIEW
     
-    private func collapseSwingSelectionView() {
+    fileprivate func collapseSwingSelectionView() {
         UIView.animate(withDuration: 0.5) {
             self.swingSelectionView.frame.size.width     = 0
             self.swingSelectionView.frame.size.height    = 0

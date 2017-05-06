@@ -12,8 +12,8 @@ import CoreData
 
 extension AirConditioner {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<AirConditioner> {
-        return NSFetchRequest<AirConditioner>(entityName: "AirConditioner")
+    @nonobjc open override class func fetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
+        return NSFetchRequest<AirConditioner>(entityName: "AirConditioner") as! NSFetchRequest<NSFetchRequestResult>
     }
 
     @NSManaged public var id            : Int16

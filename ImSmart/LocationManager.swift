@@ -13,9 +13,9 @@ import UIKit
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     static let shared       = LocationManager()
-    private var cllManager  : CLLocationManager
+    fileprivate var cllManager  : CLLocationManager
     
-    private override init() {
+    fileprivate override init() {
         cllManager = CLLocationManager()
         super.init()
         cllManager.delegate = self
@@ -47,7 +47,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didEnterRegion region: CLRegion) {
         notifyRegionChanged(
-            identifier: Constants.UserNotification.EnterRegion.identifier,
+            Constants.UserNotification.EnterRegion.identifier,
             title: Constants.UserNotification.EnterRegion.title,
             body: Constants.UserNotification.EnterRegion.body
         )
@@ -55,31 +55,31 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didExitRegion region: CLRegion) {
         notifyRegionChanged(
-            identifier: Constants.UserNotification.ExitRegion.identifier,
+            Constants.UserNotification.ExitRegion.identifier,
             title: Constants.UserNotification.ExitRegion.title,
             body: Constants.UserNotification.ExitRegion.body
         )
     }
 
-    private func notifyRegionChanged(identifier: String, title: String, body: String) {
+    fileprivate func notifyRegionChanged(_ identifier: String, title: String, body: String) {
         let appState = UIApplication.shared.applicationState
         if appState == .background {
-            showNotification(identifier: identifier, title: title, body: body)
+            showNotification(identifier, title: title, body: body)
         } else {
-            showOnScreenNotification(identifier: identifier)
+            showOnScreenNotification(identifier)
         }
     }
     
-    private func showNotification(identifier: String, title: String, body: String) {
+    fileprivate func showNotification(_ identifier: String, title: String, body: String) {
 //        if #available(iOS 10.0, *) {
 //            addRequestNotification(request: getNotificationRequest(identifier: identifier, title: title, body: body))
 //        } else {
 //            addRequestNotification(title: title, body: body)
 //        }
-        addRequestNotification(request: getNotificationRequest(identifier: identifier, title: title, body: body))
+        addRequestNotification(getNotificationRequest(identifier, title: title, body: body))
     }
     
-    private func showOnScreenNotification(identifier: String) {
+    fileprivate func showOnScreenNotification(_ identifier: String) {
             let title = identifier == Constants.UserNotification.EnterRegion.identifier ? Constants.UserNotification.EnterRegion.title : Constants.UserNotification.ExitRegion.title
             let body = identifier == Constants.UserNotification.EnterRegion.identifier ? Constants.UserNotification.EnterRegion.body : Constants.UserNotification.ExitRegion.body
         
@@ -104,7 +104,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
 //        UIApplication.shared.scheduleLocalNotification(notification)
 //    }
     
-    private func addRequestNotification(request: UNNotificationRequest) {
+    fileprivate func addRequestNotification(_ request: UNNotificationRequest) {
         UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
         UNUserNotificationCenter.current().add(request, withCompletionHandler: { (error) in
             if let error = error {
@@ -114,7 +114,7 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     @available(iOS 10.0, *)
-    private func getNotificationRequest(identifier: String, title: String, body: String) -> UNNotificationRequest {
+    fileprivate func getNotificationRequest(_ identifier: String, title: String, body: String) -> UNNotificationRequest {
         let content = UNMutableNotificationContent()
         content.title = title
         content.body = body

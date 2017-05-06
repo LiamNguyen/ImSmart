@@ -22,9 +22,9 @@ class AirConditionerViewModel {
     var allAirConditioners              : Variable<[AirConditionerCellViewModel]>!
     var currentAirConditioner           : Variable<AirConditionerCellViewModel>!
     
-    private let disposalBag: DisposeBag = DisposeBag()
+    fileprivate let disposalBag: DisposeBag = DisposeBag()
     
-    private var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    fileprivate var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init() {
         self.allAirConditioners     = Variable([AirConditionerCellViewModel]())

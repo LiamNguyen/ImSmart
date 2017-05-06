@@ -19,7 +19,7 @@ class LightCellViewModelTests: XCTestCase {
     
     var brightnessValue: UIColor!
     
-    private let disposalBag = DisposeBag()
+    fileprivate let disposalBag = DisposeBag()
     
     override func setUp() {
         super.setUp()

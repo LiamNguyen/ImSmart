@@ -11,12 +11,12 @@ import RxSwift
 
 class LightsTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var lightImageView: UIImageView!
-    @IBOutlet private weak var areaLabel: UILabel!
-    @IBOutlet private weak var brightnessLabel: UILabel!
-    @IBOutlet private weak var cellBackground: UIView!
+    @IBOutlet fileprivate weak var lightImageView: UIImageView!
+    @IBOutlet fileprivate weak var areaLabel: UILabel!
+    @IBOutlet fileprivate weak var brightnessLabel: UILabel!
+    @IBOutlet fileprivate weak var cellBackground: UIView!
     
-    private let disposalBag = DisposeBag()
+    fileprivate let disposalBag = DisposeBag()
     
     var viewModel: LightCellViewModel? {
         didSet {
@@ -36,7 +36,7 @@ class LightsTableViewCell: UITableViewCell {
             lightCellViewModel.cellMustShake.asObservable()
                 .subscribe(onNext: { [weak self] cellMustShake in
                     if cellMustShake {
-                        UIFunctionality.applyShakyAnimation(elementToBeShake: (self?.cellBackground)!, duration: 0.15)
+                        UIFunctionality.applyShakyAnimation((self?.cellBackground)!, duration: 0.15)
                     } else {
                         self?.cellBackground.layer.removeAllAnimations()
                     }

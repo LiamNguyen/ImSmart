@@ -10,8 +10,8 @@ import Foundation
 import RxSwift
 
 class LightCellViewModel {
-    private var light               : LightModel!
-    private weak var lightViewModel : LightViewModel!
+    fileprivate var light               : LightModel!
+    fileprivate weak var lightViewModel : LightViewModel!
     
     var isOn          : Variable<Bool>!
     var brightness    : Variable<Int>!
@@ -19,9 +19,9 @@ class LightCellViewModel {
     
     var cellMustShake : Observable<Bool>!
 
-    private var isReceiving     = false
-    private var isRollingBack   = false
-    private let disposalBag     = DisposeBag()
+    fileprivate var isReceiving     = false
+    fileprivate var isRollingBack   = false
+    fileprivate let disposalBag     = DisposeBag()
     
     init(light: LightModel, lightViewModel: LightViewModel) {
         self.light                  = light
@@ -36,7 +36,7 @@ class LightCellViewModel {
     
     init() {}
     
-    private func bindRx() {
+    fileprivate func bindRx() {
         isOn.asObservable()
             .subscribe(onNext: { [weak self] isOn in
                 self?.light.isOn = isOn

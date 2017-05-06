@@ -1,3 +1,4 @@
+
 //
 //  HomeViewModel.swift
 //  ImSmart
@@ -27,13 +28,13 @@ class HomeViewModel{
     var menuViewOriginXObserver             : Observable<Float>!
     var activityIndicatorShouldSpin         : Observable<Bool>!
     
-    private var disposalBag                 = DisposeBag()
+    fileprivate var disposalBag                 = DisposeBag()
     
     init() {
         bindRx()
     }
     
-    private func bindRx() {
+    fileprivate func bindRx() {
         brandLogoOriginXObserver = isMainButtonShown.asObservable()
             .map ({ isMainButtonShown in
                 return isMainButtonShown ? Constants.Window.screenWidth / 2 : -(Constants.Window.screenWidth)
@@ -56,22 +57,22 @@ class HomeViewModel{
         
         lightsButtonPositionObserver = isMainButtonShown.asObservable()
             .map({ isMainButtonShown in
-                return isMainButtonShown ? self.buttonsCoordinate(position: .Origin) : self.buttonsCoordinate(buttonType: .Light)
+                return isMainButtonShown ? self.buttonsCoordinate(position: .origin) : self.buttonsCoordinate(.light)
             })
         
         airConditionerPositionObserver = isMainButtonShown.asObservable()
             .map({ isMainButtonShown in
-                return isMainButtonShown ? self.buttonsCoordinate(position: .Origin) : self.buttonsCoordinate(buttonType: .AirConditioner)
+                return isMainButtonShown ? self.buttonsCoordinate(position: .origin) : self.buttonsCoordinate(.airConditioner)
             })
         
         shoppingCartButtonPositionObserver = isMainButtonShown.asObservable()
             .map({ isMainButtonShown in
-                return isMainButtonShown ? self.buttonsCoordinate(position: .Origin) : self.buttonsCoordinate(buttonType: .ShoppingCart)
+                return isMainButtonShown ? self.buttonsCoordinate(position: .origin) : self.buttonsCoordinate(.shoppingCart)
             })
         
         fridgeButtonPositionObserver = isMainButtonShown.asObservable()
             .map({ isMainButtonShown in
-                return isMainButtonShown ? self.buttonsCoordinate(position: .Origin) : self.buttonsCoordinate(buttonType: .Fridge)
+                return isMainButtonShown ? self.buttonsCoordinate(position: .origin) : self.buttonsCoordinate(.fridge)
             })
         
         connectionsLabelObserver = SocketIOManager.sharedInstance.isDeviceConnectedToSocket.asObservable()
@@ -91,29 +92,29 @@ class HomeViewModel{
         })
     }
     
-    private func buttonsCoordinate(buttonType: ButtonType = .Default, position: ButtonPosition = .Destination) -> (Float, Float) {
+    fileprivate func buttonsCoordinate(_ buttonType: ButtonType = .default, position: ButtonPosition = .destination) -> (Float, Float) {
         let screenWidth = Constants.Window.screenWidth
         let originCoordinate = (
             x: Float(screenWidth / 2),
             y: Float(Constants.Home.View.mainButtonPosition)
         )
         
-        if position == .Origin {
+        if position == .origin {
             return originCoordinate
         }
         
         switch buttonType {
-        case .Light:
+        case .light:
             return (
                 originCoordinate.x - 65,
                 originCoordinate.y - 65
             )
-        case .AirConditioner:
+        case .airConditioner:
             return (
                 originCoordinate.x + 65,
                 originCoordinate.y - 65
             )
-        case .ShoppingCart:
+        case .shoppingCart:
             return (
                 originCoordinate.x - 65,
                 originCoordinate.y + 65
@@ -126,16 +127,16 @@ class HomeViewModel{
         }
     }
     
-    private enum ButtonType {
-        case Light
-        case AirConditioner
-        case ShoppingCart
-        case Fridge
-        case Default
+    fileprivate enum ButtonType {
+        case light
+        case airConditioner
+        case shoppingCart
+        case fridge
+        case `default`
     }
     
-    private enum ButtonPosition {
-        case Origin
-        case Destination
+    fileprivate enum ButtonPosition {
+        case origin
+        case destination
     }
 }

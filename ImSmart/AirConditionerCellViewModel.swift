@@ -11,7 +11,7 @@ import RxSwift
 
 class AirConditionerCellViewModel {
     var airConditioner                          : AirConditionerModel!
-    private weak var airConditionerViewModel    : AirConditionerViewModel!
+    fileprivate weak var airConditionerViewModel    : AirConditionerViewModel!
     
     var isOn        : Variable<Bool>!
     var fanSpeed    : Variable<String>!
@@ -22,9 +22,9 @@ class AirConditionerCellViewModel {
     var offTime     : Variable<String>!
     var area        : Variable<String>!
     
-    private var isReceiving     = false
-    private var isRollingBack   = false
-    private let disposalBag     = DisposeBag()
+    fileprivate var isReceiving     = false
+    fileprivate var isRollingBack   = false
+    fileprivate let disposalBag     = DisposeBag()
     
     init(airConditioner: AirConditionerModel, airConditionerViewModel: AirConditionerViewModel) {
         self.airConditioner             = airConditioner
@@ -44,7 +44,7 @@ class AirConditionerCellViewModel {
     
     init() {}
     
-    private func bindRx() {
+    fileprivate func bindRx() {
         isOn.asObservable()
             .subscribe(onNext: { [weak self] isOn in
                 self?.airConditioner.isOn = isOn

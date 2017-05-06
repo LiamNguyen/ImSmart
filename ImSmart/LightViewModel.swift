@@ -33,9 +33,9 @@ class LightViewModel {
     var brightnessValue                     = Variable<Float>(0.0)
     var sampleLightBrightness               : Observable<UIColor>!
     
-    private let disposalBag                 = DisposeBag()
+    fileprivate let disposalBag                 = DisposeBag()
     
-    private var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    fileprivate var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init() {
         self.allLights      = Variable([LightCellViewModel]())
@@ -125,9 +125,9 @@ class LightViewModel {
                     return
                 }
                 let jsonObject = self!.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
-                let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
+                let jsonString = Helper.jsonStringify(jsonObject as AnyObject)
                 
-                RemoteStore.sharedInstance.updateAllLights(lights: jsonString, completionHandler: { [weak self] success in
+                RemoteStore.sharedInstance.updateAllLights(jsonString, completionHandler: { [weak self] success in
                     if success {
                         self?.isFailedToUpdate.value    = false
                         SocketIOManager.sharedInstance.requireUpdateLights()
@@ -144,7 +144,7 @@ class LightViewModel {
     }
     
     func getAllLights() {
-        RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] (allLights, error) in
+        RemoteStore.sharedInstance.getAllLights({ [weak self] (allLights, error) in
             if let _ = error {
                 self?.isHavingServerError.value = true
                 return

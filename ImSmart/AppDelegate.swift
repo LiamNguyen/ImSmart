@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var isFirstTimeBecomeActive = true
 
-    private func customizeAppearance() {
+    fileprivate func customizeAppearance() {
         if UIScreen.main.bounds.height > 736 { //Device is not iPhone
             Constants.Home.View.mainButtonPosition  = CGFloat(UIScreen.main.bounds.height - 420)
             Constants.Home.View.homeButtonSize      = (width: 60, height: 50)
@@ -125,7 +125,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func setupNotification() {
+    fileprivate func setupNotification() {
         if #available(iOS 10.0, *) {
             UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound])
             { (granted, error) in
@@ -142,7 +142,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    private func setupLocationManager() {
+    fileprivate func setupLocationManager() {
         switch CLLocationManager.authorizationStatus() {
             case .notDetermined:
                 LocationManager.shared.requestAlwaysAuthorization()

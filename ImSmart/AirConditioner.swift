@@ -10,6 +10,6 @@ import Foundation
 import CoreData
 
 @objc(AirConditioner)
-public class AirConditioner: NSManagedObject {
+open class AirConditioner: NSManagedObject {
 
 }

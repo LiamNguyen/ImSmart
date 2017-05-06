@@ -13,15 +13,15 @@ import UIKit
 class CoreDataLightOperations {
     static let sharedInstance = CoreDataLightOperations()
     
-    private let appDelegate : AppDelegate!
-    private var context     : NSManagedObjectContext?
+    fileprivate let appDelegate : AppDelegate!
+    fileprivate var context     : NSManagedObjectContext?
     
-    private init() {
+    fileprivate init() {
         self.appDelegate    = UIApplication.shared.delegate as! AppDelegate
         self.context        = appDelegate.persistentContainer.viewContext
     }
     
-    func storeLights(lights: [LightCellViewModel]) {
+    func storeLights(_ lights: [LightCellViewModel]) {
         clearLights()
         let _ = lights.map { currentLight in
             let rollbackLight           = Light(context: self.context!)
@@ -34,7 +34,7 @@ class CoreDataLightOperations {
         self.printLightsFromCoreData()
     }
 
-    private func clearLights() {
+    fileprivate func clearLights() {
         let lights = NSFetchRequest<NSFetchRequestResult>(entityName: "Light")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: lights)
         
@@ -54,7 +54,7 @@ class CoreDataLightOperations {
         }
     }
     
-    private func isLightsStored() -> Bool {
+    fileprivate func isLightsStored() -> Bool {
         do {
             return try context?.count(for: Light.fetchRequest()) == 0 ? false : true
         } catch let error {

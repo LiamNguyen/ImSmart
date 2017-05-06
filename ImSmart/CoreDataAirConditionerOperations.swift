@@ -13,15 +13,15 @@ import UIKit
 class CoreDataAirConditionerOperations {
     static let sharedInstance = CoreDataAirConditionerOperations()
     
-    private let appDelegate : AppDelegate!
-    private var context     : NSManagedObjectContext?
+    fileprivate let appDelegate : AppDelegate!
+    fileprivate var context     : NSManagedObjectContext?
     
-    private init() {
+    fileprivate init() {
         self.appDelegate    = UIApplication.shared.delegate as! AppDelegate
         self.context        = appDelegate.persistentContainer.viewContext
     }
     
-    func storeAirConditioners(airConditioners: [AirConditionerCellViewModel]) {
+    func storeAirConditioners(_ airConditioners: [AirConditionerCellViewModel]) {
         clearAirConditioners()
         let _ = airConditioners.map { currentAirCon in
             let rollBackAirCon          = AirConditioner(context: self.context!)
@@ -39,7 +39,7 @@ class CoreDataAirConditionerOperations {
         self.printAirConditionersFromCoreData()
     }
     
-    private func clearAirConditioners() {
+    fileprivate func clearAirConditioners() {
         let airConditioners = NSFetchRequest<NSFetchRequestResult>(entityName: "AirConditioner")
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: airConditioners)
         
@@ -59,7 +59,7 @@ class CoreDataAirConditionerOperations {
         }
     }
     
-    private func isAirConditionersStored() -> Bool {
+    fileprivate func isAirConditionersStored() -> Bool {
         do {
             return try context?.count(for: AirConditioner.fetchRequest()) == 0 ? false : true
         } catch let error {

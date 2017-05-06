@@ -11,8 +11,8 @@ import CoreData
 
 extension Light {
     
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Light> {
-        return NSFetchRequest<Light>(entityName: "Light")
+    @nonobjc public override class func fetchRequest() -> NSFetchRequest<NSFetchRequestResult> {
+        return NSFetchRequest<Light>(entityName: "Light") as! NSFetchRequest<NSFetchRequestResult>
     }
     
     @NSManaged public var area          : String?
