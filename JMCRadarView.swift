@@ -8,36 +8,12 @@
 
 import UIKit
 import CoreLocation
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-    switch (lhs, rhs) {
-    case let (l?, r?):
-        return l < r
-    case (nil, _?):
-        return true
-    default:
-        return false
-    }
-}
-
-// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
-// Consider refactoring the code to use the non-optional operators.
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-    switch (lhs, rhs) {
-    case let (l?, r?):
-        return l > r
-    default:
-        return rhs < lhs
-    }
-}
-
 
 public enum JMCRadarNotifications : String{
     case BeaconTapped
 }
 
-open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDelegate{
+public class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDelegate{
     
     var displayLinker: PWDisplayLinker!
     var tap : UITapGestureRecognizer!
@@ -54,7 +30,6 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
     /// Current selecter beacon
     var selectedBeacon: BeaconShape?
     
-    var shapeLayer: CAShapeLayer!
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -62,16 +37,15 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
         self.displayLinker = PWDisplayLinker(delegate: self)
         
         //Tap gesture
-        tap = UITapGestureRecognizer(target: self, action: #selector(JMCRadarView.handleTap(_:)))
+        tap = UITapGestureRecognizer(target: self, action: #selector(JMCRadarView.handleTap(sender:)))
         tap.delegate = self
-        self.addGestureRecognizer(tap)
         
         backgroundColor = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
         
     }
     
-    func handleTap(_ sender: UITapGestureRecognizer? = nil) {
-        print("Beacon tapped")
+    func handleTap(sender: UITapGestureRecognizer? = nil) {
+        print("tapped")
         if sender != nil{
             
             let point = sender!.location(in: self)
@@ -83,8 +57,7 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
                     if beacon.point.x <= point.x + 30 && beacon.point.x >= point.x - 30{
                         if beacon.point.y <= point.y + 30 && beacon.point.y >= point.y - 30{
                             self.selectedBeacon = beacon
-                            
-                            NotificationCenter.default.post(name: Notification.Name(rawValue: JMCRadarNotifications.BeaconTapped.rawValue), object: beacon.beacon)
+                            NotificationCenter.default.post(name: NotificationName, object: <#T##Any?#>)
                         }
                     }
                 }
@@ -93,37 +66,37 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
     }
     
     
-    open override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         
-        let center = CGPoint(x: self.bounds.width / 2, y: self.bounds.height / 2)
+        let center = CGPoint(x: self.bounds.width/2, y: self.bounds.height/2)
         
         // Draws the gradient effect
-        drawGradient(center, distance: .unknown)
+        drawGradient(center: center, distance: .unknown)
         
         // Draws the ranges for Unknown, Far, Near, Immediate
-        drawRange(center, distance: .unknown)
-        drawRange(center, distance: .far)
-        drawRange(center, distance: .near)
-        drawRange(center, distance: .immediate)
+        drawRange(center: center, distance: .unknown)
+        drawRange(center: center, distance: .far)
+        drawRange(center: center, distance: .near)
+        drawRange(center: center, distance: .immediate)
         
         
         // Draws the radar's scanner
-        drawRadarScanner(center)
+        drawRadarScanner(center: center)
         
         // Draws the radar's lines
-        drawLines(center, radius: self.bounds.width/2)
+        drawLines(center: center, radius: self.bounds.width/2)
         
         // Rotates the radar's scanner every 0.01 seconds
         Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(JMCRadarView.rotateRadar), userInfo: nil, repeats: true)
     }
     
-    func drawRadarScanner(_ center: CGPoint){
+    func drawRadarScanner(center: CGPoint){
         
         self.radarScannerShape = RadarScannerShape()
         
         // Calculates the angles
-        let startAngle = degreesToRad(radarScannerShape.nextStartAngle())
-        let endAngle = degreesToRad(radarScannerShape.nextEndAngle())
+        let startAngle = degreesToRad(degrees: radarScannerShape.nextStartAngle())
+        let endAngle = degreesToRad(degrees: radarScannerShape.nextEndAngle())
         
         //Draws the path
         let ovalPath = UIBezierPath()
@@ -147,15 +120,15 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
         
         self.radarScannerShape.shapeLayer.removeFromSuperlayer()
         
-        let startAngle = degreesToRad(radarScannerShape.nextStartAngle())
-        let endAngle = degreesToRad(radarScannerShape.nextEndAngle())
+        let startAngle = degreesToRad(degrees: radarScannerShape.nextStartAngle())
+        let endAngle = degreesToRad(degrees: radarScannerShape.nextEndAngle())
         
         let ovalPath = UIBezierPath()
         ovalPath.addArc(withCenter: CGPoint(x: center.x, y: center.y), radius: self.frame.width / 2, startAngle: startAngle, endAngle: endAngle, clockwise: true)
         ovalPath.addLine(to: CGPoint(x: center.x, y: center.y))
         ovalPath.close()
         
-        self.shapeLayer = CAShapeLayer()
+        let shapeLayer = CAShapeLayer()
         shapeLayer.path = ovalPath.cgPath
         shapeLayer.fillColor = UIColor(red: 0.291, green: 0.958, blue: 0.024, alpha: 0.265).cgColor
         shapeLayer.strokeColor = UIColor(red: 0.291, green: 0.958, blue: 0.024, alpha: 0.265).cgColor
@@ -167,42 +140,30 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
         self.layer.addSublayer(shapeLayer)
     }
     
-    func stopRotatingRadar() {
-        guard let _ = self.shapeLayer else {
-            return
-        }
-        self.shapeLayer.isHidden = true
+    func degreesToRad(degrees: CGFloat) -> CGFloat{
+        return degrees * CGFloat(M_PI / 180)
     }
     
-    func continueRotatingRadar() {
-        guard let _ = self.shapeLayer else {
-            return
-        }
-        self.shapeLayer.isHidden = false
-    }
-    
-    func degreesToRad(_ degrees: CGFloat) -> CGFloat{
-        return degrees * CGFloat(Float.pi / 180)
-    }
-    
-    func drawLines(_ center: CGPoint, radius: CGFloat){
+    func drawLines(center: CGPoint, radius: CGFloat){
         
         let lines = 12
-        
+    
         // Color Declarations
         let strokeColor = UIColor(red: 0.094, green: 0.717, blue: 0.013, alpha: 1.000)
         let fillColor = UIColor(red: 0.135, green: 1.000, blue: 0.025, alpha: 1.000)
         
         
         // For each line
-        for index in 0...lines {
+        for index in 0...lines
+        
+        {
             
             // calculates the line's degree ( 0 to 360)
             let degrees = ( 360.0 / CGFloat(lines) ) * CGFloat(index)
             
-            let t = degreesToRad(degrees)
+            let t = degreesToRad(degrees: degrees)
             
-            let border = calculateBorderPoint(radius, center: center, t: t)
+            let border = calculateBorderPoint(radius: radius, center: center, t: t)
             
             let path1 = UIBezierPath()
             path1.move(to: center)
@@ -227,7 +188,7 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
         }
     }
     
-    func drawGradient(_ center: CGPoint, distance: CLProximity){
+    func drawGradient(center: CGPoint, distance: CLProximity){
         
         var radius = CGFloat(self.bounds.width/2)
         let color = UIColor(red: 0.000, green: 0.000, blue: 0.000, alpha: 1.000)
@@ -244,7 +205,7 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
             //color = UIColor.redColor()
         }
         
-        let area = UIBezierPath(arcCenter: center, radius: radius, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        let area = UIBezierPath(arcCenter: center, radius: radius, startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
         
         area.close()
         
@@ -279,8 +240,8 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
         self.layer.addSublayer(gradient)
     }
     
-    
-    func drawRange(_ center: CGPoint, distance: CLProximity){
+       
+    func drawRange(center: CGPoint, distance: CLProximity){
         
         var radius = CGFloat(self.bounds.width/2)
         
@@ -293,14 +254,14 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
             radius -= radius * 0.75
         }
         
-        let area = UIBezierPath(arcCenter: center, radius: radius, startAngle: CGFloat(0), endAngle:CGFloat(Double.pi * 2), clockwise: true)
+        let area = UIBezierPath(arcCenter: center, radius: radius, startAngle: CGFloat(0), endAngle:CGFloat(M_PI * 2), clockwise: true)
         
         area.close()
         
         let shapeLayer = CAShapeLayer()
         shapeLayer.path = area.cgPath
         
-        
+     
         shapeLayer.fillColor = UIColor.clear.cgColor//color.CGColor
         shapeLayer.strokeColor = UIColor(red: 0.123, green: 0.939, blue: 0.021, alpha: 0.758).cgColor
         shapeLayer.lineWidth = 3.0
@@ -316,7 +277,7 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
         self.layer.addSublayer(shapeLayer)
     }
     
-    open func removeBeacon(_ beacon: iBeacon){
+    public func removeBeacon(beacon: iBeacon){
         // Checks if the beacon already exists
         for range in ranges.values{
             var index = 0
@@ -327,7 +288,7 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
                     if range.beacons[index].shapeLayer != nil{
                         range.beacons[index].shapeLayer.removeFromSuperlayer()
                     }
-                    
+                        
                     range.beacons.remove(at: index)
                     break
                 }
@@ -335,16 +296,16 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
             }
         }
     }
+
     
-    
-    open func addBeacon(_ beacon: iBeacon){
+    public func addBeacon(beacon: iBeacon){
         
         
         // Checks if the beacon already exists
         for range in ranges.values{
             var index = 0
             for beaconShape in range.beacons{
-                
+            
                 if beaconShape.beacon.isEqual(beacon) {
                     
                     if beaconShape.beacon.proximity == beacon.proximity{
@@ -352,7 +313,7 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
                     }else {
                         
                         if range.beacons[index].shapeLayer != nil{
-                            range.beacons[index].shapeLayer.removeFromSuperlayer()
+                           range.beacons[index].shapeLayer.removeFromSuperlayer()
                         }
                         
                         range.beacons.remove(at: index)
@@ -373,9 +334,9 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
         
         /// Calculates equal distances beetween beacons
         var t = CGFloat(0)
-        
+
         if count != nil{
-            t = CGFloat(2 * Double.pi) / CGFloat(count!)
+            t = CGFloat(2 * M_PI) / CGFloat(count!)
         }
         //let rand = Float(2) * Float(Float(arc4random()) / Float(UInt32.max))
         var index = 0
@@ -397,19 +358,19 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
             }
             
             /// Resizes all beacon of the distance layer if there is more than max
-            if count > max {
-                let circunference = CGFloat(2 * Double.pi)  * ranges[beacon.proximity]!.radius
-                beaconShape.radius = (circunference) / CGFloat(3 * count!)
+            if count! > max {
+                let circunference = CGFloat(2 * M_PI)  * ranges[beacon.proximity]!.radius
+                 beaconShape.radius = (circunference) / CGFloat(3 * count!)
             }
         }
     }
     
     /// Calculates a specific x and y that is on the range border
-    func calculateBorderPoint(_ radius: CGFloat, center: CGPoint, t: CGFloat) -> CGPoint{
+    func calculateBorderPoint(radius: CGFloat, center: CGPoint, t: CGFloat) -> CGPoint{
         
         let x = center.x + radius * cos(t)
         let y = center.y + radius * sin(t)
-        
+    
         return CGPoint(x: x, y: y)
     }
     
@@ -420,10 +381,10 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
         
         /// For each proximity range
         for range in ranges.values{
-            
+        
             for beaconShape in range.beacons{
                 
-                
+            
                 
                 ///Removes the beacon from screen
                 if beaconShape.shapeLayer != nil{
@@ -434,18 +395,19 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
                 beaconShape.speed = speed
                 
                 // calculates a new position
-                let position = calculateBorderPoint(range.radius, center: center, t: beaconShape.nextT())
+                let position = calculateBorderPoint(radius: range.radius, center: center, t: beaconShape.nextT())
                 
                 // builds a new shape
-                let shape = UIBezierPath(arcCenter: position, radius: beaconShape.radius, startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+                let shape = UIBezierPath(arcCenter: position, radius: beaconShape.radius, startAngle: CGFloat(0), endAngle: CGFloat(M_PI * 2), clockwise: true)
                 let shapeLayer = CAShapeLayer()
-                //    shapeLayer.contentsScale = UIScreen.mainScreen().scale
-                //    print(UIScreen.mainScreen().scale)
-                
+             //    shapeLayer.contentsScale = UIScreen.mainScreen().scale
+            //    print(UIScreen.mainScreen().scale)
+
                 shapeLayer.path = shape.cgPath
                 
                 if selectedBeacon != nil && (selectedBeacon?.beacon.isEqual(beaconShape.beacon))!{
                     shapeLayer.fillColor = UIColor(red: 0.5, green: 1.000, blue: 0.10, alpha: 1.000).cgColor
+
                     shapeLayer.strokeColor = UIColor(red: 0.392, green: 1.000, blue: 0.050, alpha: 1.000).cgColor
                 }else{
                     shapeLayer.fillColor = beaconShape.color.cgColor
@@ -459,7 +421,7 @@ open class JMCRadarView: UIView, UIGestureRecognizerDelegate, PWDisplayLinkerDel
                 
                 // re adds the shape to screen
                 self.layer.addSublayer(shapeLayer)
-                
+
             }
         }
     }

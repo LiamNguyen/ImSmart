@@ -12,6 +12,7 @@ protocol StoreType {
 //    **MARK: LIGHTS
     
     func getAllLights(_ completionHandler: @escaping (_ allLights: [LightModel], _ error: String?) -> Void) -> Void
+    func addLight(_ light: String, _ completionHandler: @escaping (_ success: Bool) -> Void) -> Void
     func updateAllLights(_ lights: String, completionHandler: @escaping (_ success: Bool) -> Void) -> Void
     
 //    **MARK: AIR CONDITIONERS

@@ -18,6 +18,7 @@ class HomeViewController: UIViewController {
     fileprivate var mainButton          : UIButton!
     fileprivate var cancelButton        : UIButton!
     fileprivate var lightsButton        : UIButton!
+    fileprivate var addLightButton      : UIButton!
     fileprivate var airConditionerButton: UIButton!
     fileprivate var fridgeButton        : UIButton!
     fileprivate var shoppingCartButton  : UIButton!
@@ -58,6 +59,7 @@ class HomeViewController: UIViewController {
         super.viewWillDisappear(true)
         
         self.navigationController?.navigationBar.isHidden = false
+        setAppearanceAsDefault()
     }
     
     fileprivate func bindRxObserver() {
@@ -123,6 +125,27 @@ class HomeViewController: UIViewController {
                 }
             }).addDisposableTo(disposalBag)
         
+//** Mark: ADD LIGHT BUTTON
+        
+        self.homeViewModel.addLightButtonPositionObserver
+            .subscribe(onNext: { [weak self] addLightButtonPositionObserver in
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: { 
+                        self?.addLightButton.center = CGPoint(
+                            x: CGFloat(addLightButtonPositionObserver.x),
+                            y: CGFloat(addLightButtonPositionObserver.y)
+                        )
+                    })
+                }
+            }).addDisposableTo(disposalBag)
+        
+        self.homeViewModel.isAddLightButtonShown.asObservable()
+            .subscribe(onNext: { [weak self] isAddLightButtonShown in
+                DispatchQueue.main.async {
+                    self?.addLightButton.isHidden = !isAddLightButtonShown
+                }
+            }).addDisposableTo(disposalBag)
+        
 //** Mark: AIR CONDITIONER BUTTON
 
         self.homeViewModel.airConditionerPositionObserver
@@ -164,17 +187,6 @@ class HomeViewController: UIViewController {
                     })
                 }
             }).addDisposableTo(disposalBag)
-        
-//** Mark: CONNECTED DEVICES LIST
-        
-//        self.homeViewModel.connectedDevices.asObservable()
-//            .subscribe(onNext: { [weak self] connectedDevices in
-//                DispatchQueue.main.async {
-//                    UIView.animate(withDuration: 0.4, animations: {
-//                        self?.drawDevicesView(connectedDevices: connectedDevices)
-//                    })
-//                }
-//            }).addDisposableTo(disposalBag)
         
 //** Mark: CONNECTIONS LABEL
         
@@ -227,7 +239,8 @@ class HomeViewController: UIViewController {
             .tap
             .debounce(0.2, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.homeViewModel.isMainButtonShown.value = !(self?.homeViewModel.isMainButtonShown.value)!
+                self?.homeViewModel.isMainButtonShown.value     = !(self?.homeViewModel.isMainButtonShown.value)!
+                self?.homeViewModel.isAddLightButtonShown.value = false
             }).addDisposableTo(disposalBag)
         
 //** Mark: LIGHT BUTTON
@@ -236,7 +249,20 @@ class HomeViewController: UIViewController {
             .rx
             .tap
             .subscribe(onNext: { [weak self] in
-                self?.performSegue(withIdentifier: Constants.Home.SegueIdentifier.toLightVC, sender: self)
+                if self!.homeViewModel.isAddLightButtonShown.value {
+                    self?.performSegue(withIdentifier: Constants.Home.SegueIdentifier.toLightVC, sender: self)
+                } else {
+                    self?.homeViewModel.isAddLightButtonShown.value = true
+                }
+            }).addDisposableTo(disposalBag)
+        
+//** Mark: ADD LIGHT BUTTON
+
+        self.addLightButton
+            .rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+                self?.performSegue(withIdentifier: Constants.Home.SegueIdentifier.toAddLightVc, sender: self)
             }).addDisposableTo(disposalBag)
         
 //** Mark: AIR CONDITIONER BUTTON
@@ -283,6 +309,7 @@ class HomeViewController: UIViewController {
         drawWelcomeText()
         drawCancelButton()
         drawLightsButton()
+        drawAddLightButton()
         drawAirConditionerButton()
         drawShoppingCartButton()
         drawFridgeButton()
@@ -360,6 +387,18 @@ class HomeViewController: UIViewController {
         self.lightsButton.layer.contents    = lightsButtonImage
         
         self.view.addSubview(self.lightsButton)
+    }
+    
+//** Mark: DRAWING ADD LIGHT BUTTON
+    
+    fileprivate func drawAddLightButton() {
+        let addLightButtonImage             = UIImage(named: Constants.Home.View.addButton)?.cgImage
+        
+        self.addLightButton                 = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        self.addLightButton.center          = CGPoint(x: UIScreen.main.bounds.width / 2 - 65, y: Constants.Home.View.mainButtonPosition - 65)
+        self.addLightButton.layer.contents  = addLightButtonImage
+        
+        self.view.addSubview(self.addLightButton)
     }
     
 //** Mark: DRAWING ARI CONDITIONER BUTTON
@@ -624,7 +663,13 @@ class HomeViewController: UIViewController {
             return
         }
         
-        self.homeViewModel.menuViewShouldShow.value = false
+        setAppearanceAsDefault()
+    }
+    
+    fileprivate func setAppearanceAsDefault() {
+        self.homeViewModel.menuViewShouldShow.value     = false
+        self.homeViewModel.isMainButtonShown.value      = true
+        self.homeViewModel.isAddLightButtonShown.value  = false
     }
     
     @IBAction func unwindToHomeViewController(_ segue: UIStoryboardSegue) {}

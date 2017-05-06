@@ -18,12 +18,14 @@ class RemoteStore: StoreType {
     
     fileprivate let baseURL             : URL!
     fileprivate let getLightURL         : URL!
+    fileprivate let addLightURL         : URL!
     fileprivate let updateLightURL      : URL!
     fileprivate let airConditionerURL   : URL!
     
     fileprivate init() {
         self.baseURL            = BaseURL.BETA
         self.getLightURL        = URL(string: "lights", relativeTo: self.baseURL)!
+        self.addLightURL        = URL(string: "add/lights", relativeTo: self.baseURL)!
         self.updateLightURL     = URL(string: "update/lights", relativeTo: self.baseURL)!
         self.airConditionerURL  = URL(string: "airconditioners", relativeTo: self.baseURL)!
     }
@@ -49,6 +51,27 @@ class RemoteStore: StoreType {
                     }
                     completionHandler([], "ERROR")
                 }
+        }
+    }
+    
+    func addLight(_ light: String, _ completionHandler: @escaping (_ success: Bool) -> Void) {
+        let retrier = Retrier()
+        let request = requestBuilder(retrier, requestMethod: .POST, url: self.addLightURL, requestBody: light)
+        
+        request.response { _ in
+            retrier.deleteRetryInfo(request)
+        }.validate().responseJSON { response in
+            switch response.result {
+            case .success:
+                completionHandler(true)
+                print(response)
+            case .failure(let error):
+                completionHandler(false)
+                print(error.localizedDescription)
+                if let response = response.response {
+                    print(response)
+                }
+            }
         }
     }
 

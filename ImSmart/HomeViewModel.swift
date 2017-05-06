@@ -16,11 +16,13 @@ class HomeViewModel{
     
     var isMainButtonShown                   : Variable<Bool>        = Variable(true)
     var menuViewShouldShow                  : Variable<Bool>        = Variable(false)
+    var isAddLightButtonShown               : Variable<Bool>        = Variable(false)
     var brandLogoOriginXObserver            : Observable<Float>!
     var welcomeTextOriginXObserver          : Observable<Float>!
     var mainButtonSizeObserver              : Observable<(Int, Int)>!
     var cancelButtonSizeObserver            : Observable<(Int, Int)>!
     var lightsButtonPositionObserver        : Observable<(x: Float, y: Float)>!
+    var addLightButtonPositionObserver      : Observable<(x: Float, y: Float)>!
     var airConditionerPositionObserver      : Observable<(x: Float, y: Float)>!
     var shoppingCartButtonPositionObserver  : Observable<(x: Float, y: Float)>!
     var fridgeButtonPositionObserver        : Observable<(x: Float, y: Float)>!
@@ -28,7 +30,7 @@ class HomeViewModel{
     var menuViewOriginXObserver             : Observable<Float>!
     var activityIndicatorShouldSpin         : Observable<Bool>!
     
-    fileprivate var disposalBag                 = DisposeBag()
+    fileprivate var disposalBag             = DisposeBag()
     
     init() {
         bindRx()
@@ -55,9 +57,20 @@ class HomeViewModel{
                 return isMainButtonShown ? (0, 0) : (40, 40)
             })
         
-        lightsButtonPositionObserver = isMainButtonShown.asObservable()
-            .map({ isMainButtonShown in
-                return isMainButtonShown ? self.buttonsCoordinate(position: .origin) : self.buttonsCoordinate(.light)
+        lightsButtonPositionObserver = Observable.combineLatest(
+            isMainButtonShown.asObservable(),
+            isAddLightButtonShown.asObservable())
+            .map({ (isMainButtonShown, isAddLightButtonShown) in
+                if isMainButtonShown {
+                    return self.buttonsCoordinate(position: .origin)
+                } else {
+                    return isAddLightButtonShown ? self.buttonsCoordinate(.light, position: .addLightShownDestination) : self.buttonsCoordinate(.light)
+                }
+            })
+        
+        addLightButtonPositionObserver = isAddLightButtonShown.asObservable()
+            .map({ isAddLightButtonShown in
+                return isAddLightButtonShown ? self.buttonsCoordinate(.addLight) : self.buttonsCoordinate(.addLight, position: .origin)
             })
         
         airConditionerPositionObserver = isMainButtonShown.asObservable()
@@ -99,15 +112,28 @@ class HomeViewModel{
             y: Float(Constants.Home.View.mainButtonPosition)
         )
         
+        let addLightButtonOriginCoordinate = (
+            x: originCoordinate.x - 65,
+            y: originCoordinate.y - 65
+        )
+        
         if position == .origin {
-            return originCoordinate
+            return buttonType == .addLight ? addLightButtonOriginCoordinate : originCoordinate
         }
         
         switch buttonType {
         case .light:
-            return (
+            return position == .addLightShownDestination ? (
+                originCoordinate.x - 90,
+                originCoordinate.y - 30
+            ) : (
                 originCoordinate.x - 65,
                 originCoordinate.y - 65
+            )
+        case .addLight:
+            return (
+                originCoordinate.x - 30,
+                originCoordinate.y - 90
             )
         case .airConditioner:
             return (
@@ -119,16 +145,19 @@ class HomeViewModel{
                 originCoordinate.x - 65,
                 originCoordinate.y + 65
             )
-        default:
+        case .fridge:
             return (
                 originCoordinate.x + 65,
                 originCoordinate.y + 65
             )
+        default:
+            return (0, 0)
         }
     }
     
     fileprivate enum ButtonType {
         case light
+        case addLight
         case airConditioner
         case shoppingCart
         case fridge
@@ -138,5 +167,6 @@ class HomeViewModel{
     fileprivate enum ButtonPosition {
         case origin
         case destination
+        case addLightShownDestination
     }
 }

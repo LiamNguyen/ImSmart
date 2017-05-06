@@ -13,14 +13,15 @@
 		765BF3201EBE09FF00F5DDF1 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3181EBE09FF00F5DDF1 /* DataStructures.swift */; };
 		765BF3211EBE09FF00F5DDF1 /* JMCBeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3191EBE09FF00F5DDF1 /* JMCBeaconManager.swift */; };
 		765BF3221EBE09FF00F5DDF1 /* JMCBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31A1EBE09FF00F5DDF1 /* JMCBluetoothManager.swift */; };
-		765BF3231EBE09FF00F5DDF1 /* JMCRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31B1EBE09FF00F5DDF1 /* JMCRadarView.swift */; };
 		765BF3241EBE09FF00F5DDF1 /* PWDisplayLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31C1EBE09FF00F5DDF1 /* PWDisplayLinker.swift */; };
 		765BF3251EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31D1EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift */; };
 		765BF3261EBE09FF00F5DDF1 /* RadarScannerShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31E1EBE09FF00F5DDF1 /* RadarScannerShape.swift */; };
+		765BF3291EBE582100F5DDF1 /* AddLightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3281EBE582100F5DDF1 /* AddLightViewController.swift */; };
 		76AF5B1D1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */; };
 		76AF5B1E1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76AF5B201EBB9BE500A6EAB1 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */; };
 		76AF5B211EBB9BE500A6EAB1 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76E839E21EBE70A3009E7E93 /* JMCRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E839E11EBE70A3009E7E93 /* JMCRadarView.swift */; };
 		ED1117951E9AD337006EC259 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1117941E9AD337006EC259 /* Helper.swift */; };
 		ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC01E8F89EB006791C6 /* HomeViewController.swift */; };
 		ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC61E8F8CEF006791C6 /* LocalStore.swift */; };
@@ -124,12 +125,13 @@
 		765BF3181EBE09FF00F5DDF1 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataStructures.swift; path = JMCiBeaconManager/DataStructures.swift; sourceTree = "<group>"; };
 		765BF3191EBE09FF00F5DDF1 /* JMCBeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCBeaconManager.swift; path = JMCiBeaconManager/JMCBeaconManager.swift; sourceTree = "<group>"; };
 		765BF31A1EBE09FF00F5DDF1 /* JMCBluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCBluetoothManager.swift; path = JMCiBeaconManager/JMCBluetoothManager.swift; sourceTree = "<group>"; };
-		765BF31B1EBE09FF00F5DDF1 /* JMCRadarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCRadarView.swift; path = JMCiBeaconManager/JMCRadarView.swift; sourceTree = "<group>"; };
 		765BF31C1EBE09FF00F5DDF1 /* PWDisplayLinker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWDisplayLinker.swift; path = JMCiBeaconManager/PWDisplayLinker.swift; sourceTree = "<group>"; };
 		765BF31D1EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWDisplayLinkerDelegate.swift; path = JMCiBeaconManager/PWDisplayLinkerDelegate.swift; sourceTree = "<group>"; };
 		765BF31E1EBE09FF00F5DDF1 /* RadarScannerShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadarScannerShape.swift; path = JMCiBeaconManager/RadarScannerShape.swift; sourceTree = "<group>"; };
+		765BF3281EBE582100F5DDF1 /* AddLightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLightViewController.swift; sourceTree = "<group>"; };
 		76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		76E839E11EBE70A3009E7E93 /* JMCRadarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCRadarView.swift; path = JMCiBeaconManager/JMCRadarView.swift; sourceTree = "<group>"; };
 		ED1117941E9AD337006EC259 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ED171EC01E8F89EB006791C6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED171EC61E8F8CEF006791C6 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
@@ -251,11 +253,11 @@
 		765BF3271EBE0A0700F5DDF1 /* JMCiBeaconManager */ = {
 			isa = PBXGroup;
 			children = (
+				76E839E11EBE70A3009E7E93 /* JMCRadarView.swift */,
 				765BF3171EBE09FF00F5DDF1 /* BeaconShape.swift */,
 				765BF3181EBE09FF00F5DDF1 /* DataStructures.swift */,
 				765BF3191EBE09FF00F5DDF1 /* JMCBeaconManager.swift */,
 				765BF31A1EBE09FF00F5DDF1 /* JMCBluetoothManager.swift */,
-				765BF31B1EBE09FF00F5DDF1 /* JMCRadarView.swift */,
 				765BF31C1EBE09FF00F5DDF1 /* PWDisplayLinker.swift */,
 				765BF31D1EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift */,
 				765BF31E1EBE09FF00F5DDF1 /* RadarScannerShape.swift */,
@@ -296,6 +298,7 @@
 				EDF791E61E9554A00078E98B /* AirConditionerViewController.swift */,
 				ED67474E1E95663700C925D0 /* FridgeViewController.swift */,
 				ED6747501E9567CC00C925D0 /* ShoppingCartViewController.swift */,
+				765BF3281EBE582100F5DDF1 /* AddLightViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -716,7 +719,6 @@
 				ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */,
 				ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
-				765BF3231EBE09FF00F5DDF1 /* JMCRadarView.swift in Sources */,
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
 				ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */,
 				765BF3251EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift in Sources */,
@@ -727,6 +729,7 @@
 				ED1117951E9AD337006EC259 /* Helper.swift in Sources */,
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
 				765BF3211EBE09FF00F5DDF1 /* JMCBeaconManager.swift in Sources */,
+				765BF3291EBE582100F5DDF1 /* AddLightViewController.swift in Sources */,
 				765BF3221EBE09FF00F5DDF1 /* JMCBluetoothManager.swift in Sources */,
 				EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
@@ -740,6 +743,7 @@
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
 				ED5168101EB4B523000813C7 /* Retrier.swift in Sources */,
 				EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */,
+				76E839E21EBE70A3009E7E93 /* JMCRadarView.swift in Sources */,
 				ED1BACC71E98EA64005F7F75 /* ColorExtension.swift in Sources */,
 				EDD938081E941DE000FB1797 /* LightCellViewModel.swift in Sources */,
 				EDA77A7F1E957CE0002C801B /* LightsMockup.swift in Sources */,
