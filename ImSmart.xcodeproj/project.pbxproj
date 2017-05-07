@@ -382,8 +382,8 @@
 		ED75D32F1E8C478A006D6082 /* ImSmart */ = {
 			isa = PBXGroup;
 			children = (
-				765BF3271EBE0A0700F5DDF1 /* JMCiBeaconManager */,
 				ED75D3301E8C478A006D6082 /* AppDelegate.swift */,
+				765BF3271EBE0A0700F5DDF1 /* JMCiBeaconManager */,
 				7639CB151EA3554E0050FEF2 /* CoreData */,
 				ED171EC31E8F8CB4006791C6 /* Store */,
 				ED171EC21E8F8CAB006791C6 /* Helper */,

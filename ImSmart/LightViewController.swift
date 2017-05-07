@@ -10,8 +10,9 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SnapKit
+import NVActivityIndicatorView
 
-class LightViewController: UIViewController {
+class LightViewController: UIViewController, NVActivityIndicatorViewable {
     
     fileprivate var lightViewModel: LightViewModel!
     
@@ -22,7 +23,7 @@ class LightViewController: UIViewController {
     fileprivate var cancelSelectionView : UIView!
     fileprivate var cancelButton        : UIButton!
     fileprivate var refreshButton       : UIButton!
-    fileprivate var activityIndicator   : UIActivityIndicatorView!
+    fileprivate var activityIndicator   : NVActivityIndicatorView!
     
     fileprivate let disposalBag = DisposeBag()
 
@@ -299,10 +300,13 @@ class LightViewController: UIViewController {
 //** Mark: DRAWING ACTIVITY INDICATOR VIEW
     
     fileprivate func drawActivityIndicatorView() {
-        self.activityIndicator                          = UIActivityIndicatorView()
-        
-        activityIndicator.hidesWhenStopped              = true
-        activityIndicator.activityIndicatorViewStyle    = .gray
+        let frame = CGRect(x: 0, y: 0, width: 90, height: 90)
+        self.activityIndicator = NVActivityIndicatorView(
+            frame: frame,
+            type: .ballRotateChase,
+            color: .red,
+            padding: 0
+        )
         
         self.view.addSubview(activityIndicator)
         

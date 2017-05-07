@@ -10,8 +10,9 @@ import UIKit
 import RxCocoa
 import RxSwift
 import SnapKit
+import NVActivityIndicatorView
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     
     var homeViewModel               : HomeViewModel!
     
@@ -30,7 +31,7 @@ class HomeViewController: UIViewController {
     fileprivate var topBar              : UIView!
     fileprivate var devicesStackView    : UIStackView!
     fileprivate var devicesScrollView   : UIScrollView!
-    fileprivate var activityIndicator   : UIActivityIndicatorView!
+    fileprivate var activityIndicator   : NVActivityIndicatorView!
     fileprivate var connectionsLabel    : UILabel!
     
     fileprivate let disposalBag         = DisposeBag()
@@ -577,10 +578,12 @@ class HomeViewController: UIViewController {
 //** Mark: DRAWING ACTIVITY INDICATOR VIEW
     
     fileprivate func drawActivityIndicatorView() {
-        self.activityIndicator                          = UIActivityIndicatorView()
-        
-        activityIndicator.hidesWhenStopped              = true
-        activityIndicator.activityIndicatorViewStyle    = .gray
+        let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        self.activityIndicator = NVActivityIndicatorView(
+            frame: frame,
+            type: .ballScaleRippleMultiple,
+            color: .red, padding: 0
+        )
         
         self.menuView.addSubview(activityIndicator)
         
