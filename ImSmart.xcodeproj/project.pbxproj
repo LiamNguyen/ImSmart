@@ -355,7 +355,6 @@
 		ED75D3241E8C4782006D6082 = {
 			isa = PBXGroup;
 			children = (
-				76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */,
 				ED810EC11E9BB440005F701E /* ExternalLibraries */,
 				ED75D32F1E8C478A006D6082 /* ImSmart */,
 				ED75D3441E8C478B006D6082 /* ImSmartTests */,
@@ -448,6 +447,7 @@
 		ED810EC11E9BB440005F701E /* ExternalLibraries */ = {
 			isa = PBXGroup;
 			children = (
+				76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */,
 				76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */,
 				ED953A0A1EB37B5900D622CB /* Alamofire.framework */,
 				EDC5047D1EAB64350086B377 /* SocketIO.framework */,

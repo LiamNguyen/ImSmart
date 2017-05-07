@@ -27,9 +27,9 @@ class LightModel: Mappable {
     }
     
     func mapping(map: Map) {
-        id          <- map["Id"]
-        isOn        <- map["IsOn"]
-        brightness  <- map["Brightness"]
-        area        <- map["Area"]
+        id          <- map["id"]
+        isOn        <- map["isOn"]
+        brightness  <- map["brightness"]
+        area        <- map["area"]
     }
 }
