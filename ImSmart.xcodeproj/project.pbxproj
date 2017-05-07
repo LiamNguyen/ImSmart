@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */; };
 		7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7639CB161EA355760050FEF2 /* Model.xcdatamodeld */; };
+		76577C0E1EBFB96000D33080 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76577C0D1EBFB96000D33080 /* NVActivityIndicatorView.framework */; };
+		76577C0F1EBFB96000D33080 /* NVActivityIndicatorView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76577C0D1EBFB96000D33080 /* NVActivityIndicatorView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		765BF31F1EBE09FF00F5DDF1 /* BeaconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3171EBE09FF00F5DDF1 /* BeaconShape.swift */; };
 		765BF3201EBE09FF00F5DDF1 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3181EBE09FF00F5DDF1 /* DataStructures.swift */; };
 		765BF3211EBE09FF00F5DDF1 /* JMCBeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3191EBE09FF00F5DDF1 /* JMCBeaconManager.swift */; };
@@ -106,6 +108,7 @@
 			files = (
 				EDAB2C431E952EB4006DF616 /* RxCocoa.framework in Embed Frameworks */,
 				76AF5B1E1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Embed Frameworks */,
+				76577C0F1EBFB96000D33080 /* NVActivityIndicatorView.framework in Embed Frameworks */,
 				ED953A0C1EB37B5900D622CB /* Alamofire.framework in Embed Frameworks */,
 				ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */,
 				ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */,
@@ -121,6 +124,7 @@
 /* Begin PBXFileReference section */
 		1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7639CB171EA355760050FEF2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		76577C0D1EBFB96000D33080 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		765BF3171EBE09FF00F5DDF1 /* BeaconShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeaconShape.swift; path = JMCiBeaconManager/BeaconShape.swift; sourceTree = "<group>"; };
 		765BF3181EBE09FF00F5DDF1 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataStructures.swift; path = JMCiBeaconManager/DataStructures.swift; sourceTree = "<group>"; };
 		765BF3191EBE09FF00F5DDF1 /* JMCBeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCBeaconManager.swift; path = JMCiBeaconManager/JMCBeaconManager.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 			files = (
 				EDAB2C421E952EB4006DF616 /* RxCocoa.framework in Frameworks */,
 				76AF5B1D1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Frameworks */,
+				76577C0E1EBFB96000D33080 /* NVActivityIndicatorView.framework in Frameworks */,
 				ED953A0B1EB37B5900D622CB /* Alamofire.framework in Frameworks */,
 				ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */,
 				ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */,
@@ -447,6 +452,7 @@
 		ED810EC11E9BB440005F701E /* ExternalLibraries */ = {
 			isa = PBXGroup;
 			children = (
+				76577C0D1EBFB96000D33080 /* NVActivityIndicatorView.framework */,
 				76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */,
 				76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */,
 				ED953A0A1EB37B5900D622CB /* Alamofire.framework */,
@@ -684,6 +690,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SocketIO.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 			);
 			outputPaths = (
 			);
