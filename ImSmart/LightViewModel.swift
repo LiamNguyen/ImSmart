@@ -14,8 +14,10 @@ class LightViewModel {
     var requireCellShake                    = Variable<Bool>(false)
     var requireSynchronization              = Variable<Bool>(false)
     var isReceiving                         = Variable<Bool>(false)
+    var isRollingBack                       = Variable<Bool>(false)
     var isFirstTimeGetLights                = Variable<Bool>(true)
     var isHavingServerError                 = Variable<Bool>(false)
+    var isFailedToUpdate                    = Variable<Bool>(false)
     var allLights                           : Variable<[LightCellViewModel]>!
     var selectedLights                      : Variable<[String: LightCellViewModel]>!
     
@@ -31,12 +33,15 @@ class LightViewModel {
     var brightnessValue                     = Variable<Float>(0.0)
     var sampleLightBrightness               : Observable<UIColor>!
     
-    private let disposalBag                 = DisposeBag()
+    fileprivate let disposalBag                 = DisposeBag()
+    
+    fileprivate var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init() {
         self.allLights      = Variable([LightCellViewModel]())
         self.selectedLights = Variable([String: LightCellViewModel]())
 
+        getAllLights()
         bindRx()
         
 //        **MARK: NOTIFICATION OBSERVERS
@@ -56,8 +61,6 @@ class LightViewModel {
     }
     
     func bindRx() {
-        getAllLights()
-        
         viewColorObserver = requireCellShake.asObservable()
             .map({ requireCellShake in
                 return requireCellShake ? Theme.contentHighlighted : Theme.background
@@ -100,8 +103,9 @@ class LightViewModel {
         
         barButtonEnableObserver = Observable.combineLatest(
             requireCellShake.asObservable(),
-            selectedLights.asObservable()) { (requireCellShake, selectedLights) in
-                return requireCellShake ? !selectedLights.values.isEmpty : true
+            selectedLights.asObservable(),
+            isHavingServerError.asObservable()) { (requireCellShake, selectedLights, isHavingServerError) in
+                return requireCellShake ? !selectedLights.values.isEmpty : !isHavingServerError
         }
         
         activityIndicatorShouldSpin = Observable.combineLatest(
@@ -121,12 +125,18 @@ class LightViewModel {
                     return
                 }
                 let jsonObject = self!.buildJSONObject(fromLightCellViewModel: (self?.allLights.value)!)
-                let jsonString = Helper.jsonStringify(jsonObject: jsonObject as AnyObject)
+                let jsonString = Helper.jsonStringify(jsonObject as AnyObject)
                 
-                RemoteStore.sharedInstance.updateAllLights(lights: jsonString, completionHandler: { success in
+                RemoteStore.sharedInstance.updateAllLights(jsonString, completionHandler: { [weak self] success in
                     if success {
+                        self?.isFailedToUpdate.value    = false
                         SocketIOManager.sharedInstance.requireUpdateLights()
                     } else {
+                        self?.isRollingBack.value       = true
+                        self?.isFailedToUpdate.value    = true
+                        let rollBackLights              = CoreDataLightOperations.sharedInstance.getLights()
+                        self?.allLights.value           = self!.parseLightsFromCoreData(lights: rollBackLights)
+
                         print("ERROR: Error when updating lights")
                     }
                 })
@@ -134,16 +144,16 @@ class LightViewModel {
     }
     
     func getAllLights() {
-        RemoteStore.sharedInstance.getAllLights(completionHandler: { [weak self] (allLights, error) in
-            if !error.isEmpty {
+        RemoteStore.sharedInstance.getAllLights({ [weak self] (allLights, error) in
+            if let _ = error {
                 self?.isHavingServerError.value = true
                 return
             }
-            guard let _ = self?.parseJSONToLightCellViewModel(json: allLights) else {
-                print("ERROR: Self is nil")
-                return
-            }
-            self?.allLights.value               = self!.parseJSONToLightCellViewModel(json: allLights)
+            
+            self?.allLights.value = allLights.map({ light -> LightCellViewModel in
+                return LightCellViewModel(light: light, lightViewModel: self!)
+            })
+            
             self?.isHavingServerError.value     = false
             if self!.isFirstTimeGetLights.value {
                 self?.isFirstTimeGetLights.value = false
@@ -164,20 +174,23 @@ class LightViewModel {
             })
     }
     
-    //** Mark: PARSE JSON TO MODEL AND RETURN ARRAY OF LIGHTS
+    //** Mark: PARSE LIGHTS FROM CORE DATA TO MODEL AND RETURN ARRAY OF LIGHTS
     
-    private func parseJSONToLightCellViewModel(json: NSArray) -> [LightCellViewModel] {
-        let receivedAllLights = json.map({ item -> LightCellViewModel in
-            let dictionary = item as? NSDictionary
-            let light           = Light(context: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext)
+    private func parseLightsFromCoreData(lights: NSArray) -> [LightCellViewModel] {
+        return lights.map { light -> LightCellViewModel in
+            guard let _ = light as? Light else {
+                print("ERROR: Light type casting failed")
+                return LightCellViewModel()
+            }
             
-            light.id            = dictionary?["Id"]         as? Int16   ?? 0
-            light.brightness    = dictionary?["Brightness"] as? Int16   ?? 0
-            light.area          = dictionary?["Area"]       as? String  ?? ""
-            light.isOn          = dictionary?["IsOn"]       as? Bool    ?? false
-            
-            return LightCellViewModel(light: light, lightViewModel: self)
-        })
-        return receivedAllLights
+            let light = light as! Light
+            let lightModel = LightModel(
+                id          : Int(light.id),
+                isOn        : light.isOn,
+                brightness  : Int(light.brightness),
+                area        : light.area!
+            )
+            return LightCellViewModel(light: lightModel, lightViewModel: self)
+        }
     }
 }

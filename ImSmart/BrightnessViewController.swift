@@ -15,12 +15,12 @@ class BrightnessViewController: UIViewController {
 
     var lightViewModel                  : LightViewModel!
     
-    private var sampleLightBrightness   : UIImageView!
-    private var brightnessValueLabel    : UILabel!
-    private var adjustBrightnessSlider  : UISlider!
+    fileprivate var sampleLightBrightness   : UIImageView!
+    fileprivate var brightnessValueLabel    : UILabel!
+    fileprivate var adjustBrightnessSlider  : UISlider!
     
-    private var sliderValueDidChange    = false
-    private let disposalBag = DisposeBag()
+    fileprivate var sliderValueDidChange    = false
+    fileprivate let disposalBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,7 +52,7 @@ class BrightnessViewController: UIViewController {
         print("Brightness VC -> Dead")
     }
     
-    private func bindRxObserver() {
+    fileprivate func bindRxObserver() {
         lightViewModel.brightnessValue.asObservable()
             .map { value in
                 return String(Int(value))
@@ -75,21 +75,36 @@ class BrightnessViewController: UIViewController {
                 }
                 
                 for lightCellViewModel in (self?.lightViewModel.selectedLights.value.values)! {
-                    lightCellViewModel.brightness.value = Int16(brightness)
+                    lightCellViewModel.brightness.value = brightness
                     if brightness == 0 {
                         lightCellViewModel.isOn.value   = false
                     }
                 }
             }).addDisposableTo(disposalBag)
+        
+        lightViewModel.isFailedToUpdate.asObservable()
+            .subscribe(onNext: { [weak self] isFailedToUpdate in
+                DispatchQueue.main.async {
+                    if isFailedToUpdate {
+                        self?.showMessage(
+                            Constants.Lights.Message.serverError,
+                            type: .error,
+                            options: [.textNumberOfLines(Constants.longTextLineNumbers), .height(80.0)]
+                        )
+                    } else {
+                        self?.hideMessage()
+                    }
+                }
+            }).addDisposableTo(disposalBag)
     }
     
-    private func bindRxAction() {
+    fileprivate func bindRxAction() {
         
     }
     
 //** Mark: SUPPORT FUNCTIONS
     
-    private func clearRequireState() {
+    fileprivate func clearRequireState() {
 //        Clear selected lights
         lightViewModel.selectedLights.value.removeAll()
         
@@ -100,7 +115,7 @@ class BrightnessViewController: UIViewController {
         lightViewModel.requireCellShake.value = false
     }
 
-    private func customizeAppearance() {
+    fileprivate func customizeAppearance() {
         drawSampleImage()
         drawBrightnessValueLabel()
         drawBrightnessSlider()
@@ -108,7 +123,7 @@ class BrightnessViewController: UIViewController {
     
 //** Mark: DRAWING BRIGHTNESS EXAMPLE IMAGE
     
-    private func drawSampleImage() {
+    fileprivate func drawSampleImage() {
         let sampleImage                                     = UIImage(named: Constants.Brightness.View.brightnessExample)
         
         self.sampleLightBrightness                          = UIImageView(image: sampleImage)
@@ -120,7 +135,7 @@ class BrightnessViewController: UIViewController {
         addImageViewConstraints()
     }
 
-    private func drawBrightnessValueLabel() {
+    fileprivate func drawBrightnessValueLabel() {
         self.brightnessValueLabel                            = UILabel()
         
         self.brightnessValueLabel.adjustsFontSizeToFitWidth  = true
@@ -131,7 +146,7 @@ class BrightnessViewController: UIViewController {
         addLabelConstraints()
     }
     
-    private func drawBrightnessSlider() {
+    fileprivate func drawBrightnessSlider() {
         self.adjustBrightnessSlider                 = UISlider(frame: CGRect(x: 0, y: 0, width: 220, height: 40))
         
         self.adjustBrightnessSlider.minimumValue    = 0
@@ -145,7 +160,7 @@ class BrightnessViewController: UIViewController {
         addSliderConstraints()
     }
     
-    @objc func sliderValueChange(sender: UISlider) {
+    @objc func sliderValueChange(_ sender: UISlider) {
         self.sliderValueDidChange               = !self.sliderValueDidChange
         let sliderValueStep: Float              = 5
         let roundedValue                        = round(sender.value / sliderValueStep) * sliderValueStep
@@ -156,7 +171,7 @@ class BrightnessViewController: UIViewController {
     
 //** Mark: MAKE CONSTRAINTS
 
-    private func addImageViewConstraints() {
+    fileprivate func addImageViewConstraints() {
         self.sampleLightBrightness.snp.makeConstraints { maker in
             maker.width.equalTo(220)
             maker.height.equalTo(330)
@@ -165,14 +180,14 @@ class BrightnessViewController: UIViewController {
         }
     }
     
-    private func addLabelConstraints() {
+    fileprivate func addLabelConstraints() {
         self.brightnessValueLabel.snp.makeConstraints { maker in
             maker.top.equalTo(self.sampleLightBrightness.snp.bottom).offset(30)
             maker.centerX.equalToSuperview()
         }
     }
     
-    private func addSliderConstraints() {
+    fileprivate func addSliderConstraints() {
         self.adjustBrightnessSlider.snp.makeConstraints { maker in
             maker.width.equalTo(220)
             maker.height.equalTo(40)

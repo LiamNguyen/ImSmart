@@ -13,37 +13,36 @@ import UIKit
 class CoreDataLightOperations {
     static let sharedInstance = CoreDataLightOperations()
     
-    private let appDelegate : AppDelegate!
-    private var context     : NSManagedObjectContext?
+    fileprivate let appDelegate : AppDelegate!
+    fileprivate var context     : NSManagedObjectContext?
     
-    private init() {
+    fileprivate init() {
         self.appDelegate    = UIApplication.shared.delegate as! AppDelegate
         self.context        = appDelegate.persistentContainer.viewContext
     }
     
-    func storeLights(lights: [LightCellViewModel]) {
+    func storeLights(_ lights: [LightCellViewModel]) {
         clearLights()
-        context?.perform({ 
-            let _ = lights.map { currentLight in
-                let rollbackLight           = Light(context: self.context!)
-                
-                rollbackLight.area          = currentLight.area.value
-                rollbackLight.brightness    = Int16(currentLight.brightness.value)
-                rollbackLight.isOn          = currentLight.isOn.value
-            }
+        let _ = lights.map { currentLight in
+            let rollbackLight           = Light(context: self.context!)
+            
+            rollbackLight.area          = currentLight.area.value
+            rollbackLight.brightness    = Int16(currentLight.brightness.value)
+            rollbackLight.isOn          = currentLight.isOn.value
             self.appDelegate.saveContext()
-        })
+        }
+        self.printLightsFromCoreData()
     }
-    
-    private func clearLights() {
-        context?.perform({
-            let _ = self.getLights().map { [unowned self] light in
-                if let light = light as? Light {
-                    self.context?.delete(light)
-                    self.appDelegate.saveContext()
-                }
-            }
-        })
+
+    fileprivate func clearLights() {
+        let lights = NSFetchRequest<NSFetchRequestResult>(entityName: "Light")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: lights)
+        
+        do {
+            try self.context?.persistentStoreCoordinator?.execute(deleteRequest, with: self.context!)
+        } catch let error {
+            print("ERROR: Cannot delete lights from Coredata\n\(error)")
+        }
     }
     
     func getLights() -> NSArray {
@@ -55,12 +54,25 @@ class CoreDataLightOperations {
         }
     }
     
-    private func isLightsStored() -> Bool {
+    fileprivate func isLightsStored() -> Bool {
         do {
             return try context?.count(for: Light.fetchRequest()) == 0 ? false : true
         } catch let error {
             print("ERROR: Cannot count lights from CoreData\n\(error)")
             return false
         }
+    }
+    
+    func printLightsFromCoreData() {
+        print("START________________")
+        let _ = getLights().map { light in
+            if let light = light as? Light {
+                print("Id           : \(light.id)")
+                print("Area         : \(light.area!)")
+                print("Brightness   : \(light.brightness)")
+                print("Is on        : \(light.isOn)")
+            }
+        }
+        print("END________________")
     }
 }

@@ -11,7 +11,7 @@ import Foundation
 class Helper {
 //** Mark: CONVERT JSON OBJ TO STRING
 
-    static func jsonStringify(jsonObject: AnyObject) -> String {
+    static func jsonStringify(_ jsonObject: AnyObject) -> String {
         let jsonValidObject = JSONSerialization.isValidJSONObject(jsonObject)
         if !jsonValidObject {
             print("Invalid JSON object")
@@ -27,7 +27,7 @@ class Helper {
         return String()
     }
     
-    static func printMockupLights(mockupLights: [LightCellViewModel]) {
+    static func printMockupLights(_ mockupLights: [LightCellViewModel]) {
         let _ = mockupLights
             .map({ lightCellViewModel in
                 print("__________Start item")

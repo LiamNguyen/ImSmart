@@ -10,30 +10,33 @@ import Foundation
 import RxSwift
 
 class LightCellViewModel {
-    private var light               : Light!
-    private weak var lightViewModel : LightViewModel!
+    fileprivate var light               : LightModel!
+    fileprivate weak var lightViewModel : LightViewModel!
     
     var isOn          : Variable<Bool>!
-    var brightness    : Variable<Int16>!
+    var brightness    : Variable<Int>!
     var area          : Variable<String>!
     
     var cellMustShake : Observable<Bool>!
 
-    private var isReceiving = false
-    private let disposalBag = DisposeBag()
+    fileprivate var isReceiving     = false
+    fileprivate var isRollingBack   = false
+    fileprivate let disposalBag     = DisposeBag()
     
-    init(light: Light, lightViewModel: LightViewModel) {
+    init(light: LightModel, lightViewModel: LightViewModel) {
         self.light                  = light
         
         self.lightViewModel         = lightViewModel
-        self.isOn                   = Variable<Bool>(self.light.isOn)
-        self.brightness             = Variable<Int16>(self.light.brightness)
-        self.area                   = Variable<String>(self.light.area!)
+        self.isOn                   = Variable<Bool>(self.light.isOn        ?? false)
+        self.brightness             = Variable<Int>(self.light.brightness   ?? 0)
+        self.area                   = Variable<String>(self.light.area      ?? "")
         
         bindRx()
     }
     
-    private func bindRx() {
+    init() {}
+    
+    fileprivate func bindRx() {
         isOn.asObservable()
             .subscribe(onNext: { [weak self] isOn in
                 self?.light.isOn = isOn
@@ -57,6 +60,11 @@ class LightCellViewModel {
                 self?.isReceiving = isReceiving
         }.addDisposableTo(disposalBag)
         
+        lightViewModel.isRollingBack.asObservable()
+            .bindNext { [weak self] isRollingBack in
+                self?.isRollingBack = isRollingBack
+        }.addDisposableTo(disposalBag)
+        
         cellMustShake = lightViewModel.requireCellShake.asObservable()
             .map({ return $0 })
         
@@ -66,11 +74,15 @@ class LightCellViewModel {
             area.asObservable())
             .throttle(2.2, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] _ in
-                if (self?.lightViewModel.isFirstTimeGetLights.value)! {
+                if self!.lightViewModel.isFirstTimeGetLights.value {
                     return
                 }
-                if (self?.isReceiving)! {
-                    self?.isReceiving = !(self?.isReceiving)!
+                if self!.isReceiving {
+                    self?.isReceiving = !self!.isReceiving
+                    return
+                }
+                if self!.isRollingBack {
+                    self?.isRollingBack = !self!.isRollingBack
                     return
                 }
                 self?.lightViewModel.requireSynchronization.value = true

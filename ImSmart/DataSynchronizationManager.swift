@@ -11,18 +11,18 @@ import MultipeerConnectivity
 
 protocol DataSynchronizationManagerDelegate: class {
 
-    func connectedDevicesChanged(manager: DataSynchronizationManager, connectedDevices: [String])
-    func onDataReceived(manager: DataSynchronizationManager, data: Any)
+    func connectedDevicesChanged(_ manager: DataSynchronizationManager, connectedDevices: [String])
+    func onDataReceived(_ manager: DataSynchronizationManager, data: Any)
 }
 
 class DataSynchronizationManager: NSObject {
 
     // Service type must be a unique string, at most 15 characters long
     // and can contain only ASCII lowercase letters, numbers and hyphens.
-    private let serviceType         = "synchronization"
-    private let myPeerId            = MCPeerID(displayName: UIDevice.current.name)
-    private let serviceAdvertiser   : MCNearbyServiceAdvertiser
-    private let serviceBrowser      : MCNearbyServiceBrowser
+    fileprivate let serviceType         = "synchronization"
+    fileprivate let myPeerId            = MCPeerID(displayName: UIDevice.current.name)
+    fileprivate let serviceAdvertiser   : MCNearbyServiceAdvertiser
+    fileprivate let serviceBrowser      : MCNearbyServiceBrowser
     weak var delegate               : DataSynchronizationManagerDelegate?
 
     lazy var session : MCSession = {
@@ -44,7 +44,7 @@ class DataSynchronizationManager: NSObject {
         self.serviceBrowser.startBrowsingForPeers()
     }
     
-    func senđData(dataToBeSent: String) {
+    func senđData(_ dataToBeSent: String) {
         NSLog("%@", "sendData: \(dataToBeSent) to \(session.connectedPeers.count) peers")
         NSLog("%@", "List of peers: \(session.connectedPeers.map{$0.displayName})")
 
@@ -99,7 +99,7 @@ extension DataSynchronizationManager : MCSessionDelegate {
 
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
         NSLog("%@", "peer \(peerID) didChangeState: \(state)")
-        self.delegate?.connectedDevicesChanged(manager: self, connectedDevices:
+        self.delegate?.connectedDevicesChanged(self, connectedDevices:
             session.connectedPeers.map{$0.displayName})
     }
 

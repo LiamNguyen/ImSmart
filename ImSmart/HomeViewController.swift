@@ -10,29 +10,31 @@ import UIKit
 import RxCocoa
 import RxSwift
 import SnapKit
+import NVActivityIndicatorView
 
-class HomeViewController: UIViewController {
+class HomeViewController: UIViewController, NVActivityIndicatorViewable {
     
     var homeViewModel               : HomeViewModel!
     
-    private var mainButton          : UIButton!
-    private var cancelButton        : UIButton!
-    private var lightsButton        : UIButton!
-    private var airConditionerButton: UIButton!
-    private var fridgeButton        : UIButton!
-    private var shoppingCartButton  : UIButton!
-    private var homeButton          : UIButton!
-    private var mainButtonImageView : UIImageView!
-    private var brandLogoImageView  : UIImageView!
-    private var welcomeTextImageView: UIImageView!
-    private var menuView            : UIView!
-    private var topBar              : UIView!
-    private var devicesStackView    : UIStackView!
-    private var devicesScrollView   : UIScrollView!
-    private var activityIndicator   : UIActivityIndicatorView!
-    private var connectionsLabel    : UILabel!
+    fileprivate var mainButton          : UIButton!
+    fileprivate var cancelButton        : UIButton!
+    fileprivate var lightsButton        : UIButton!
+    fileprivate var addLightButton      : UIButton!
+    fileprivate var airConditionerButton: UIButton!
+    fileprivate var fridgeButton        : UIButton!
+    fileprivate var shoppingCartButton  : UIButton!
+    fileprivate var homeButton          : UIButton!
+    fileprivate var mainButtonImageView : UIImageView!
+    fileprivate var brandLogoImageView  : UIImageView!
+    fileprivate var welcomeTextImageView: UIImageView!
+    fileprivate var menuView            : UIView!
+    fileprivate var topBar              : UIView!
+    fileprivate var devicesStackView    : UIStackView!
+    fileprivate var devicesScrollView   : UIScrollView!
+    fileprivate var activityIndicator   : NVActivityIndicatorView!
+    fileprivate var connectionsLabel    : UILabel!
     
-    private let disposalBag         = DisposeBag()
+    fileprivate let disposalBag         = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,9 +60,10 @@ class HomeViewController: UIViewController {
         super.viewWillDisappear(true)
         
         self.navigationController?.navigationBar.isHidden = false
+        setAppearanceAsDefault()
     }
     
-    private func bindRxObserver() {
+    fileprivate func bindRxObserver() {
 //** Mark: BRAND LOGO
         
         self.homeViewModel.brandLogoOriginXObserver
@@ -123,6 +126,27 @@ class HomeViewController: UIViewController {
                 }
             }).addDisposableTo(disposalBag)
         
+//** Mark: ADD LIGHT BUTTON
+        
+        self.homeViewModel.addLightButtonPositionObserver
+            .subscribe(onNext: { [weak self] addLightButtonPositionObserver in
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: { 
+                        self?.addLightButton.center = CGPoint(
+                            x: CGFloat(addLightButtonPositionObserver.x),
+                            y: CGFloat(addLightButtonPositionObserver.y)
+                        )
+                    })
+                }
+            }).addDisposableTo(disposalBag)
+        
+        self.homeViewModel.isAddLightButtonShown.asObservable()
+            .subscribe(onNext: { [weak self] isAddLightButtonShown in
+                DispatchQueue.main.async {
+                    self?.addLightButton.isHidden = !isAddLightButtonShown
+                }
+            }).addDisposableTo(disposalBag)
+        
 //** Mark: AIR CONDITIONER BUTTON
 
         self.homeViewModel.airConditionerPositionObserver
@@ -165,17 +189,6 @@ class HomeViewController: UIViewController {
                 }
             }).addDisposableTo(disposalBag)
         
-//** Mark: CONNECTED DEVICES LIST
-        
-//        self.homeViewModel.connectedDevices.asObservable()
-//            .subscribe(onNext: { [weak self] connectedDevices in
-//                DispatchQueue.main.async {
-//                    UIView.animate(withDuration: 0.4, animations: {
-//                        self?.drawDevicesView(connectedDevices: connectedDevices)
-//                    })
-//                }
-//            }).addDisposableTo(disposalBag)
-        
 //** Mark: CONNECTIONS LABEL
         
         self.homeViewModel.connectionsLabelObserver
@@ -209,7 +222,7 @@ class HomeViewController: UIViewController {
             }).addDisposableTo(disposalBag)
     }
     
-    private func bindRxActions() {
+    fileprivate func bindRxActions() {
 //** Mark: MAIN BUTTON
 
         self.mainButton
@@ -227,7 +240,8 @@ class HomeViewController: UIViewController {
             .tap
             .debounce(0.2, scheduler: MainScheduler.instance)
             .subscribe(onNext: { [weak self] in
-                self?.homeViewModel.isMainButtonShown.value = !(self?.homeViewModel.isMainButtonShown.value)!
+                self?.homeViewModel.isMainButtonShown.value     = !(self?.homeViewModel.isMainButtonShown.value)!
+                self?.homeViewModel.isAddLightButtonShown.value = false
             }).addDisposableTo(disposalBag)
         
 //** Mark: LIGHT BUTTON
@@ -236,7 +250,20 @@ class HomeViewController: UIViewController {
             .rx
             .tap
             .subscribe(onNext: { [weak self] in
-                self?.performSegue(withIdentifier: Constants.Home.SegueIdentifier.toLightVC, sender: self)
+                if self!.homeViewModel.isAddLightButtonShown.value {
+                    self?.performSegue(withIdentifier: Constants.Home.SegueIdentifier.toLightVC, sender: self)
+                } else {
+                    self?.homeViewModel.isAddLightButtonShown.value = true
+                }
+            }).addDisposableTo(disposalBag)
+        
+//** Mark: ADD LIGHT BUTTON
+
+        self.addLightButton
+            .rx
+            .tap
+            .subscribe(onNext: { [weak self] in
+                self?.performSegue(withIdentifier: Constants.Home.SegueIdentifier.toAddLightVc, sender: self)
             }).addDisposableTo(disposalBag)
         
 //** Mark: AIR CONDITIONER BUTTON
@@ -276,13 +303,14 @@ class HomeViewController: UIViewController {
             }).addDisposableTo(disposalBag)
     }
     
-    private func customizeAppearance() {
+    fileprivate func customizeAppearance() {
         self.view.layer.contents = UIImage(named: Constants.Home.View.homeBackground)?.cgImage
         
         drawBrandLogo()
         drawWelcomeText()
         drawCancelButton()
         drawLightsButton()
+        drawAddLightButton()
         drawAirConditionerButton()
         drawShoppingCartButton()
         drawFridgeButton()
@@ -293,7 +321,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING BRAND LOGO
 
-    private func drawBrandLogo() {
+    fileprivate func drawBrandLogo() {
         let brandLogoImage                   = UIImage(named: Constants.Home.View.logo)
         
         self.brandLogoImageView              = UIImageView(image: brandLogoImage)
@@ -306,7 +334,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING WELCOME TEXT
 
-    private func drawWelcomeText() {
+    fileprivate func drawWelcomeText() {
         let welcomeTextImage                   = UIImage(named: Constants.Home.View.welcomeText)
         
         self.welcomeTextImageView              = UIImageView(image: welcomeTextImage)
@@ -319,11 +347,11 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING MAIN BUTTON
 
-    private func drawMainButton() {
+    fileprivate func drawMainButton() {
         self.mainButton                             = UIButton(frame: CGRect(x: 0, y: 0, width: 120, height: 120))
         self.mainButton.frame                       = self.mainButton.bounds
         self.mainButton.center                      = CGPoint(x: UIScreen.main.bounds.width / 2, y: Constants.Home.View.mainButtonPosition)
-        UIFunctionality.applyShadow(toView: self.mainButton, withColor: UIColor.red)
+        UIFunctionality.applyShadow(self.mainButton, withColor: UIColor.red)
         
         let buttonImage                             = UIImage(named: Constants.Home.View.mainButton)
         
@@ -340,7 +368,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING CANCEL BUTTON
     
-    private func drawCancelButton() {
+    fileprivate func drawCancelButton() {
         let cancelButtonImage               = UIImage(named: Constants.Home.View.cancelButton)?.cgImage
         
         self.cancelButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -352,7 +380,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING LIGHT BUTTON
     
-    private func drawLightsButton() {
+    fileprivate func drawLightsButton() {
         let lightsButtonImage               = UIImage(named: Constants.Home.View.lightsButton)?.cgImage
         
         self.lightsButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
@@ -362,9 +390,21 @@ class HomeViewController: UIViewController {
         self.view.addSubview(self.lightsButton)
     }
     
+//** Mark: DRAWING ADD LIGHT BUTTON
+    
+    fileprivate func drawAddLightButton() {
+        let addLightButtonImage             = UIImage(named: Constants.Home.View.addButton)?.cgImage
+        
+        self.addLightButton                 = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
+        self.addLightButton.center          = CGPoint(x: UIScreen.main.bounds.width / 2 - 65, y: Constants.Home.View.mainButtonPosition - 65)
+        self.addLightButton.layer.contents  = addLightButtonImage
+        
+        self.view.addSubview(self.addLightButton)
+    }
+    
 //** Mark: DRAWING ARI CONDITIONER BUTTON
     
-    private func drawAirConditionerButton() {
+    fileprivate func drawAirConditionerButton() {
         let airConditionerButtonImage               = UIImage(named: Constants.Home.View.airConditionerButton)?.cgImage
         
         self.airConditionerButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
@@ -376,7 +416,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING SHOPPING CART BUTTON
     
-    private func drawShoppingCartButton() {
+    fileprivate func drawShoppingCartButton() {
         let shoppingCartButtonImage               = UIImage(named: Constants.Home.View.shoppingCartButton)?.cgImage
         
         self.shoppingCartButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
@@ -388,7 +428,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING FRIDGE BUTTON
     
-    private func drawFridgeButton() {
+    fileprivate func drawFridgeButton() {
         let fridgeButtonImage               = UIImage(named: Constants.Home.View.fridgeButton)?.cgImage
         
         self.fridgeButton                   = UIButton(frame: CGRect(x: 0, y: 0, width: 60, height: 60))
@@ -400,7 +440,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING HOME BUTTON
 
-    private func drawHomeButton() {
+    fileprivate func drawHomeButton() {
         let size                          = Constants.Home.View.homeButtonSize
         
         let homeButtonImage               = UIImage(named: Constants.Home.View.homeButton)?.cgImage
@@ -420,7 +460,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING MENU VIEW
     
-    private func drawMenuView() {
+    fileprivate func drawMenuView() {
         self.menuView                 = UIView(frame: CGRect(x: 0, y: 0, width: 270, height: self.view.frame.height))
         
         self.menuView.center          = CGPoint(x: self.view.frame.width + 135, y: self.view.frame.height / 2)
@@ -437,7 +477,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING TOP BAR OF MENU
     
-    private func drawTopBar() {
+    fileprivate func drawTopBar() {
         self.topBar = UIView()
         
         topBar.backgroundColor  = UIColor.black
@@ -455,7 +495,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING TITLE
     
-    private func drawTitle() {
+    fileprivate func drawTitle() {
         let title           = UILabel()
         
         title.font          = UIFont.systemFont(ofSize: 22, weight: UIFontWeightBold)
@@ -473,7 +513,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING CONNECTIONS LABEL
     
-    private func drawConnectionsLabel() {
+    fileprivate func drawConnectionsLabel() {
         self.connectionsLabel = UILabel()
         
         connectionsLabel.text = Constants.Home.Menu.waitingConnection
@@ -488,7 +528,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING CONNECTED DEVICES SCROLL VIEW
     
-    private func drawDevicesView(connectedDevices: [String]) {
+    fileprivate func drawDevicesView(_ connectedDevices: [String]) {
         if let stackView = self.devicesStackView, let scrollView = self.devicesScrollView {
             stackView.removeFromSuperview()
             scrollView.removeFromSuperview()
@@ -502,7 +542,7 @@ class HomeViewController: UIViewController {
         devicesStackView.alignment  = .center
         
         for device in connectedDevices {
-            let deviceLabel = drawDeviceLabel(deviceName: device)
+            let deviceLabel = drawDeviceLabel(device)
             devicesStackView.addArrangedSubview(deviceLabel)
         }
         
@@ -526,7 +566,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING DEVICE LABEL
     
-    private func drawDeviceLabel(deviceName: String) -> UILabel {
+    fileprivate func drawDeviceLabel(_ deviceName: String) -> UILabel {
         let deviceLabel = UILabel()
         
         deviceLabel.text = deviceName
@@ -537,11 +577,13 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING ACTIVITY INDICATOR VIEW
     
-    private func drawActivityIndicatorView() {
-        self.activityIndicator                          = UIActivityIndicatorView()
-        
-        activityIndicator.hidesWhenStopped              = true
-        activityIndicator.activityIndicatorViewStyle    = .gray
+    fileprivate func drawActivityIndicatorView() {
+        let frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        self.activityIndicator = NVActivityIndicatorView(
+            frame: frame,
+            type: .ballScaleRippleMultiple,
+            color: .red, padding: 0
+        )
         
         self.menuView.addSubview(activityIndicator)
         
@@ -553,7 +595,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING FOOTER OF MENU
     
-    private func drawMenuViewFooter() {
+    fileprivate func drawMenuViewFooter() {
         let tcButton                = drawTermsAndCondiTionsButton()
         let privacyStatementButton  = drawPrivacyStatementButton()
         let versionLabel            = drawVersionLabel()
@@ -582,7 +624,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING TERMS AND CONDITIONS BUTTON
     
-    private func drawTermsAndCondiTionsButton() -> UIButton {
+    fileprivate func drawTermsAndCondiTionsButton() -> UIButton {
         let tcButton                = UIButton()
         
         tcButton.titleLabel?.font   = UIFont.systemFont(ofSize: 12)
@@ -594,7 +636,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING PRIVACY STATEMENT BUTTON
     
-    private func drawPrivacyStatementButton() -> UIButton {
+    fileprivate func drawPrivacyStatementButton() -> UIButton {
         let privacyStatementButton              = UIButton()
         
         privacyStatementButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
@@ -606,7 +648,7 @@ class HomeViewController: UIViewController {
     
 //** Mark: DRAWING VERSION LABEL
     
-    private func drawVersionLabel() -> UILabel {
+    fileprivate func drawVersionLabel() -> UILabel {
         let versionLabel        = UILabel()
         
         versionLabel.text       = Constants.Home.Menu.version
@@ -624,8 +666,14 @@ class HomeViewController: UIViewController {
             return
         }
         
-        self.homeViewModel.menuViewShouldShow.value = false
+        setAppearanceAsDefault()
     }
     
-    @IBAction func unwindToHomeViewController(segue: UIStoryboardSegue) {}
+    fileprivate func setAppearanceAsDefault() {
+        self.homeViewModel.menuViewShouldShow.value     = false
+        self.homeViewModel.isMainButtonShown.value      = true
+        self.homeViewModel.isAddLightButtonShown.value  = false
+    }
+    
+    @IBAction func unwindToHomeViewController(_ segue: UIStoryboardSegue) {}
 }

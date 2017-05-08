@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Byy-FK-4uE">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Byy-FK-4uE">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,6 +29,7 @@
                         <segue destination="FbY-Y5-U51" kind="show" identifier="segue_HomeToShoppingCartVC" id="u8e-TR-Lt9"/>
                         <segue destination="VAP-mZ-JfI" kind="show" identifier="segue_HomeToAirConditionerVC" id="itV-ld-ouR"/>
                         <segue destination="YPv-KN-f6H" kind="show" identifier="segue_HomeToFridgeVC" id="qRd-eb-OgI"/>
+                        <segue destination="fzB-m1-zqo" kind="show" identifier="segue_HomeToAddLightVC" id="nJm-fB-SlL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -77,7 +78,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B5S-QV-fBw">
-                                                    <rect key="frame" x="2" y="5" width="284" height="92"/>
+                                                    <rect key="frame" x="2" y="5" width="339" height="92"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="spR-M2-cR3">
                                                             <rect key="frame" x="0.0" y="7" width="63" height="79"/>
@@ -86,7 +87,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="XAe-4w-OLA">
-                                                            <rect key="frame" x="97" y="49" width="145" height="20.5"/>
+                                                            <rect key="frame" x="97" y="49.5" width="145" height="20.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Brightness: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cKh-zp-3Gd">
                                                                     <rect key="frame" x="0.0" y="0.0" width="91.5" height="20.5"/>
@@ -180,10 +181,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PGa-TC-KM9">
-                                <rect key="frame" x="27.5" y="140" width="320" height="128"/>
+                                <rect key="frame" x="28" y="140" width="320" height="128"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="2LS-mF-3FX">
-                                        <rect key="frame" x="164" y="11" width="156" height="107.5"/>
+                                        <rect key="frame" x="164" y="10.5" width="156" height="107.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMb-zc-xWC">
                                                 <rect key="frame" x="0.0" y="0.0" width="156" height="84"/>
@@ -257,7 +258,7 @@
                                                                 </constraints>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Left" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mcQ-EW-1m2">
-                                                                <rect key="frame" x="12.5" y="55" width="30" height="21"/>
+                                                                <rect key="frame" x="12" y="55" width="30" height="21"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="21" id="D74-6u-UTO"/>
                                                                 </constraints>
@@ -290,13 +291,13 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPG-kg-dbh">
-                                        <rect key="frame" x="8" y="17" width="91.5" height="95.5"/>
+                                        <rect key="frame" x="8" y="16.5" width="91.5" height="95.5"/>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="80"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="℃" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bd-V6-Hn6">
-                                        <rect key="frame" x="108" y="17" width="33.5" height="36"/>
+                                        <rect key="frame" x="107.5" y="17" width="33.5" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -336,22 +337,8 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="22" translatesAutoresizingMaskIntoConstraints="NO" id="qsj-K8-jYM">
                                                 <rect key="frame" x="0.0" y="74" width="102" height="40"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHH-V2-Q5h">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="40" id="PPa-2W-dvZ"/>
-                                                            <constraint firstAttribute="height" constant="40" id="SXQ-fi-h7k"/>
-                                                        </constraints>
-                                                        <state key="normal" image="fanButton">
-                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="btn_FanSpeed_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="YB1-Iv-HqJ"/>
-                                                            <action selector="btn_TempUp_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="HPO-BI-rej"/>
-                                                        </connections>
-                                                    </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHE-sX-iTG">
-                                                        <rect key="frame" x="62" y="0.0" width="40" height="40"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="40" id="5KK-SV-6bo"/>
                                                             <constraint firstAttribute="width" constant="40" id="a19-1D-ysu"/>
@@ -362,6 +349,20 @@
                                                         <connections>
                                                             <action selector="btn_Swing_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="Me2-T9-Sgc"/>
                                                             <action selector="btn_TempUp_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="lfP-HI-4s7"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHH-V2-Q5h">
+                                                        <rect key="frame" x="62" y="0.0" width="40" height="40"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="40" id="PPa-2W-dvZ"/>
+                                                            <constraint firstAttribute="height" constant="40" id="SXQ-fi-h7k"/>
+                                                        </constraints>
+                                                        <state key="normal" image="fanButton">
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                        <connections>
+                                                            <action selector="btn_FanSpeed_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="YB1-Iv-HqJ"/>
+                                                            <action selector="btn_TempUp_OnClick:" destination="VAP-mZ-JfI" eventType="touchUpInside" id="HPO-BI-rej"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -504,6 +505,42 @@
             </objects>
             <point key="canvasLocation" x="2089" y="384"/>
         </scene>
+        <!--Add Light View Controller-->
+        <scene sceneID="C2L-Bz-95F">
+            <objects>
+                <viewController id="fzB-m1-zqo" customClass="AddLightViewController" customModule="ImSmart" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Lv-9x-eCO"/>
+                        <viewControllerLayoutGuide type="bottom" id="7bw-Ho-69L"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Opy-wx-gDQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0od-gR-gDv" customClass="JMCRadarView" customModule="ImSmart" customModuleProvider="target">
+                                <rect key="frame" x="63" y="213" width="248" height="240"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="JmZ-dK-qjo"/>
+                                    <constraint firstAttribute="width" constant="248" id="nVd-0s-s8Z"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0od-gR-gDv" firstAttribute="centerY" secondItem="Opy-wx-gDQ" secondAttribute="centerY" id="JFZ-p5-55d"/>
+                            <constraint firstItem="0od-gR-gDv" firstAttribute="centerX" secondItem="Opy-wx-gDQ" secondAttribute="centerX" id="lUg-u4-MQN"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="view_RangingLightsView" destination="0od-gR-gDv" id="VMR-4Y-HMt"/>
+                        <segue destination="vnQ-DK-CcP" kind="show" identifier="segue_AddLightToLightVC" id="kNz-M2-Dbl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TWj-hK-xZ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1137" y="-993"/>
+        </scene>
         <!--Fridges-->
         <scene sceneID="brN-NE-NHF">
             <objects>
@@ -558,4 +595,7 @@
         <image name="whiteAirConditionerButton" width="457" height="457"/>
         <image name="whiteAirConditionerIcon" width="359" height="300"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="kNz-M2-Dbl"/>
+    </inferredMetricsTieBreakers>
 </document>

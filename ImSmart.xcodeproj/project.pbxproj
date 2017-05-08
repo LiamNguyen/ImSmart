@@ -9,6 +9,21 @@
 /* Begin PBXBuildFile section */
 		1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */; };
 		7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7639CB161EA355760050FEF2 /* Model.xcdatamodeld */; };
+		76577C0E1EBFB96000D33080 /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76577C0D1EBFB96000D33080 /* NVActivityIndicatorView.framework */; };
+		76577C0F1EBFB96000D33080 /* NVActivityIndicatorView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76577C0D1EBFB96000D33080 /* NVActivityIndicatorView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		765BF31F1EBE09FF00F5DDF1 /* BeaconShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3171EBE09FF00F5DDF1 /* BeaconShape.swift */; };
+		765BF3201EBE09FF00F5DDF1 /* DataStructures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3181EBE09FF00F5DDF1 /* DataStructures.swift */; };
+		765BF3211EBE09FF00F5DDF1 /* JMCBeaconManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3191EBE09FF00F5DDF1 /* JMCBeaconManager.swift */; };
+		765BF3221EBE09FF00F5DDF1 /* JMCBluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31A1EBE09FF00F5DDF1 /* JMCBluetoothManager.swift */; };
+		765BF3241EBE09FF00F5DDF1 /* PWDisplayLinker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31C1EBE09FF00F5DDF1 /* PWDisplayLinker.swift */; };
+		765BF3251EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31D1EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift */; };
+		765BF3261EBE09FF00F5DDF1 /* RadarScannerShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31E1EBE09FF00F5DDF1 /* RadarScannerShape.swift */; };
+		765BF3291EBE582100F5DDF1 /* AddLightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3281EBE582100F5DDF1 /* AddLightViewController.swift */; };
+		76AF5B1D1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */; };
+		76AF5B1E1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76AF5B201EBB9BE500A6EAB1 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */; };
+		76AF5B211EBB9BE500A6EAB1 /* ObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		76E839E21EBE70A3009E7E93 /* JMCRadarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E839E11EBE70A3009E7E93 /* JMCRadarView.swift */; };
 		ED1117951E9AD337006EC259 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1117941E9AD337006EC259 /* Helper.swift */; };
 		ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC01E8F89EB006791C6 /* HomeViewController.swift */; };
 		ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED171EC61E8F8CEF006791C6 /* LocalStore.swift */; };
@@ -22,6 +37,14 @@
 		ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */; };
 		ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */; };
 		ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */; };
+		ED2D3CA71EB73FEB00BC46AF /* LightModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */; };
+		ED3281261EB7C36D00DF20F6 /* AirConditionerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3281251EB7C36D00DF20F6 /* AirConditionerModel.swift */; };
+		ED504F611EB84FF100802BE3 /* AirConditioner.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F5F1EB84FF100802BE3 /* AirConditioner.swift */; };
+		ED504F621EB84FF100802BE3 /* AirConditionerProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F601EB84FF100802BE3 /* AirConditionerProperties.swift */; };
+		ED504F641EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F631EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift */; };
+		ED504F661EB851F900802BE3 /* AirConditionerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F651EB851F900802BE3 /* AirConditionerViewModel.swift */; };
+		ED504F681EB85A1100802BE3 /* AirConditionerCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F671EB85A1100802BE3 /* AirConditionerCellViewModel.swift */; };
+		ED504F6A1EB8912C00802BE3 /* StoreType.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED504F691EB8912C00802BE3 /* StoreType.swift */; };
 		ED5168101EB4B523000813C7 /* Retrier.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED51680F1EB4B523000813C7 /* Retrier.swift */; };
 		ED5168151EB50201000813C7 /* GSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5168141EB50201000813C7 /* GSMessage.swift */; };
 		ED53DA391E9AEAE2002B6CDD /* HelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */; };
@@ -84,10 +107,13 @@
 			dstSubfolderSpec = 10;
 			files = (
 				EDAB2C431E952EB4006DF616 /* RxCocoa.framework in Embed Frameworks */,
+				76AF5B1E1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Embed Frameworks */,
+				76577C0F1EBFB96000D33080 /* NVActivityIndicatorView.framework in Embed Frameworks */,
 				ED953A0C1EB37B5900D622CB /* Alamofire.framework in Embed Frameworks */,
 				ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */,
 				ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */,
 				EDC5047F1EAB64350086B377 /* SocketIO.framework in Embed Frameworks */,
+				76AF5B211EBB9BE500A6EAB1 /* ObjectMapper.framework in Embed Frameworks */,
 				ED1BACCC1E98FF43005F7F75 /* SnapKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
@@ -98,6 +124,18 @@
 /* Begin PBXFileReference section */
 		1AABF7D91EB5427E00BFAD42 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7639CB171EA355760050FEF2 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		76577C0D1EBFB96000D33080 /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
+		765BF3171EBE09FF00F5DDF1 /* BeaconShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BeaconShape.swift; path = JMCiBeaconManager/BeaconShape.swift; sourceTree = "<group>"; };
+		765BF3181EBE09FF00F5DDF1 /* DataStructures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataStructures.swift; path = JMCiBeaconManager/DataStructures.swift; sourceTree = "<group>"; };
+		765BF3191EBE09FF00F5DDF1 /* JMCBeaconManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCBeaconManager.swift; path = JMCiBeaconManager/JMCBeaconManager.swift; sourceTree = "<group>"; };
+		765BF31A1EBE09FF00F5DDF1 /* JMCBluetoothManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCBluetoothManager.swift; path = JMCiBeaconManager/JMCBluetoothManager.swift; sourceTree = "<group>"; };
+		765BF31C1EBE09FF00F5DDF1 /* PWDisplayLinker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWDisplayLinker.swift; path = JMCiBeaconManager/PWDisplayLinker.swift; sourceTree = "<group>"; };
+		765BF31D1EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWDisplayLinkerDelegate.swift; path = JMCiBeaconManager/PWDisplayLinkerDelegate.swift; sourceTree = "<group>"; };
+		765BF31E1EBE09FF00F5DDF1 /* RadarScannerShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadarScannerShape.swift; path = JMCiBeaconManager/RadarScannerShape.swift; sourceTree = "<group>"; };
+		765BF3281EBE582100F5DDF1 /* AddLightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLightViewController.swift; sourceTree = "<group>"; };
+		76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
+		76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
+		76E839E11EBE70A3009E7E93 /* JMCRadarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCRadarView.swift; path = JMCiBeaconManager/JMCRadarView.swift; sourceTree = "<group>"; };
 		ED1117941E9AD337006EC259 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		ED171EC01E8F89EB006791C6 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		ED171EC61E8F8CEF006791C6 /* LocalStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalStore.swift; sourceTree = "<group>"; };
@@ -110,6 +148,14 @@
 		ED2D3C7B1EB619CC00BC46AF /* UIApplicationExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIApplicationExtension.swift; sourceTree = "<group>"; };
 		ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataLightOperations.swift; sourceTree = "<group>"; };
 		ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightProperties.swift; sourceTree = "<group>"; };
+		ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LightModel.swift; sourceTree = "<group>"; };
+		ED3281251EB7C36D00DF20F6 /* AirConditionerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerModel.swift; sourceTree = "<group>"; };
+		ED504F5F1EB84FF100802BE3 /* AirConditioner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditioner.swift; sourceTree = "<group>"; };
+		ED504F601EB84FF100802BE3 /* AirConditionerProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerProperties.swift; sourceTree = "<group>"; };
+		ED504F631EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAirConditionerOperations.swift; sourceTree = "<group>"; };
+		ED504F651EB851F900802BE3 /* AirConditionerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerViewModel.swift; sourceTree = "<group>"; };
+		ED504F671EB85A1100802BE3 /* AirConditionerCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AirConditionerCellViewModel.swift; sourceTree = "<group>"; };
+		ED504F691EB8912C00802BE3 /* StoreType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreType.swift; sourceTree = "<group>"; };
 		ED51680F1EB4B523000813C7 /* Retrier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Retrier.swift; sourceTree = "<group>"; };
 		ED5168141EB50201000813C7 /* GSMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GSMessage.swift; sourceTree = "<group>"; };
 		ED53DA381E9AEAE2002B6CDD /* HelperTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperTests.swift; sourceTree = "<group>"; };
@@ -153,10 +199,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDAB2C421E952EB4006DF616 /* RxCocoa.framework in Frameworks */,
+				76AF5B1D1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Frameworks */,
+				76577C0E1EBFB96000D33080 /* NVActivityIndicatorView.framework in Frameworks */,
 				ED953A0B1EB37B5900D622CB /* Alamofire.framework in Frameworks */,
 				ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */,
 				ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */,
 				EDC5047E1EAB64350086B377 /* SocketIO.framework in Frameworks */,
+				76AF5B201EBB9BE500A6EAB1 /* ObjectMapper.framework in Frameworks */,
 				ED1BACCB1E98FF43005F7F75 /* SnapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -201,15 +250,35 @@
 			children = (
 				7639CB161EA355760050FEF2 /* Model.xcdatamodeld */,
 				ED2D3C7D1EB640E900BC46AT /* CoreDataLightOperations.swift */,
+				ED504F631EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift */,
 			);
 			name = CoreData;
+			sourceTree = "<group>";
+		};
+		765BF3271EBE0A0700F5DDF1 /* JMCiBeaconManager */ = {
+			isa = PBXGroup;
+			children = (
+				76E839E11EBE70A3009E7E93 /* JMCRadarView.swift */,
+				765BF3171EBE09FF00F5DDF1 /* BeaconShape.swift */,
+				765BF3181EBE09FF00F5DDF1 /* DataStructures.swift */,
+				765BF3191EBE09FF00F5DDF1 /* JMCBeaconManager.swift */,
+				765BF31A1EBE09FF00F5DDF1 /* JMCBluetoothManager.swift */,
+				765BF31C1EBE09FF00F5DDF1 /* PWDisplayLinker.swift */,
+				765BF31D1EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift */,
+				765BF31E1EBE09FF00F5DDF1 /* RadarScannerShape.swift */,
+			);
+			name = JMCiBeaconManager;
 			sourceTree = "<group>";
 		};
 		ED171EBD1E8F87E2006791C6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ED504F5F1EB84FF100802BE3 /* AirConditioner.swift */,
+				ED504F601EB84FF100802BE3 /* AirConditionerProperties.swift */,
 				EDD938091E941E5300FB1797 /* Light.swift */,
 				ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */,
+				ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */,
+				ED3281251EB7C36D00DF20F6 /* AirConditionerModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -220,6 +289,7 @@
 				ED5954B81E98990200C3E047 /* CellViewModel */,
 				ED171EC81E8F8D09006791C6 /* HomeViewModel.swift */,
 				ED5954B61E9898FB00C3E047 /* LightViewModel.swift */,
+				ED504F651EB851F900802BE3 /* AirConditionerViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -233,6 +303,7 @@
 				EDF791E61E9554A00078E98B /* AirConditionerViewController.swift */,
 				ED67474E1E95663700C925D0 /* FridgeViewController.swift */,
 				ED6747501E9567CC00C925D0 /* ShoppingCartViewController.swift */,
+				765BF3281EBE582100F5DDF1 /* AddLightViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -255,6 +326,7 @@
 				ED51680E1EB4B515000813C7 /* Alamofire */,
 				ED171EC61E8F8CEF006791C6 /* LocalStore.swift */,
 				ED8896CD1EAEC3F90064404E /* RemoteStore.swift */,
+				ED504F691EB8912C00802BE3 /* StoreType.swift */,
 			);
 			name = Store;
 			sourceTree = "<group>";
@@ -280,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				EDD938071E941DE000FB1797 /* LightCellViewModel.swift */,
+				ED504F671EB85A1100802BE3 /* AirConditionerCellViewModel.swift */,
 			);
 			name = CellViewModel;
 			sourceTree = "<group>";
@@ -310,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				ED75D3301E8C478A006D6082 /* AppDelegate.swift */,
+				765BF3271EBE0A0700F5DDF1 /* JMCiBeaconManager */,
 				7639CB151EA3554E0050FEF2 /* CoreData */,
 				ED171EC31E8F8CB4006791C6 /* Store */,
 				ED171EC21E8F8CAB006791C6 /* Helper */,
@@ -378,6 +452,9 @@
 		ED810EC11E9BB440005F701E /* ExternalLibraries */ = {
 			isa = PBXGroup;
 			children = (
+				76577C0D1EBFB96000D33080 /* NVActivityIndicatorView.framework */,
+				76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */,
+				76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */,
 				ED953A0A1EB37B5900D622CB /* Alamofire.framework */,
 				EDC5047D1EAB64350086B377 /* SocketIO.framework */,
 				ED1BACCA1E98FF43005F7F75 /* SnapKit.framework */,
@@ -531,11 +608,13 @@
 					ED75D32C1E8C4782006D6082 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 86M37DGEMQ;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					ED75D3401E8C478B006D6082 = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = 86M37DGEMQ;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 						TestTargetID = ED75D32C1E8C4782006D6082;
 					};
@@ -599,7 +678,7 @@
 /* Begin PBXShellScriptBuildPhase section */
 		ED75D3621E8C498B006D6082 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -609,6 +688,9 @@
 				"$(SRCROOT)/Carthage/Build/iOS/Spruce.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SocketIO.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AlamofireObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 			);
 			outputPaths = (
 			);
@@ -640,30 +722,47 @@
 			files = (
 				ED75D3311E8C478A006D6082 /* AppDelegate.swift in Sources */,
 				ED171EC11E8F89EB006791C6 /* HomeViewController.swift in Sources */,
+				ED504F621EB84FF100802BE3 /* AirConditionerProperties.swift in Sources */,
 				ED171EC91E8F8D09006791C6 /* HomeViewModel.swift in Sources */,
 				ED1BACCE1E999494005F7F75 /* BrightnessViewController.swift in Sources */,
 				ED171EC71E8F8CEF006791C6 /* LocalStore.swift in Sources */,
 				EDF791E71E9554A00078E98B /* AirConditionerViewController.swift in Sources */,
 				ED2D3C7C1EB619CC00BC46AF /* UIApplicationExtension.swift in Sources */,
+				765BF3251EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift in Sources */,
+				ED504F611EB84FF100802BE3 /* AirConditioner.swift in Sources */,
 				ED5954B71E9898FB00C3E047 /* LightViewModel.swift in Sources */,
 				ED2D3C801EB704A800BC46AT /* LightProperties.swift in Sources */,
 				ED67474F1E95663700C925D0 /* FridgeViewController.swift in Sources */,
 				ED1117951E9AD337006EC259 /* Helper.swift in Sources */,
 				EDD9380A1E941E5300FB1797 /* Light.swift in Sources */,
+				765BF3211EBE09FF00F5DDF1 /* JMCBeaconManager.swift in Sources */,
+				765BF3291EBE582100F5DDF1 /* AddLightViewController.swift in Sources */,
+				765BF3221EBE09FF00F5DDF1 /* JMCBluetoothManager.swift in Sources */,
 				EDC504811EAB64720086B377 /* SocketIOManager.swift in Sources */,
 				ED9792D31E9010A5004827D4 /* UIFunctionality.swift in Sources */,
 				1AABF7DA1EB5427E00BFAD42 /* LocationManager.swift in Sources */,
+				ED504F661EB851F900802BE3 /* AirConditionerViewModel.swift in Sources */,
+				765BF3261EBE09FF00F5DDF1 /* RadarScannerShape.swift in Sources */,
+				ED504F681EB85A1100802BE3 /* AirConditionerCellViewModel.swift in Sources */,
+				765BF3241EBE09FF00F5DDF1 /* PWDisplayLinker.swift in Sources */,
+				765BF31F1EBE09FF00F5DDF1 /* BeaconShape.swift in Sources */,
+				ED2D3CA71EB73FEB00BC46AF /* LightModel.swift in Sources */,
 				ED6747511E9567CC00C925D0 /* ShoppingCartViewController.swift in Sources */,
 				ED5168101EB4B523000813C7 /* Retrier.swift in Sources */,
 				EDA77A7D1E9571DB002C801B /* LightsTableViewCell.swift in Sources */,
+				76E839E21EBE70A3009E7E93 /* JMCRadarView.swift in Sources */,
 				ED1BACC71E98EA64005F7F75 /* ColorExtension.swift in Sources */,
 				EDD938081E941DE000FB1797 /* LightCellViewModel.swift in Sources */,
 				EDA77A7F1E957CE0002C801B /* LightsMockup.swift in Sources */,
 				EDAB2C401E95287F006DF616 /* Constants.swift in Sources */,
 				7639CB181EA355760050FEF2 /* Model.xcdatamodeld in Sources */,
 				ED2D3C7E1EB640E900BC46AT /* CoreDataLightOperations.swift in Sources */,
+				765BF3201EBE09FF00F5DDF1 /* DataStructures.swift in Sources */,
+				ED3281261EB7C36D00DF20F6 /* AirConditionerModel.swift in Sources */,
+				ED504F641EB8519C00802BE3 /* CoreDataAirConditionerOperations.swift in Sources */,
 				ED8896CE1EAEC3F90064404E /* RemoteStore.swift in Sources */,
 				ED5168151EB50201000813C7 /* GSMessage.swift in Sources */,
+				ED504F6A1EB8912C00802BE3 /* StoreType.swift in Sources */,
 				EDF791E91E9557120078E98B /* LightViewController.swift in Sources */,
 				ED1BACC91E98EAB2005F7F75 /* Theme.swift in Sources */,
 				ED810EC31E9BB4A9005F701E /* DataSynchronizationManager.swift in Sources */,

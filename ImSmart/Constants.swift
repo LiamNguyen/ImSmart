@@ -11,12 +11,15 @@ import UIKit
 
 struct Constants {
     
-    static let deviceUUID = UIDevice.current.identifierForVendor?.uuidString ?? ""
-    static let deviceName = UIDevice.current.name
+    static let deviceUUID:String = UIDevice.current.identifierForVendor?.uuidString ?? ""
+    static let deviceName:String = UIDevice.current.name
+    static var longTextLineNumbers: Int = {
+        return Constants.DeviceModel.deviceType() == .iPhone5 || Constants.DeviceModel.deviceType() == .iPhone4 ? 3 : 2
+    }()
     
     struct Window {
-        static let screenWidth  = Float(UIScreen.main.bounds.width)
-        static let screenHeight = Float(UIScreen.main.bounds.height)
+        static let screenWidth: Float  = Float(UIScreen.main.bounds.width)
+        static let screenHeight: Float = Float(UIScreen.main.bounds.height)
     }
     
     struct DeviceModel {
@@ -54,6 +57,7 @@ struct Constants {
             static let shoppingCartButton   = "shoppingCartIcon.png"
             static let fridgeButton         = "fridgeIcon.png"
             static let homeButton           = "homeIcon.png"
+            static let addButton            = "addIcon.png"
             static var homeButtonSize       = (width: 40, height: 40)
             static var mainButtonPosition   = CGFloat(Constants.Window.screenHeight - 250)
         }
@@ -72,6 +76,7 @@ struct Constants {
             static let toAirConditionerVC   = "segue_HomeToAirConditionerVC"
             static let toShoppingCartVC     = "segue_HomeToShoppingCartVC"
             static let toFridgeVC           = "segue_HomeToFridgeVC"
+            static let toAddLightVc         = "segue_HomeToAddLightVC"
         }
     }
     
@@ -97,6 +102,26 @@ struct Constants {
         }
     }
     
+    struct AddLight {
+        struct AlertView {
+            static let title                : String = "Found light"
+            static let message              : String = "Light Id: "
+            static let textFieldPlaceHolder : String = "Where is this light located?"
+            
+            struct CancelAction {
+                static let title: String    = "Cancel"
+            }
+            
+            struct AddAction {
+                static let title: String    = "Add"
+            }
+        }
+        
+        struct SegueIdentifier {
+            static let toLightVC        = "segue_AddLightToLightVC"
+        }
+    }
+    
     struct Brightness {
         struct View {
             static let title                = "Adjust brightness"
@@ -119,6 +144,19 @@ struct Constants {
             static let areaLabel            = "Living Room"
         }
         
+        struct FanSpeed {
+            static let high                 = "HI"
+            static let medium               = "MED"
+            static let low                  = "LO"
+        }
+        
+        struct Swing {
+            static let left                 = "LEFT"
+            static let middle               = "MID"
+            static let right                = "RIGHT"
+            static let auto                 = "AUTO"
+        }
+        
         struct segueIdentifier {
             static let toHomeVC             = "segue_AirConditionerToHomeVC"
         }
@@ -138,6 +176,7 @@ struct Constants {
     
     struct NotificationName {
         static let requiredUpdateLights     = "requiredUpdateLights"
+        static let requiredUpdateAirCons    = "requiredUpdateAirCons"
     }
     
     struct UserNotification {
@@ -160,6 +199,14 @@ struct Constants {
     
     struct Location {
         static let radius                   = 1.0
+    }
+    
+    struct Beacon {
+        static let TestBeacon: (minor: UInt16, major: UInt16, proximityId: String) = (
+            minor: 0001,
+            major: 0001,
+            proximityId: "135A1D6C-0B9F-482A-9944-33E230D8AF05"
+        )
     }
     
     struct HttpStatusCode {

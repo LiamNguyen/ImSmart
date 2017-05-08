@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 struct LightsMockup {
-    static func lights(requireCellShake: Variable<Bool>, requireSynchronization: Variable<Bool>) -> [LightCellViewModel] {
+    static func lights(_ requireCellShake: Variable<Bool>, requireSynchronization: Variable<Bool>) -> [LightCellViewModel] {
         return [LightCellViewModel]()
 //        
 //        let kitchenrequireCellShake             = LightCellViewModel(

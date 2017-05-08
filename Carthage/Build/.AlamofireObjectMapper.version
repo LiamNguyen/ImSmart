@@ -1,0 +1,10 @@
+{
+  "xcodeVersion" : "Xcode 8.3.2\nBuild version 8E2002",
+  "commitish" : "4.1.0",
+  "iOS" : [
+    {
+      "hash" : "b88ec34c628154ed837809ef7e105a4852af201d5750cc0d49b65223683f7fce",
+      "name" : "AlamofireObjectMapper"
+    }
+  ]
+}

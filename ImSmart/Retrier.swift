@@ -12,23 +12,23 @@ import Alamofire
 class Retrier: RequestRetrier {
     
     var defaultRetryCount = 3
-    private  var requestsAndRetryCounts: [(Request, Int)] = []
-    private  var lock = NSLock()
+    fileprivate  var requestsAndRetryCounts: [(Request, Int)] = []
+    fileprivate  var lock = NSLock()
     
-    private func index(request: Request) -> Int? {
+    fileprivate func index(_ request: Request) -> Int? {
         return requestsAndRetryCounts.index(where: { $0.0 === request })
     }
     
-    func addRetryInfo(request: Request, retryCount: Int? = nil) {
+    func addRetryInfo(_ request: Request, retryCount: Int? = nil) {
         lock.lock() ; defer { lock.unlock() }
-        guard index(request: request) == nil else { print("ERROR addRetryInfo called for already tracked request"); return }
+        guard index(request) == nil else { print("ERROR addRetryInfo called for already tracked request"); return }
         
         requestsAndRetryCounts.append((request, retryCount ?? defaultRetryCount))
     }
     
-    func deleteRetryInfo(request: Request) {
+    func deleteRetryInfo(_ request: Request) {
         lock.lock() ; defer { lock.unlock() }
-        guard let index = index(request: request) else { print("ERROR deleteRetryInfo called for not tracked request"); return }
+        guard let index = index(request) else { print("ERROR deleteRetryInfo called for not tracked request"); return }
         
         requestsAndRetryCounts.remove(at: index)
     }
@@ -37,7 +37,7 @@ class Retrier: RequestRetrier {
         
         lock.lock() ; defer { lock.unlock() }
         
-        guard let index = index(request: request) else { completion(false, 0); return }
+        guard let index = index(request) else { completion(false, 0); return }
         let (request, retryCount) = requestsAndRetryCounts[index]
         
         if retryCount == 0 {

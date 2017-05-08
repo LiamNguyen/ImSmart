@@ -11,14 +11,14 @@ import UIKit
 import Spruce
 
 struct UIFunctionality {
-    static func applyShadow(toView: AnyObject, withColor: UIColor) {
+    static func applyShadow(_ toView: AnyObject, withColor: UIColor) {
         toView.layer.shadowColor = withColor.cgColor
         toView.layer.shadowOffset = CGSize.zero
         toView.layer.shadowOpacity = 0.7
         toView.layer.shadowRadius = 10
     }
     
-    static func applyShakyAnimation(elementToBeShake: AnyObject, duration: Float, repeatCount: Float = .infinity) {
+    static func applyShakyAnimation(_ elementToBeShake: AnyObject, duration: Float, repeatCount: Float = .infinity) {
         let animation = CABasicAnimation(keyPath: "position")
         animation.duration = CFTimeInterval(duration)
         animation.repeatCount = repeatCount
@@ -31,7 +31,7 @@ struct UIFunctionality {
         }
     }
     
-    static func applySmoothAnimation(elementToBeSmooth: UIView) {
+    static func applySmoothAnimation(_ elementToBeSmooth: UIView) {
         let animations   : [StockAnimation] = [.slide(.left, .severely), .fadeIn]
         let animation    = SpringAnimation(duration: 0.8)
         let sortFunction = LinearSortFunction(direction: .topToBottom, interObjectDelay: 0.1)
