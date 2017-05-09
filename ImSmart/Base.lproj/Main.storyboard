@@ -478,7 +478,7 @@
                         <outlet property="btn_Mode" destination="ZLg-wJ-5q1" id="VN0-Ea-KTu"/>
                         <outlet property="btn_Swing" destination="QHE-sX-iTG" id="mrg-Tl-C1V"/>
                         <outlet property="view_AdjustTemperature" destination="Myn-Pm-rLq" id="e5a-9o-5Oh"/>
-                        <segue destination="xWe-kg-Xv7" kind="unwind" identifier="segue_AirConditionerToHomeVC" unwindAction="unwindToHomeViewControllerWithSegue:" id="lW1-2D-ve6"/>
+                        <segue destination="xWe-kg-Xv7" kind="unwind" identifier="segue_AirConditionerToHomeVC" unwindAction="unwindToHomeViewController:" id="K6h-im-Twe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6j-LA-i66" userLabel="First Responder" sceneMemberID="firstResponder"/>
