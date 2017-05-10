@@ -10,21 +10,27 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SnapKit
+import NVActivityIndicatorView
 
-class AirConditionerViewController: UIViewController {
+class AirConditionerViewController: UIViewController, NVActivityIndicatorViewable {
     fileprivate var airConditionerViewModel: AirConditionerViewModel!
     
     @IBOutlet fileprivate weak var view_AdjustTemperature   : UIView!
     @IBOutlet fileprivate weak var btn_Mode                 : UIButton!
     @IBOutlet fileprivate weak var btn_FanSpeed             : UIButton!
     @IBOutlet fileprivate weak var btn_Swing                : UIButton!
+    @IBOutlet fileprivate weak var lbl_Temperature          : UILabel!
+    @IBOutlet fileprivate weak var lbl_Mode                 : UILabel!
+    @IBOutlet fileprivate weak var lbl_Fanspeed             : UILabel!
+    @IBOutlet fileprivate weak var lbl_Swing                : UILabel!
     
     fileprivate var topBar                  : UIView!
-    fileprivate var backIcon                : UIButton!
-    fileprivate var backButton              : UIButton!
     fileprivate var modeSelectionView       : UIView!
     fileprivate var fanSpeedSelectionView   : UIView!
     fileprivate var swingSelectionView      : UIView!
+    fileprivate var loadingView             : UIView!
+    fileprivate var backIcon                : UIButton!
+    fileprivate var backButton              : UIButton!
     fileprivate var coolModeButton          : UIButton!
     fileprivate var autoModeButton          : UIButton!
     fileprivate var dryModeButton           : UIButton!
@@ -36,6 +42,9 @@ class AirConditionerViewController: UIViewController {
     fileprivate var middleSwingButton       : UIButton!
     fileprivate var rightSwingButton        : UIButton!
     fileprivate var autoSwingButton         : UIButton!
+    fileprivate var areaTitle               : UILabel!
+    fileprivate var loadingLabel            : UILabel!
+    fileprivate var activityIndicator       : NVActivityIndicatorView!
     
     fileprivate let disposalBag             = DisposeBag()
     
@@ -83,7 +92,54 @@ class AirConditionerViewController: UIViewController {
     }
     
     fileprivate func bindRxObserver() {
+        airConditionerViewModel.isFirstTimeGetAirConditioners.asObservable()
+            .subscribe(onNext: { [weak self] isFirstTimeGetAirConditioners in
+                if !isFirstTimeGetAirConditioners {
+                    self?.bindRxObserverForCurrentAirConditioner()
+                }
+            }).addDisposableTo(disposalBag)
         
+        airConditionerViewModel.loadingViewAlphaObservable
+            .subscribe(onNext: { [weak self] loadingViewAlpha in
+                DispatchQueue.main.async {
+                    UIView.animate(withDuration: 0.4, animations: {
+                        self?.loadingView.alpha = CGFloat(loadingViewAlpha)
+                    })
+                }
+            }).addDisposableTo(disposalBag)
+        
+        airConditionerViewModel.activityIndicatorShouldSpin
+            .subscribe(onNext: { [weak self] activityIndicatorShouldSpin in
+                DispatchQueue.main.async {
+                    activityIndicatorShouldSpin ? self?.activityIndicator.startAnimating() : self?.activityIndicator.stopAnimating()
+                }
+            }).addDisposableTo(disposalBag)
+    }
+    
+    fileprivate func bindRxObserverForCurrentAirConditioner() {
+        let currentAirConditional: Variable<AirConditionerCellViewModel>
+            = self.airConditionerViewModel.currentAirConditioner
+        
+        currentAirConditional.value.area.asObservable()
+            .bindTo(areaTitle.rx.text)
+            .addDisposableTo(disposalBag)
+        
+        currentAirConditional.value.temperature.asObservable()
+            .map({ Helper.removeDecimalPartFromString(afterConvertedFromDouble: String($0)) })
+            .bindTo(lbl_Temperature.rx.text)
+            .addDisposableTo(disposalBag)
+        
+        currentAirConditional.value.mode.asObservable()
+            .bindTo(lbl_Mode.rx.text)
+            .addDisposableTo(disposalBag)
+        
+        currentAirConditional.value.fanSpeed.asObservable()
+            .bindTo(lbl_Fanspeed.rx.text)
+            .addDisposableTo(disposalBag)
+        
+        currentAirConditional.value.swing.asObservable()
+            .bindTo(lbl_Swing.rx.text)
+            .addDisposableTo(disposalBag)
     }
     
     fileprivate func bindRxActions() {
@@ -115,6 +171,9 @@ class AirConditionerViewController: UIViewController {
     }
     
     @IBAction func btn_Mode_OnClick(_ sender: Any) {
+        collapseSwingSelectionView()
+        collapseFanSpeedSelectionView()
+        
         UIView.animate(withDuration: 0.3) {
             self.modeSelectionView.frame.size.width     = 250
             self.modeSelectionView.frame.size.height    = 50
@@ -136,6 +195,9 @@ class AirConditionerViewController: UIViewController {
     }
     
     @IBAction func btn_FanSpeed_OnClick(_ sender: Any) {
+        collapseModeSelectionView()
+        collapseSwingSelectionView()
+        
         UIView.animate(withDuration: 0.3) {
             self.fanSpeedSelectionView.frame.size.width     = 230
             self.fanSpeedSelectionView.frame.size.height    = 50
@@ -154,6 +216,9 @@ class AirConditionerViewController: UIViewController {
     }
     
     @IBAction func btn_Swing_OnClick(_ sender: Any) {
+        collapseModeSelectionView()
+        collapseFanSpeedSelectionView()
+        
         UIView.animate(withDuration: 0.3) {
             self.swingSelectionView.frame.size.width     = 272
             self.swingSelectionView.frame.size.height    = 50
@@ -179,6 +244,7 @@ class AirConditionerViewController: UIViewController {
         drawModeSelectionView()
         drawFanSpeedSelectionView()
         drawSwingSelectionView()
+        drawLoadingView()
     }
     
 //** Mark: DRAWING TOP BAR
@@ -243,16 +309,16 @@ class AirConditionerViewController: UIViewController {
 //** Mark: DRAWING AREA TITLE
     
     fileprivate func drawAreaTitle() {
-        let title           = UILabel()
+        self.areaTitle          = UILabel()
         
-        title.font          = UIFont.systemFont(ofSize: 22, weight: UIFontWeightBold)
-        title.textAlignment = .center
-        title.text          = Constants.AirConditioner.BarItem.areaLabel
-        title.textColor     = Theme.customItemColor
+        areaTitle.font          = UIFont.systemFont(ofSize: 22, weight: UIFontWeightBold)
+        areaTitle.textAlignment = .center
+        areaTitle.text          = Constants.AirConditioner.BarItem.areaLabel
+        areaTitle.textColor     = Theme.customItemColor
         
-        self.topBar.addSubview(title)
+        self.topBar.addSubview(areaTitle)
         
-        title.snp.makeConstraints { maker in
+        areaTitle.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
             maker.centerY.equalToSuperview()
         }
@@ -529,6 +595,64 @@ class AirConditionerViewController: UIViewController {
             
             self.autoSwingButton.frame.size.width        = 0
             self.autoSwingButton.frame.size.height       = 0
+        }
+    }
+    
+//** Mark: DRAWING LOADING VIEW
+    
+    fileprivate func drawLoadingView() {
+        self.loadingView = UIView()
+        
+        loadingView.backgroundColor = .black
+        loadingView.alpha           = 0.85
+        
+        self.view.addSubview(loadingView)
+        
+        loadingView.snp.makeConstraints { maker in
+            maker.top.equalTo(self.view.snp.top).offset(0)
+            maker.right.equalTo(self.view.snp.right).offset(0)
+            maker.bottom.equalTo(self.view.snp.bottom).offset(0)
+            maker.left.equalTo(self.view.snp.left).offset(0)
+        }
+        
+        drawActivityIndicatorView()
+        drawLoadingLabel()
+    }
+    
+//** Mark: DRAW ACTIVITY INDICATOR
+    
+    fileprivate func drawActivityIndicatorView() {
+        let frame = CGRect(x: 0, y: 0, width: 90, height: 90)
+        self.activityIndicator = NVActivityIndicatorView(
+            frame: frame,
+            type: .ballRotateChase,
+            color: .white,
+            padding: 0
+        )
+        
+        self.loadingView.addSubview(activityIndicator)
+        
+        activityIndicator.snp.makeConstraints { maker in
+            maker.centerX.equalToSuperview()
+            maker.centerY.equalToSuperview()
+        }
+    }
+    
+//** Mark: DRAW LOADING LABEL
+    
+    fileprivate func drawLoadingLabel() {
+        self.loadingLabel = UILabel()
+        
+        loadingLabel.font          = UIFont.systemFont(ofSize: 22, weight: UIFontWeightBold)
+        loadingLabel.textAlignment = .center
+        loadingLabel.text          = Constants.AirConditioner.View.loadingLabel
+        loadingLabel.textColor     = Theme.customItemColor
+        
+        self.loadingView.addSubview(loadingLabel)
+
+        loadingLabel.snp.makeConstraints { maker in
+            maker.top.equalTo(self.activityIndicator.snp.bottom).offset(30)
+            maker.centerX.equalToSuperview()
         }
     }
     

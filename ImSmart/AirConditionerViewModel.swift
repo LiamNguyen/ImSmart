@@ -22,13 +22,15 @@ class AirConditionerViewModel {
     var allAirConditioners              : Variable<[AirConditionerCellViewModel]>!
     var currentAirConditioner           : Variable<AirConditionerCellViewModel>!
     
+    var loadingViewAlphaObservable      : Observable<Float>!
+    var activityIndicatorShouldSpin     : Observable<Bool>!
+    
     fileprivate let disposalBag: DisposeBag = DisposeBag()
     
     fileprivate var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     init() {
-        self.allAirConditioners     = Variable([AirConditionerCellViewModel]())
-        self.currentAirConditioner  = Variable(AirConditionerCellViewModel())
+        self.allAirConditioners = Variable([AirConditionerCellViewModel]())
         
         getAllAirConditioners()
         bindRx()
@@ -50,14 +52,29 @@ class AirConditionerViewModel {
     }
     
     private func bindRx() {
+        loadingViewAlphaObservable = isFirstTimeGetAirConditioners.asObservable()
+            .map({ isFirstTimeGetAirConditioners in
+                return isFirstTimeGetAirConditioners ? 1 : 0
+            })
+        
+        activityIndicatorShouldSpin = isFirstTimeGetAirConditioners.asObservable()
+            .map({ return $0 })
+        
         Observable.combineLatest(
             allAirConditioners.asObservable(),
             currentAirConditionerIndex.asObservable())
             .subscribe(onNext: { [weak self] _ in
-                guard self!.allAirConditioners.value.count > 0 else {
+                guard self!.isAllAirConditionerHasValue() else {
                     return
                 }
-                self?.currentAirConditioner.value = self!.allAirConditioners.value[self!.currentAirConditionerIndex.value]
+                
+                let itemAtIndexOfAllAirConditioners = self!.allAirConditioners.value[self!.currentAirConditionerIndex.value]
+                
+                if self?.currentAirConditioner == nil {
+                    self?.currentAirConditioner = Variable(itemAtIndexOfAllAirConditioners)
+                } else {
+                    self?.currentAirConditioner.value = itemAtIndexOfAllAirConditioners
+                }
             }).addDisposableTo(disposalBag)
     }
     
@@ -71,11 +88,14 @@ class AirConditionerViewModel {
             self?.allAirConditioners.value = allAirConditioners.map({ airConditioner -> AirConditionerCellViewModel in
                 return AirConditionerCellViewModel(airConditioner: airConditioner, airConditionerViewModel: self!)
             })
-            
             self?.isHavingServerError.value = false
             if self!.isFirstTimeGetAirConditioners.value {
                 self?.isFirstTimeGetAirConditioners.value = false
             }
         }
+    }
+    
+    func isAllAirConditionerHasValue() -> Bool {
+        return self.allAirConditioners.value.count > 0
     }
 }

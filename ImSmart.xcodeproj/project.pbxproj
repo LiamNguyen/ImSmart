@@ -270,15 +270,31 @@
 			name = JMCiBeaconManager;
 			sourceTree = "<group>";
 		};
-		ED171EBD1E8F87E2006791C6 /* Model */ = {
+		76DCEE531EC244570046CA2F /* AirConditioner */ = {
 			isa = PBXGroup;
 			children = (
 				ED504F5F1EB84FF100802BE3 /* AirConditioner.swift */,
 				ED504F601EB84FF100802BE3 /* AirConditionerProperties.swift */,
+				ED3281251EB7C36D00DF20F6 /* AirConditionerModel.swift */,
+			);
+			name = AirConditioner;
+			sourceTree = "<group>";
+		};
+		76DCEE541EC244650046CA2F /* Light */ = {
+			isa = PBXGroup;
+			children = (
 				EDD938091E941E5300FB1797 /* Light.swift */,
 				ED2D3C7F1EB704A800BC46AT /* LightProperties.swift */,
 				ED2D3CA61EB73FEB00BC46AF /* LightModel.swift */,
-				ED3281251EB7C36D00DF20F6 /* AirConditionerModel.swift */,
+			);
+			name = Light;
+			sourceTree = "<group>";
+		};
+		ED171EBD1E8F87E2006791C6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				76DCEE531EC244570046CA2F /* AirConditioner */,
+				76DCEE541EC244650046CA2F /* Light */,
 			);
 			name = Model;
 			sourceTree = "<group>";
