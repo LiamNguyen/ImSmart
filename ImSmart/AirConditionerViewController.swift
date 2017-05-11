@@ -250,10 +250,10 @@ class AirConditionerViewController: UIViewController, NVActivityIndicatorViewabl
 //** Mark: DRAWING TOP BAR
     
     fileprivate func drawTopBar() {
-        self.topBar = UIView()
+        self.topBar                     = UIView()
         
-        topBar.backgroundColor  = Theme.customBackgroundColor
-        topBar.alpha            = 0.7
+        topBar.backgroundColor          = Theme.customBackgroundColor
+        topBar.alpha                    = 0.7
         
         self.view.addSubview(topBar)
         
@@ -264,9 +264,30 @@ class AirConditionerViewController: UIViewController, NVActivityIndicatorViewabl
             maker.right.equalToSuperview().offset(0)
         }
         
+        drawAreaTitle()
         drawBackIcon()
         drawBackButton()
-        drawAreaTitle()
+        drawBackButtonStackView()
+    }
+    
+//** Mark: DRAWING BACK BUTTON STACKVIEW
+    
+    fileprivate func drawBackButtonStackView() {
+        let backButtonStackView         = UIStackView()
+        
+        backButtonStackView.axis        = .horizontal
+        backButtonStackView.spacing     = 0
+        backButtonStackView.alignment   = .center
+        
+        backButtonStackView.addArrangedSubview(self.backIcon)
+        backButtonStackView.addArrangedSubview(self.backButton)
+        
+        self.view.addSubview(backButtonStackView)
+        
+        backButtonStackView.snp.makeConstraints { maker in
+            maker.left.equalTo(self.topBar.snp.left).offset(5)
+            maker.bottom.equalTo(self.topBar.snp.bottom).offset(-10)
+        }
     }
     
 //** Mark: DRAWING BACK ICON
@@ -277,13 +298,9 @@ class AirConditionerViewController: UIViewController, NVActivityIndicatorViewabl
         self.backIcon           = UIButton()
         backIcon.layer.contents = backIconImage
         
-        self.topBar.addSubview(backIcon)
-        
         backIcon.snp.makeConstraints { maker in
             maker.width.equalTo(24)
             maker.height.equalTo(27)
-            maker.left.equalTo(self.topBar.snp.left).offset(5)
-            maker.centerY.equalToSuperview()
         }
     }
     
@@ -296,13 +313,9 @@ class AirConditionerViewController: UIViewController, NVActivityIndicatorViewabl
         backButton.setTitleColor(Theme.customItemColor, for: .normal)
         backButton.setTitle(Constants.AirConditioner.BarItem.back, for: .normal)
         
-        self.topBar.addSubview(backButton)
-        
         backButton.snp.makeConstraints { maker in
             maker.width.equalTo(50)
             maker.height.equalTo(30)
-            maker.left.equalTo(backIcon.snp.right).offset(0)
-            maker.centerY.equalToSuperview()
         }
     }
     
@@ -311,7 +324,7 @@ class AirConditionerViewController: UIViewController, NVActivityIndicatorViewabl
     fileprivate func drawAreaTitle() {
         self.areaTitle          = UILabel()
         
-        areaTitle.font          = UIFont.systemFont(ofSize: 22, weight: UIFontWeightBold)
+        areaTitle.font          = UIFont.systemFont(ofSize: 17, weight: UIFontWeightBold)
         areaTitle.textAlignment = .center
         areaTitle.text          = Constants.AirConditioner.BarItem.areaLabel
         areaTitle.textColor     = Theme.customItemColor
@@ -320,7 +333,7 @@ class AirConditionerViewController: UIViewController, NVActivityIndicatorViewabl
         
         areaTitle.snp.makeConstraints { maker in
             maker.centerX.equalToSuperview()
-            maker.centerY.equalToSuperview()
+            maker.bottom.equalTo(self.topBar.snp.bottom).offset(-15)
         }
     }
     
@@ -604,7 +617,6 @@ class AirConditionerViewController: UIViewController, NVActivityIndicatorViewabl
         self.loadingView = UIView()
         
         loadingView.backgroundColor = .black
-        loadingView.alpha           = 0.85
         
         self.view.addSubview(loadingView)
         
