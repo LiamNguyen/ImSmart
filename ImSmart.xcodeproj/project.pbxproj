@@ -19,6 +19,8 @@
 		765BF3251EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31D1EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift */; };
 		765BF3261EBE09FF00F5DDF1 /* RadarScannerShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF31E1EBE09FF00F5DDF1 /* RadarScannerShape.swift */; };
 		765BF3291EBE582100F5DDF1 /* AddLightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 765BF3281EBE582100F5DDF1 /* AddLightViewController.swift */; };
+		76615D021EC4BC5A008C1018 /* AKPickerView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76615D011EC4BC5A008C1018 /* AKPickerView.framework */; };
+		76615D031EC4BC5A008C1018 /* AKPickerView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76615D011EC4BC5A008C1018 /* AKPickerView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76AF5B1D1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */; };
 		76AF5B1E1EBB952300A6EAB1 /* AlamofireObjectMapper.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		76AF5B201EBB9BE500A6EAB1 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */; };
@@ -111,6 +113,7 @@
 				76577C0F1EBFB96000D33080 /* NVActivityIndicatorView.framework in Embed Frameworks */,
 				ED953A0C1EB37B5900D622CB /* Alamofire.framework in Embed Frameworks */,
 				ED9C588F1E8E49C400F57B8F /* RxSwift.framework in Embed Frameworks */,
+				76615D031EC4BC5A008C1018 /* AKPickerView.framework in Embed Frameworks */,
 				ED5954B51E981B3600C3E047 /* Spruce.framework in Embed Frameworks */,
 				EDC5047F1EAB64350086B377 /* SocketIO.framework in Embed Frameworks */,
 				76AF5B211EBB9BE500A6EAB1 /* ObjectMapper.framework in Embed Frameworks */,
@@ -133,6 +136,7 @@
 		765BF31D1EBE09FF00F5DDF1 /* PWDisplayLinkerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PWDisplayLinkerDelegate.swift; path = JMCiBeaconManager/PWDisplayLinkerDelegate.swift; sourceTree = "<group>"; };
 		765BF31E1EBE09FF00F5DDF1 /* RadarScannerShape.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadarScannerShape.swift; path = JMCiBeaconManager/RadarScannerShape.swift; sourceTree = "<group>"; };
 		765BF3281EBE582100F5DDF1 /* AddLightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLightViewController.swift; sourceTree = "<group>"; };
+		76615D011EC4BC5A008C1018 /* AKPickerView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AKPickerView.framework; path = Carthage/Build/iOS/AKPickerView.framework; sourceTree = "<group>"; };
 		76AF5B1C1EBB952300A6EAB1 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlamofireObjectMapper.framework; path = Carthage/Build/iOS/AlamofireObjectMapper.framework; sourceTree = "<group>"; };
 		76AF5B1F1EBB9BE500A6EAB1 /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		76E839E11EBE70A3009E7E93 /* JMCRadarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JMCRadarView.swift; path = JMCiBeaconManager/JMCRadarView.swift; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 				76577C0E1EBFB96000D33080 /* NVActivityIndicatorView.framework in Frameworks */,
 				ED953A0B1EB37B5900D622CB /* Alamofire.framework in Frameworks */,
 				ED9C588E1E8E49C400F57B8F /* RxSwift.framework in Frameworks */,
+				76615D021EC4BC5A008C1018 /* AKPickerView.framework in Frameworks */,
 				ED5954B41E981B3600C3E047 /* Spruce.framework in Frameworks */,
 				EDC5047E1EAB64350086B377 /* SocketIO.framework in Frameworks */,
 				76AF5B201EBB9BE500A6EAB1 /* ObjectMapper.framework in Frameworks */,
@@ -376,6 +381,7 @@
 		ED75D3241E8C4782006D6082 = {
 			isa = PBXGroup;
 			children = (
+				76615D011EC4BC5A008C1018 /* AKPickerView.framework */,
 				ED810EC11E9BB440005F701E /* ExternalLibraries */,
 				ED75D32F1E8C478A006D6082 /* ImSmart */,
 				ED75D3441E8C478B006D6082 /* ImSmartTests */,
@@ -707,6 +713,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/AlamofireObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/AKPickerView.framework",
 			);
 			outputPaths = (
 			);

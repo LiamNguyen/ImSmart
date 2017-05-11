@@ -1,0 +1,9 @@
+{
+  "commitish" : "2.0.1",
+  "iOS" : [
+    {
+      "hash" : "95fdeb20627cf4ef198622b04b79dae53f287e71bde26435fa9cb456f802fefc",
+      "name" : "AKPickerView"
+    }
+  ]
+}
