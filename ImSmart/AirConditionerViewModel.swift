@@ -54,7 +54,7 @@ class AirConditionerViewModel {
     private func bindRx() {
         loadingViewAlphaObservable = isFirstTimeGetAirConditioners.asObservable()
             .map({ isFirstTimeGetAirConditioners in
-                return isFirstTimeGetAirConditioners ? 1 : 0
+                return isFirstTimeGetAirConditioners ? 0.85 : 0
             })
         
         activityIndicatorShouldSpin = isFirstTimeGetAirConditioners.asObservable()
