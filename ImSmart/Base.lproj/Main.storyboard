@@ -292,6 +292,9 @@
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hPG-kg-dbh">
                                         <rect key="frame" x="8" y="16.5" width="91.5" height="95.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="91.5" id="Gk8-2s-sOU"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="italicSystem" pointSize="80"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -477,8 +480,12 @@
                         <outlet property="btn_FanSpeed" destination="yHH-V2-Q5h" id="AAy-Np-Z1a"/>
                         <outlet property="btn_Mode" destination="ZLg-wJ-5q1" id="VN0-Ea-KTu"/>
                         <outlet property="btn_Swing" destination="QHE-sX-iTG" id="mrg-Tl-C1V"/>
+                        <outlet property="lbl_Fanspeed" destination="O8U-YG-WuE" id="HEy-Di-Yc1"/>
+                        <outlet property="lbl_Mode" destination="t6z-TM-kc3" id="YZl-yT-vCs"/>
+                        <outlet property="lbl_Swing" destination="mcQ-EW-1m2" id="TNe-Nf-rGc"/>
+                        <outlet property="lbl_Temperature" destination="hPG-kg-dbh" id="t7J-EA-ENT"/>
                         <outlet property="view_AdjustTemperature" destination="Myn-Pm-rLq" id="e5a-9o-5Oh"/>
-                        <segue destination="xWe-kg-Xv7" kind="unwind" identifier="segue_AirConditionerToHomeVC" unwindAction="unwindToHomeViewControllerWithSegue:" id="lW1-2D-ve6"/>
+                        <segue destination="xWe-kg-Xv7" kind="unwind" identifier="segue_AirConditionerToHomeVC" unwindAction="unwindToHomeViewController:" id="K6h-im-Twe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6j-LA-i66" userLabel="First Responder" sceneMemberID="firstResponder"/>

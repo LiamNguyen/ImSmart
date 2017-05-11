@@ -27,15 +27,19 @@ class Helper {
         return String()
     }
     
-    static func printMockupLights(_ mockupLights: [LightCellViewModel]) {
-        let _ = mockupLights
-            .map({ lightCellViewModel in
-                print("__________Start item")
-                print("Area: \(lightCellViewModel.area.value)")
-                print("Brigtness: \(lightCellViewModel.brightness.value)")
-                print("Light is on \(lightCellViewModel.isOn.value)")
-                print("__________End item")
-            })
-        print("\n_____________DONE RECEVING_____________\n")
+    static func removeDecimalPartFromString(afterConvertedFromDouble string: String) -> String {
+        let pattern = ".[0-9]*$"
+        do {
+            let regex   = try NSRegularExpression(pattern: pattern, options: [])
+            return regex.stringByReplacingMatches(
+                in: string,
+                options: [],
+                range: NSRange(location: 0, length: string.characters.count),
+                withTemplate: ""
+            )
+        } catch let error {
+            print(error)
+            return ""
+        }
     }
 }

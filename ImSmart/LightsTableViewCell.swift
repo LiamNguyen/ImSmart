@@ -11,10 +11,10 @@ import RxSwift
 
 class LightsTableViewCell: UITableViewCell {
 
-    @IBOutlet fileprivate weak var lightImageView: UIImageView!
-    @IBOutlet fileprivate weak var areaLabel: UILabel!
-    @IBOutlet fileprivate weak var brightnessLabel: UILabel!
-    @IBOutlet fileprivate weak var cellBackground: UIView!
+    @IBOutlet fileprivate weak var lightImageView   : UIImageView!
+    @IBOutlet fileprivate weak var areaLabel        : UILabel!
+    @IBOutlet fileprivate weak var brightnessLabel  : UILabel!
+    @IBOutlet fileprivate weak var cellBackground   : UIView!
     
     fileprivate let disposalBag = DisposeBag()
     

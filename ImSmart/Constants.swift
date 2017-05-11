@@ -132,6 +132,7 @@ struct Constants {
     struct AirConditioner {
         struct View {
             static let title                = "Air Conditioners"
+            static let loadingLabel         = "Loading..."
             static let backIcon             = "backIcon.png"
             static let snowFlake            = "snowFlake.png"
             static let tearDropIcon         = "tearDropIcon.png"

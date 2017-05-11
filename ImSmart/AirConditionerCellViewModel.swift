@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class AirConditionerCellViewModel {
-    var airConditioner                          : AirConditionerModel!
+    var airConditioner                              : AirConditionerModel!
     fileprivate weak var airConditionerViewModel    : AirConditionerViewModel!
     
     var isOn        : Variable<Bool>!
